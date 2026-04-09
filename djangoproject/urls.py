@@ -19,7 +19,7 @@ from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
-from .views import domain_homepage, error_redirect
+from .views import domain_homepage
 
 urlpatterns = [
     path("", domain_homepage, name="domain_homepage"),
@@ -37,8 +37,3 @@ else:
     urlpatterns += [
         re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
     ]
-
-handler400 = error_redirect
-handler403 = error_redirect
-handler404 = error_redirect
-handler500 = 'djangoproject.views.error_redirect'

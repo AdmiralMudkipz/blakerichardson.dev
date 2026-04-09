@@ -106,7 +106,7 @@ PROJECTS = {
             'It features project showcases with detail pages, skill-based filtering, responsive design for all devices. '
             'The source code is publicly available on GitHub.'
         ),
-        'github': 'https://github.com/AdmiralMudkipz/blakerichardson.dev',
+        'github': 'https://github.com/AdmiralMudkipz/Portfolio',
         'skills': ['Python', 'JavaScript', 'Bash', 'HTML', 'CSS', 'Django', 'HTMX', 'Git', 'Networking', 'Hosting'],
     },
 }
