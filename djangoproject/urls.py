@@ -24,9 +24,6 @@ from .views import domain_homepage
 urlpatterns = [
     path("", domain_homepage, name="domain_homepage"),
     path("admin/", admin.site.urls),
-    path("basic/", include('basic.urls')),
-    path("htmx/", include('htmx.urls')),
-    path("tasks/", include('tasks.urls')),
     path("campaign/", include('campaign.urls')),
     path("portfolio/", include('portfolio.urls')),
 ]

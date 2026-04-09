@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-51c(2q0$zm%db%k*&_ihcz$%rh0#7_m7f=(s_ggs7vj87+4314"
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -40,9 +40,6 @@ USE_X_FORWARDED_HOST = True
 # Application definition
 
 INSTALLED_APPS = [
-    "tasks.apps.TasksConfig",
-    "htmx.apps.HtmxConfig",
-    "basic.apps.BasicConfig",
     "campaign.apps.CampaignConfig",
     "django.contrib.admin",
     "django.contrib.auth",
