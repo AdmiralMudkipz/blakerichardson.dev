@@ -1,0 +1,210 @@
+{% extends "campaign/base.html" %}
+
+{% block title %}Cheap Energy — Blake Richardson{% endblock %}
+
+{% block extra_css %}
+<style>
+    .page-header {
+        text-align: center;
+        padding: 56px 20px 32px;
+        background: linear-gradient(180deg, #1a1400 0%, var(--bg) 100%);
+        position: relative;
+        overflow: hidden;
+    }
+    .page-header h1 {
+        font-size: clamp(1.6rem, 5vw, 2.6rem);
+        color: #fde68a;
+        position: relative;
+        z-index: 2;
+    }
+    .page-header .subtitle {
+        color: #d4c878;
+        margin-top: 8px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .bolt-scene {
+        position: relative;
+        height: 100px;
+        max-width: 200px;
+        margin: 20px auto 0;
+        z-index: 2;
+    }
+    .bolt {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 4.5rem;
+        filter: drop-shadow(0 0 12px rgba(250, 204, 21, 0.7));
+        animation: strike 2s ease-in-out infinite;
+    }
+    @keyframes strike {
+        0%, 100% { opacity: 0.3; transform: translateX(-50%) scale(0.9); filter: drop-shadow(0 0 4px rgba(250, 204, 21, 0.3)); }
+        10%      { opacity: 1;   transform: translateX(-50%) scale(1.15); filter: drop-shadow(0 0 24px rgba(250, 204, 21, 0.9)); }
+        20%      { opacity: 0.5; transform: translateX(-50%) scale(1.0);  filter: drop-shadow(0 0 8px rgba(250, 204, 21, 0.4)); }
+        30%      { opacity: 1;   transform: translateX(-50%) scale(1.1);  filter: drop-shadow(0 0 20px rgba(250, 204, 21, 0.8)); }
+        50%      { opacity: 0.8; transform: translateX(-50%) scale(1.0);  filter: drop-shadow(0 0 10px rgba(250, 204, 21, 0.5)); }
+    }
+
+    .spark {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: #facc15;
+        border-radius: 50%;
+        opacity: 0;
+        animation: sparkFloat 3s ease-in-out infinite;
+    }
+    .spark:nth-child(2) { left: 20%; top: 40%; animation-delay: 0.5s; }
+    .spark:nth-child(3) { left: 75%; top: 30%; animation-delay: 1.0s; }
+    .spark:nth-child(4) { left: 40%; top: 60%; animation-delay: 1.5s; }
+    .spark:nth-child(5) { left: 85%; top: 55%; animation-delay: 0.8s; }
+    .spark:nth-child(6) { left: 10%; top: 70%; animation-delay: 2.0s; }
+    @keyframes sparkFloat {
+        0%, 100% { opacity: 0; transform: translateY(0) scale(0.5); }
+        50%      { opacity: 0.9; transform: translateY(-16px) scale(1.2); }
+    }
+
+    .page-header::before {
+        content: '';
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        width: 300px;
+        height: 300px;
+        transform: translate(-50%, -50%);
+        background: radial-gradient(circle, rgba(250, 204, 21, 0.08) 0%, transparent 70%);
+        animation: glowPulse 3s ease-in-out infinite;
+    }
+    @keyframes glowPulse {
+        0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+        50%      { opacity: 1;   transform: translate(-50%, -50%) scale(1.3); }
+    }
+
+    .policies {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 24px 16px 48px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    .policy {
+        background: #1a1708;
+        border: 1px solid #3b3411;
+        border-left: 4px solid #eab308;
+        border-radius: 10px;
+        padding: 20px 24px;
+        opacity: 0;
+        animation: fadeInUp 0.5s ease forwards;
+    }
+    .policy:nth-child(1) { animation-delay: 0.3s; }
+    .policy:nth-child(2) { animation-delay: 0.45s; }
+    .policy:nth-child(3) { animation-delay: 0.6s; }
+    .policy:nth-child(4) { animation-delay: 0.75s; }
+    .policy:nth-child(5) { animation-delay: 0.9s; }
+    .policy:nth-child(6) { animation-delay: 1.05s; }
+    .policy:nth-child(7) { animation-delay: 1.2s; }
+    .policy h3 {
+        color: #fde68a;
+        margin-bottom: 6px;
+        font-size: 1.1rem;
+    }
+    .policy .meta {
+        color: #facc15;
+        font-size: 0.84rem;
+        margin-bottom: 8px;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+    }
+    .policy p {
+        color: #c9bc80;
+        line-height: 1.55;
+        font-size: 0.95rem;
+        margin: 8px 0;
+    }
+    .policy p.effect {
+        color: #e9dfb8;
+    }
+
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(18px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <h1>⚡ Cheap Energy</h1>
+    <p class="subtitle">Policy plan for faster, cheaper, local energy production.</p>
+
+    <div class="bolt-scene">
+        <div class="bolt">⚡</div>
+        <span class="spark"></span>
+        <span class="spark"></span>
+        <span class="spark"></span>
+        <span class="spark"></span>
+        <span class="spark"></span>
+    </div>
+</section>
+
+<div class="policies">
+    <article class="policy">
+        <div class="meta">Issue &amp; Policy: Permitting Reform / Streamline Bureaucracy</div>
+        <h3>Implement New Policy — SolarApp+ (NJ Smart Solar Permitting Law A5264)</h3>
+        <p>Do solar permitting via SolarApp+ utilizing the NJ Smart Solar Permitting Law (A5264).</p>
+        <p class="effect"><strong>Effects:</strong> Effectively automates solar permitting, saving both the township and residents thousands a year while streamlining permitting and construction to get desperately needed solar savings rapidly during our ongoing energy crisis.</p>
+    </article>
+
+    <article class="policy">
+        <div class="meta">Issue &amp; Policy: Energy Production / Cut Red-Tape</div>
+        <h3>Repeal § 225-132D(1)</h3>
+        <p>Allow properties to have solar installations in which the principle use is the production of electricity via solar.</p>
+        <p class="effect"><strong>Effects:</strong> Unbans solar power plants.</p>
+    </article>
+
+    <article class="policy">
+        <div class="meta">Issue &amp; Policy: Energy Production / Cut Red-Tape</div>
+        <h3>Repeal § 225-132D(3)</h3>
+        <p>Allow a property to have both ground and rooftop solar.</p>
+        <p class="effect"><strong>Effects:</strong> This is a completely arbitrary rule with no benefit. If a property can use more solar than it has roof space they ought to be able to build that much solar generation by right.</p>
+    </article>
+
+    <article class="policy">
+        <div class="meta">Issue &amp; Policy: Energy Production / Cut Red-Tape</div>
+        <h3>Repeal § 225-132D(4)(f), § 110-1.1J</h3>
+        <p>Remove mandatory township review for ROW facing roof solar.</p>
+        <p class="effect"><strong>Effects:</strong> Removes unnecessary red tape around installing roof solar. This law needlessly involves the township in something inconsequential and makes solar installation more complicated for homeowners for no tangible benefit.</p>
+    </article>
+
+    <article class="policy">
+        <div class="meta">Issue &amp; Policy: Energy Production / Cut Red-Tape</div>
+        <h3>Repeal § 225-132D(5)(b)</h3>
+        <p>Allow ground solar on &lt;1 acre properties.</p>
+        <p class="effect"><strong>Effects:</strong> The feasibility of a solar installation should be decided by the property owner. This opens up ground solar opportunities for residents with smaller plots.</p>
+    </article>
+
+    <article class="policy">
+        <div class="meta">Issue &amp; Policy: Energy Production / Cut Red-Tape</div>
+        <h3>Modify § 225-132D(6)(a)</h3>
+        <p>Reduce solar panel setback rule to the same as sheds, 10 feet from the property boundary.</p>
+        <p class="effect"><strong>Effects:</strong> Enables solar installations in areas with less land to work with. No need for excessively large setbacks.</p>
+    </article>
+
+    <article class="policy">
+        <div class="meta">Issue &amp; Policy: Energy Production / Legalize More Local Production</div>
+        <h3>Legalize Local Energy Infrastructure</h3>
+        <p>In addition to the ordinance reforms listed above, legalize the following:</p>
+        <ul style="color: #c9bc80; line-height: 1.7; font-size: 0.95rem; margin: 8px 0 8px 20px;">
+            <li>Waive local township fees for energy installations provided the property owner has funding/financing.</li>
+            <li>Community solar zones &mdash; allows developers to build mid-sized solar arrays on top of commercial buildings, parking lot canopies, marginal/non-preserved land without a variance, so residents can subscribe to these local solar arrays and save 15&ndash;20% on their monthly energy bills without modifying their own properties at all.</li>
+            <li>Windmills so long as they fit the neighborhood aesthetic.</li>
+            <li>Legally permit homes to encroach a few inches into their setbacks if that space is being used to add thick exterior insulation (&ldquo;outsulation&rdquo;), a high-efficiency heat pump compressor, inverters, or batteries. Houses must still follow the aesthetic of the neighborhood and/or Main Street.</li>
+        </ul>
+        <p class="effect"><strong>Effects:</strong> Lowers energy costs for residents and businesses. Lowers the barriers to building local energy infrastructure. Offers affordable options to those unable or unwilling to build solar upon their own residences.</p>
+    </article>
+</div>
+{% endblock %}

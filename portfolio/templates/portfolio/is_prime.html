@@ -1,0 +1,15 @@
+<h1>Prime Home Page</h1>
+
+<p>
+    {% if is_prime %}
+        {{ input }} is a prime number since there are no divisors.
+    {% else %}
+        {{ input }} is not a prime number since {{ divisor|default:"1 or less" }} is a divisor.
+    {% endif %}
+</p>
+
+{% if time_computed %}
+<p>
+    <i>First computed on {{ time_computed }}</i>
+</p>
+{% endif %}

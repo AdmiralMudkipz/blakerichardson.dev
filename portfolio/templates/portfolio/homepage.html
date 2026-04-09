@@ -1,0 +1,639 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #121212;
+        color: #B2B2B2;
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    .hero {
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('/media/banner.jpeg') center/cover;
+        color: white;
+        padding: 8vh 20px;
+        text-align: center;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        min-height: 50vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        z-index: 10;
+        box-sizing: border-box;
+    }
+    .hero::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 25%;
+        background: linear-gradient(to bottom, transparent, #121212);
+        pointer-events: none;
+        z-index: 10;
+    }
+    @media (max-width: 768px) {
+        .hero {
+            min-height: 40vh;
+            padding: 6vh 10px;
+        }
+    }
+    @media (max-width: 480px) {
+        .hero {
+            min-height: 35vh;
+            padding: 4vh 10px;
+        }
+    }
+    .hero h1 {
+        font-size: 4rem;
+        font-weight: bold;
+    }
+    @media (max-width: 768px) {
+        .hero h1 {
+            font-size: 5vw;
+        }
+    }
+    @media (max-width: 480px) {
+        .hero h1 {
+            font-size: 7vw;
+        }
+    }
+    .hero p {
+        font-size: 1.5rem;
+        margin-top: 10px;
+    }
+    @media (max-width: 768px) {
+        .hero p {
+            font-size: 3vw;
+            margin-top: 1vh;
+        }
+    }
+    @media (max-width: 480px) {
+        .hero p {
+            font-size: 3.5vw;
+            margin-top: 0.5vh;
+        }
+    }
+    .profile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 0;
+        position: relative;
+        z-index: 12;
+    }
+    .profile img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 5px solid #3A3A3A;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2vh;
+    }
+    @media (max-width: 768px) {
+        .profile img {
+            width: 15vw;
+            height: 15vw;
+            border: 0.4vw solid #3A3A3A;
+            margin-bottom: 1.5vh;
+        }
+    }
+    @media (max-width: 480px) {
+        .profile img {
+            width: 25vw;
+            height: 25vw;
+            border: 0.5vw solid #3A3A3A;
+            margin-bottom: 1vh;
+        }
+    }
+    .content-wrapper {
+        margin-top: 0;
+        margin-bottom: 5vh;
+        padding: 0 3vw;
+        padding-top: 3vh;
+    }
+    @media (max-width: 768px) {
+        .content-wrapper {
+            margin-top: 0;
+            margin-bottom: 4vh;
+            padding: 0 4vw;
+            padding-top: 2.5vh;
+        }
+    }
+    @media (max-width: 480px) {
+        .content-wrapper {
+            margin-top: 0;
+            margin-bottom: 3vh;
+            padding: 0 5vw;
+            padding-top: 2vh;
+        }
+    }
+    .section {
+        padding: 50px 20px;
+        background-color: #3A3A3A;
+        border-radius: 10px;
+        margin-bottom: 2vh;
+        margin-top: 2vh;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    @media (max-width: 768px) {
+        .section {
+            padding: 4vh 3vw;
+            margin-bottom: 1.5vh;
+            margin-top: 1.5vh;
+        }
+    }
+    @media (max-width: 480px) {
+        .section {
+            padding: 3vh 3vw;
+            margin-bottom: 1.5vh;
+            margin-top: 1.5vh;
+        }
+    }
+    .bullet-box {
+        background-color: #2A2A2A;
+        border-radius: 10px;
+        padding: 0 1.5vw 1.5vh;
+        margin-bottom: 1.5vh;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+    .bullet-box::before {
+        content: '';
+        display: block;
+        height: 4px;
+        background: linear-gradient(90deg, #478cbf, #6ab0e3);
+        margin: 0 -1.5vw 8px -1.5vw;
+    }
+    @media (max-width: 480px) {
+        .bullet-box {
+            padding: 1vh 2vw;
+            margin-bottom: 1vh;
+        }
+    }
+    .card {
+        background-color: #2A2A2A;
+        border-radius: 10px;
+        padding: 2vh 2vw;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+    }
+    .card a.card-link {
+        color: #fff;
+        text-decoration: none;
+    }
+    .card a.card-link:hover {
+        color: #6CB4EE;
+    }
+    .skill-tag {
+        display: inline-block;
+        background-color: #1E1E1E;
+        color: #C0C0C0;
+        border: 1px solid #444;
+        border-radius: 6px;
+        padding: 2px 8px;
+        margin: 3px 3px 3px 0;
+        font-size: 0.75rem;
+        text-decoration: none;
+        transition: background-color 0.2s, color 0.2s;
+    }
+    .skill-tag:hover {
+        background-color: #3A3A3A;
+        color: #fff;
+    }
+    @media (max-width: 768px) {
+        .card {
+            padding: 1.5vh 1.5vw;
+        }
+    }
+    @media (max-width: 480px) {
+        .card {
+            padding: 1.2vh 1.5vw;
+        }
+    }
+    .card:hover {
+        transform: translateY(-10px);
+    }
+    .card h3 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #fff;
+    }
+    @media (max-width: 768px) {
+        .card h3 {
+            font-size: 2.5vw;
+        }
+    }
+    @media (max-width: 480px) {
+        .card h3 {
+            font-size: 3.5vw;
+        }
+    }
+    .card p {
+        font-size: 1rem;
+        color: #A2A2A2;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .hero {
+        animation: fadeIn 0.6s ease-out forwards;
+        opacity: 0;
+    }
+    .section {
+        animation: fadeInUp 0.7s ease-out forwards;
+        opacity: 0;
+    }
+    .bullet-box, .card {
+        animation: fadeInUp 0.6s ease-out forwards;
+        opacity: 0;
+    }
+
+    @media (max-width: 480px) {
+        .hero {
+            position: relative;
+            height: auto;
+            min-height: 200px;
+            padding: 28px 16px 48px;
+        }
+        .hero h1 {
+            font-size: 1.75rem;
+            line-height: 1.2;
+        }
+        .hero p {
+            font-size: 0.72rem;
+            line-height: 1.65;
+            margin-top: 8px;
+            padding: 0 6px;
+        }
+        .profile img {
+            width: 80px;
+            height: 80px;
+            border: 3px solid #3A3A3A;
+            margin-bottom: 10px;
+        }
+
+        .content-wrapper {
+            margin-top: 0;
+            padding: 0 10px;
+            padding-top: 8px;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            padding: 18px 14px;
+            border-radius: 8px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .section > h2 {
+            font-size: 1.25rem !important;
+            margin-bottom: 14px !important;
+        }
+
+        .bullet-box {
+            padding: 0 14px 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .bullet-box::before {
+            margin: 0 -14px 12px -14px;
+        }
+        .bullet-box h3 {
+            font-size: 0.95rem !important;
+            margin-bottom: 6px !important;
+        }
+        .bullet-box > p {
+            font-size: 0.8rem !important;
+        }
+        .bullet-box ul li {
+            font-size: 0.82rem;
+            line-height: 1.55;
+            margin-bottom: 3px;
+        }
+
+        .card {
+            padding: 14px 14px;
+            border-radius: 8px;
+        }
+        .card h3 {
+            font-size: 1rem !important;
+            margin-bottom: 6px !important;
+        }
+        .card p {
+            font-size: 0.83rem !important;
+        }
+        .card:hover {
+            transform: none;
+        }
+
+        .skill-tag {
+            font-size: 0.68rem;
+            padding: 2px 6px;
+            margin: 2px 2px 2px 0;
+        }
+    }
+</style>
+
+<div class="hero">
+    <div class="profile">
+        <img src="/media/profilepic.jpeg" alt="Profile Picture">
+        <h1>Blake Richardson</h1>
+        <p>Graduating Senior in Computer Science at Rowan University</p>
+        <p style="margin-top:6px;">Software Developer &bull; IT Professional</p>
+
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:20px;">
+            <a href="#projects" style="background:#478cbf;color:#fff;font-weight:600;padding:10px 24px;border-radius:8px;text-decoration:none;font-size:0.95rem;transition:background 0.2s;" onmouseover="this.style.background='#6ab0e3'" onmouseout="this.style.background='#478cbf'">View My Work</a>
+            <a href="#experience" style="background:#478cbf;color:#fff;font-weight:600;padding:10px 24px;border-radius:8px;text-decoration:none;font-size:0.95rem;transition:background 0.2s;" onmouseover="this.style.background='#6ab0e3'" onmouseout="this.style.background='#478cbf'">Experience</a>
+            <a href="#contact" style="background:#478cbf;color:#fff;font-weight:600;padding:10px 24px;border-radius:8px;text-decoration:none;font-size:0.95rem;transition:background 0.2s;" onmouseover="this.style.background='#6ab0e3'" onmouseout="this.style.background='#478cbf'">Contact Me</a>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:12px;">
+            <div style="position:relative;display:inline-block;" id="hero-resume-dropdown">
+                <button onclick="var m=document.getElementById('hero-resume-menu');m.style.display=m.style.display==='block'?'none':'block';event.stopPropagation();" style="background:transparent;color:#fff;font-weight:600;padding:10px 24px;border-radius:8px;border:2px solid #6ab0e3;font-size:0.95rem;cursor:pointer;display:flex;align-items:center;gap:6px;transition:background 0.2s;" onmouseover="this.style.background='rgba(106,176,227,0.15)'" onmouseout="this.style.background='transparent'">
+                    Download Resume
+                    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="currentColor" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>
+                </button>
+                <div id="hero-resume-menu" style="display:none;position:absolute;top:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#1E1E2E;border:1px solid #444;border-radius:8px;min-width:220px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,0.5);overflow:hidden;">
+                    <a href="/media/resume_swe.pdf" target="_blank" style="display:block;padding:10px 16px;color:#C0C0C0;text-decoration:none;font-size:0.85rem;transition:background 0.15s;" onmouseover="this.style.background='#2A2A3A';this.style.color='#fff'" onmouseout="this.style.background='';this.style.color='#C0C0C0'">Software Engineering Resume</a>
+                    <a href="/media/resume_it.pdf" target="_blank" style="display:block;padding:10px 16px;color:#C0C0C0;text-decoration:none;font-size:0.85rem;border-top:1px solid #333;transition:background 0.15s;" onmouseover="this.style.background='#2A2A3A';this.style.color='#fff'" onmouseout="this.style.background='';this.style.color='#C0C0C0'">IT / Systems Resume</a>
+                </div>
+            </div>
+        </div>
+
+        <div style="display:flex;gap:16px;margin-top:16px;">
+            <a href="https://github.com/AdmiralMudkipz" target="_blank" aria-label="GitHub" style="color:rgba(255,255,255,0.6);transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/blakeevanrichardson/" target="_blank" aria-label="LinkedIn" style="color:rgba(255,255,255,0.6);transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452H17.21v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.984V9h3.113v1.561h.045c.434-.823 1.494-1.691 3.074-1.691 3.289 0 3.894 2.165 3.894 4.979v6.603zM5.337 7.433a1.807 1.807 0 1 1 0-3.614 1.807 1.807 0 0 1 0 3.614zm1.559 13.019H3.778V9h3.118v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <div>
+        <section id="about" class="section">
+            <h2 class="text-3xl font-semibold text-white mb-6">About Me</h2>
+            <p class="text-gray-400" style="color: #B2B2B2;">I am a graduating senior at Rowan University pursuing a Bachelor of Science in Computer Science in the spring semester of 2026. I'm a digital native who has had a passion for all things computer related from a very young age. I've been programming since 2019, starting with Java for competitive robotics, and expanding into C, C++, Python, full stack development with web applications and databases, game development in Godot, and embedded systems on Arduino.</p>
+            <p class="text-gray-400 mt-4" style="color: #B2B2B2;">With over two and a half years of IT experience at Rowan University, I bring both technical expertise and practical problem-solving skills to every project. I'm looking for software developer or IT opportunities where I can apply my skills and passion for building things and solving problems.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;" class="mt-4">
+                <div class="bullet-box" style="flex:1 1 calc(33.333% - 1rem);min-width:280px;">
+                    <h3 style="color: #fff; font-weight: bold; margin-bottom: 8px;">Education</h3>
+                    <p style="color: #B2B2B2;">Rowan University</p>
+                    <p style="color: #A2A2A2; font-size: 0.9rem;">BS in Computer Science</p>
+                    <p style="color: #808080; font-size: 0.85rem;">Graduating June 2026</p>
+                </div>
+                <div class="bullet-box" style="flex:1 1 calc(33.333% - 1rem);min-width:280px;">
+                    <h3 style="color: #fff; font-weight: bold; margin-bottom: 8px;">Experience</h3>
+                    <p style="color: #B2B2B2;">Rowan University IRT</p>
+                    <p style="color: #A2A2A2; font-size: 0.9rem;">Classroom Support Student Manager</p>
+                    <p style="margin-top: 6px;"><a href="#experience" style="color: #6CB4EE; font-size: 0.85rem; text-decoration: none;">View work experience &darr;</a></p>
+                </div>
+                <div class="bullet-box" style="flex:1 1 calc(33.333% - 1rem);min-width:280px;">
+                    <h3 style="color: #fff; font-weight: bold; margin-bottom: 8px;">Activities</h3>
+                    <p style="color: #B2B2B2;">Association for Computing Machinery (ACM)</p>
+                    <p style="color: #A2A2A2; font-size: 0.85rem; margin-top: 4px;">Active member throughout all three years at Rowan University</p>
+                    <p style="color: #6CB4EE; font-size: 0.85rem; margin-top: 4px;">🏆 Most Dedicated Attendee Award</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <h2 class="text-3xl font-semibold text-white mb-6">Skills</h2>
+            <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;">
+                <div class="bullet-box" style="flex:1 1 calc(33.333% - 1rem);min-width:280px;">
+                    <h3 style="color: #fff; font-weight: bold; margin-bottom: 8px;">Programming Languages</h3>
+                    <div style="display:flex;flex-wrap:wrap;gap:4px;">
+                        <a href="{% url 'portfolio:projects_by_skill' 'C' %}" class="skill-tag">C</a>
+                        <a href="{% url 'portfolio:projects_by_skill' 'C++' %}" class="skill-tag">C++</a>
+                        <a href="{% url 'portfolio:projects_by_skill' 'Java' %}" class="skill-tag">Java</a>
+                        <a href="{% url 'portfolio:projects_by_skill' 'Python' %}" class="skill-tag">Python</a>
+                        <a href="{% url 'portfolio:projects_by_skill' 'SQL' %}" class="skill-tag">SQL</a>
+                        <a href="{% url 'portfolio:projects_by_skill' 'HTML' %}" class="skill-tag">HTML</a>
+                        <a href="{% url 'portfolio:projects_by_skill' 'CSS' %}" class="skill-tag">CSS</a>
+                        <a href="{% url 'portfolio:projects_by_skill' 'JavaScript' %}" class="skill-tag">JavaScript</a>
+                        <span class="skill-tag" style="cursor:default;">C#</span>
+                        <span class="skill-tag" style="cursor:default;">GDScript</span>
+                    </div>
+                </div>
+                <div class="bullet-box" style="flex:1 1 calc(33.333% - 1rem);min-width:280px;">
+                    <h3 style="color: #fff; font-weight: bold; margin-bottom: 8px;">Tools &amp; Technologies</h3>
+                    <div style="display:flex;flex-wrap:wrap;gap:4px;">
+                        <a href="{% url 'portfolio:projects_by_skill' 'Git' %}" class="skill-tag">Git</a>
+                        <a href="{% url 'portfolio:projects_by_skill' 'Bash' %}" class="skill-tag">Bash</a>
+                        <a href="{% url 'portfolio:projects_by_skill' 'Django' %}" class="skill-tag">Django</a>
+                        <a href="{% url 'portfolio:projects_by_skill' 'HTMX' %}" class="skill-tag">HTMX</a>
+                        <a href="{% url 'portfolio:projects_by_skill' 'SQLite' %}" class="skill-tag">SQLite</a>
+                        <span class="skill-tag" style="cursor:default;">AWS</span>
+                        <span class="skill-tag" style="cursor:default;">Arch Linux</span>
+                        <span class="skill-tag" style="cursor:default;">Godot</span>
+                        <span class="skill-tag" style="cursor:default;">Blender</span>
+                        <span class="skill-tag" style="cursor:default;">Unity</span>
+                        <a href="{% url 'portfolio:projects_by_skill' 'React' %}" class="skill-tag">React</a>
+                        <a href="{% url 'portfolio:projects_by_skill' 'MySQL' %}" class="skill-tag">MySQL</a>
+                        <span class="skill-tag" style="cursor:default;">ServiceNow</span>
+                    </div>
+                </div>
+                <div class="bullet-box" style="flex:1 1 calc(33.333% - 1rem);min-width:280px;">
+                    <h3 style="color: #fff; font-weight: bold; margin-bottom: 8px;">Concepts &amp; Methodologies</h3>
+                    <div style="display:flex;flex-wrap:wrap;gap:4px;">
+                        <a href="{% url 'portfolio:projects_by_skill' 'Agile/Scrum' %}" class="skill-tag">Agile/Scrum</a>
+                        <span class="skill-tag" style="cursor:default;">Relational Databases</span>
+                        <a href="{% url 'portfolio:projects_by_skill' 'Operating Systems' %}" class="skill-tag">Operating Systems</a>
+                        <a href="{% url 'portfolio:projects_by_skill' 'Data Structures' %}" class="skill-tag">Data Structures</a>
+                        <a href="{% url 'portfolio:projects_by_skill' 'OOP' %}" class="skill-tag">OOP</a>
+                        <a href="{% url 'portfolio:projects_by_skill' 'Networking' %}" class="skill-tag">Networking</a>
+                        <a href="{% url 'portfolio:projects_by_skill' 'Hosting' %}" class="skill-tag">Hosting</a>
+                        <a href="{% url 'portfolio:projects_by_skill' 'Circuit Design' %}" class="skill-tag">Circuit Design</a>
+                    </div>
+                </div>
+                <div class="bullet-box" style="flex:1 1 calc(33.333% - 1rem);min-width:280px;max-width:calc(33.333% - 1rem);">
+                    <h3 style="color: #fff; font-weight: bold; margin-bottom: 8px;">Languages</h3>
+                    <div style="display:flex;flex-wrap:wrap;gap:4px;">
+                        <span class="skill-tag" style="cursor:default;">English <span style="font-size:0.7rem;color:#808080;">(Native)</span></span>
+                        <span class="skill-tag" style="cursor:default;">German <span style="font-size:0.7rem;color:#808080;">(Professional Working)</span></span>
+                    </div>
+                    <p style="color: #808080; font-size: 0.8rem; margin-top: 6px;">German-American dual citizen</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <h2 class="text-3xl font-semibold text-white mb-6">Projects</h2>
+            <div style="display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:center;">
+                {% for project in projects %}
+                <div class="card" style="padding-top:0;overflow:hidden;flex:1 1 calc(33.333% - 1.5rem);min-width:280px;max-width:calc(33.333% - 1.5rem);">
+                    <div style="height:4px;background:linear-gradient(90deg,#478cbf,#6ab0e3);border-radius:10px 10px 0 0;margin:0 -2vw 14px;width:calc(100% + 4vw);"></div>
+                    <h3><a class="card-link" href="{% url 'portfolio:project_detail' project.slug %}">{{ project.title }}</a></h3>
+                    <p style="color: #808080; font-size: 0.85rem;">{{ project.subtitle }}</p>
+                    <p style="color: #A2A2A2;" class="mt-2">{{ project.description }}</p>
+                    <div style="margin-top: 0.75rem;">
+                        {% for skill in project.skills %}
+                            <a href="{% url 'portfolio:projects_by_skill' skill %}" class="skill-tag">{{ skill }}</a>
+                        {% endfor %}
+                    </div>
+                    {% if project.github %}
+                        <a href="{{ project.github }}" target="_blank" class="text-blue-400 mt-2 inline-block" style="font-size:0.85rem;">View on GitHub &rarr;</a>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section id="experience" class="section">
+            <h2 class="text-3xl font-semibold text-white mb-6">Experience</h2>
+
+            <div class="bullet-box" style="margin-bottom: 16px;">
+                <h3 style="color: #fff; font-weight: bold;">IT Student Manager</h3>
+                <p style="color: #808080; font-size: 0.9rem;">Rowan University IRT — Glassboro, NJ &bull; Aug 2025 – Present</p>
+                <ul class="list-disc list-inside mt-2" style="color: #A2A2A2;">
+                    <li>Manage daily IT operations &amp; support workload for university classrooms, ensuring high system reliability and uptime.</li>
+                    <li>Serve as the primary point of escalation for complex, unresolved hardware and software troubleshooting issues.</li>
+                    <li>Lead the onboarding and training of new technicians, ensuring adherence to technical standards.</li>
+                    <li>Coordinate scheduling and task prioritization for the Classroom Support team.</li>
+                </ul>
+                <div style="margin-top: 0.75rem;">
+                    <span class="skill-tag">IT Support</span>
+                    <span class="skill-tag">Technical Support</span>
+                    <span class="skill-tag">Team Management</span>
+                    <span class="skill-tag">Scheduling</span>
+                    <a href="{% url 'portfolio:projects_by_skill' 'Agile/Scrum' %}" class="skill-tag">Agile/Scrum</a>
+                    <span class="skill-tag">ServiceNow</span>
+                    <span class="skill-tag">Incident Escalation</span>
+                </div>
+            </div>
+
+            <div class="bullet-box" style="margin-bottom: 16px;">
+                <h3 style="color: #fff; font-weight: bold;">IT Support Technician</h3>
+                <p style="color: #808080; font-size: 0.9rem;">Rowan University IRT — Glassboro, NJ &bull; May 2024 – Aug 2025</p>
+                <ul class="list-disc list-inside mt-2" style="color: #A2A2A2;">
+                    <li>Provided on-call, realtime technical support to faculty and students, diagnosing and resolving live classroom issues.</li>
+                    <li>Maintained, repaired, and tested A/V equipment, hardware, and software across hundreds of classrooms.</li>
+                    <li>Communicated complex technical solutions effectively to non-technical end users under time-sensitive conditions.</li>
+                </ul>
+                <div style="margin-top: 0.75rem;">
+                    <span class="skill-tag">IT Support</span>
+                    <span class="skill-tag">Technical Support</span>
+                    <span class="skill-tag">Troubleshooting</span>
+                    <span class="skill-tag">A/V Equipment</span>
+                    <span class="skill-tag">Hardware Repair</span>
+                    <span class="skill-tag">ServiceNow</span>
+                </div>
+            </div>
+
+            <div class="bullet-box" style="margin-bottom: 16px;">
+                <h3 style="color: #fff; font-weight: bold;">Print Lab Technician</h3>
+                <p style="color: #808080; font-size: 0.9rem;">Rowan University — Glassboro, NJ &bull; Oct 2023 – May 2024</p>
+                <ul class="list-disc list-inside mt-2" style="color: #A2A2A2;">
+                    <li>Configured and maintained large format printing hardware, ensuring consistent operation and print quality.</li>
+                    <li>Managed the production queue, processed orders, and provided customer service and technical support.</li>
+                </ul>
+                <div style="margin-top: 0.75rem;">
+                    <span class="skill-tag">Hardware Maintenance</span>
+                    <span class="skill-tag">Customer Service</span>
+                    <span class="skill-tag">Queue Management</span>
+                    <span class="skill-tag">Technical Support</span>
+                </div>
+            </div>
+
+            <div class="bullet-box">
+                <h3 style="color: #fff; font-weight: bold;">IT Student Worker</h3>
+                <p style="color: #808080; font-size: 0.9rem;">Clearview Regional High School — Mullica Hill, NJ &bull; Jul 2022 – Sep 2022</p>
+                <ul class="list-disc list-inside mt-2" style="color: #A2A2A2;">
+                    <li>Troubleshot and repaired classroom technology, minimizing downtime for educators.</li>
+                    <li>Handled help desk calls and provided direct support to faculty, resolving software and hardware inquiries.</li>
+                </ul>
+                <div style="margin-top: 0.75rem;">
+                    <span class="skill-tag">IT Support</span>
+                    <span class="skill-tag">Troubleshooting</span>
+                    <span class="skill-tag">Hardware Repair</span>
+                    <span class="skill-tag">Help Desk</span>
+                    <span class="skill-tag">Network Testing</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section text-center">
+            <h2 class="text-3xl font-semibold text-white mb-6">Get in Touch</h2>
+            <p class="text-gray-400" style="color: #B2B2B2;">I'm open to Software Engineer, Software Developer, DevOps, Data Science, and IT roles. Feel free to reach out!</p>
+            <div class="mt-4" style="color: #B2B2B2;">
+                <p>Email: <a href="mailto:blake@blakerichardson.dev" class="text-blue-400">blake@blakerichardson.dev</a></p>
+                <p class="mt-1">Phone: <a href="tel:+18564721492" class="text-blue-400">856-472-1492</a></p>
+                <p class="mt-1">GitHub: <a href="https://github.com/AdmiralMudkipz" class="text-blue-400">github.com/AdmiralMudkipz</a></p>
+                <p class="mt-1">LinkedIn: <a href="https://www.linkedin.com/in/blakeevanrichardson/" class="text-blue-400">linkedin.com/in/blakeevanrichardson</a></p>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('click', function(e) {
+        var menu = document.getElementById('hero-resume-menu');
+        var dropdown = document.getElementById('hero-resume-dropdown');
+        if (menu && dropdown && !dropdown.contains(e.target)) {
+            menu.style.display = 'none';
+        }
+    });
+
+    document.querySelectorAll('a[href*="#"]').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            var hash = this.getAttribute('href').split('#')[1];
+            var target = document.getElementById(hash);
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var hero = document.querySelector('.hero');
+        if (hero) {
+            hero.style.animationDelay = '0s';
+        }
+
+        document.querySelectorAll('.section, .bullet-box, .card').forEach(function(el) {
+            el.style.opacity = '0';
+            el.style.animation = 'none';
+        });
+
+        var sectionObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (!entry.isIntersecting) return;
+                var section = entry.target;
+                section.style.animation = 'fadeInUp 0.7s ease-out forwards';
+
+                var boxes = section.querySelectorAll('.bullet-box, .card');
+                boxes.forEach(function(box, i) {
+                    box.style.animation = 'fadeInUp 0.6s ease-out forwards';
+                    box.style.animationDelay = (0.25 + i * 0.08) + 's';
+                });
+
+                sectionObserver.unobserve(section);
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.section').forEach(function(el) {
+            sectionObserver.observe(el);
+        });
+    });
+</script>
+{% endblock %}

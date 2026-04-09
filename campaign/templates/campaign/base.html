@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Blake Richardson for Township Committee{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="/media/favicon_io/favicon.ico" />
+    <style>
+        :root {
+            --bg: #0f172a;
+            --panel: #111827;
+            --panel-2: #1f2937;
+            --text: #e5e7eb;
+            --muted: #9ca3af;
+            --accent: #38bdf8;
+            --red: #ef4444;
+            --yellow: #facc15;
+            --green: #22c55e;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+        a { text-decoration: none; color: inherit; }
+
+        .topnav {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 24px;
+            background: #0b1120;
+            border-bottom: 1px solid #1e293b;
+        }
+        .topnav img {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+        }
+        .topnav .brand {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #fff;
+        }
+        .topnav .home-link {
+            margin-left: auto;
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+        .topnav .home-link:hover { text-decoration: underline; }
+
+        .wrap {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 32px 16px 64px;
+        }
+        .footer {
+            text-align: center;
+            color: #4b5563;
+            font-size: 0.85rem;
+            margin-top: 48px;
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <nav class="topnav">
+        <img src="/media/logo.png" alt="Logo" />
+        <span class="brand">Blake Richardson</span>
+        <a class="home-link" href="/campaign/homepage/">← Home</a>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <div class="wrap">
+        <p class="footer">© 2026 Blake Richardson Campaign</p>
+    </div>
+</body>
+</html>

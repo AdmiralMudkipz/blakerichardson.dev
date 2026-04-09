@@ -1,0 +1,233 @@
+{% extends "campaign/base.html" %}
+
+{% block title %}Cut Red Tape — Blake Richardson{% endblock %}
+
+{% block extra_css %}
+<style>
+    .page-header {
+        text-align: center;
+        padding: 56px 20px 32px;
+        background: linear-gradient(180deg, #1a0505 0%, var(--bg) 100%);
+        position: relative;
+        overflow: hidden;
+    }
+    .page-header h1 {
+        font-size: clamp(1.6rem, 5vw, 2.6rem);
+        color: #fca5a5;
+        position: relative;
+        z-index: 2;
+    }
+    .page-header .subtitle {
+        color: #d4a0a0;
+        margin-top: 8px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .tape-scene {
+        position: relative;
+        height: 48px;
+        margin: 24px auto 0;
+        max-width: 500px;
+        z-index: 2;
+    }
+    .tape {
+        position: absolute;
+        top: 18px;
+        left: 0;
+        right: 0;
+        height: 12px;
+        background: repeating-linear-gradient(
+            90deg, #dc2626 0px, #dc2626 20px, #b91c1c 20px, #b91c1c 40px
+        );
+        border-radius: 2px;
+    }
+    .tape-left {
+        right: 50%;
+        animation: slideLeft 1.2s 0.8s ease forwards;
+        transform-origin: right center;
+    }
+    .tape-right {
+        left: 50%;
+        animation: slideRight 1.2s 0.8s ease forwards;
+        transform-origin: left center;
+    }
+    @keyframes slideLeft {
+        to { transform: translateX(-40px) rotate(-4deg); opacity: 0.3; }
+    }
+    @keyframes slideRight {
+        to { transform: translateX(40px) rotate(4deg); opacity: 0.3; }
+    }
+
+    .scissors {
+        position: absolute;
+        top: 2px;
+        font-size: 2.2rem;
+        z-index: 3;
+        animation: cutAcross 1.0s 0.3s ease-in-out forwards;
+        left: -30px;
+        opacity: 0;
+    }
+    @keyframes cutAcross {
+        0%   { left: -30px; opacity: 0; transform: rotate(0deg); }
+        15%  { opacity: 1; }
+        50%  { left: calc(50% - 16px); transform: rotate(-8deg); }
+        100% { left: calc(50% - 16px); opacity: 1; transform: rotate(0deg); }
+    }
+
+    .page-header::before,
+    .page-header::after {
+        content: '';
+        position: absolute;
+        height: 6px;
+        background: rgba(220, 38, 38, 0.12);
+        border-radius: 3px;
+    }
+    .page-header::before {
+        width: 220px;
+        top: 25%;
+        left: -20px;
+        transform: rotate(-6deg);
+        animation: driftRight 8s ease-in-out infinite alternate;
+    }
+    .page-header::after {
+        width: 180px;
+        bottom: 20%;
+        right: -20px;
+        transform: rotate(4deg);
+        animation: driftLeft 9s ease-in-out infinite alternate;
+    }
+    @keyframes driftRight { to { transform: translateX(30px) rotate(-4deg); } }
+    @keyframes driftLeft  { to { transform: translateX(-30px) rotate(2deg); } }
+
+    .policies {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 24px 16px 48px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    .policy {
+        background: #1c1212;
+        border: 1px solid #3b1111;
+        border-left: 4px solid #dc2626;
+        border-radius: 10px;
+        padding: 20px 24px;
+        opacity: 0;
+        animation: fadeInUp 0.5s ease forwards;
+    }
+    .policy:nth-child(1) { animation-delay: 0.3s; }
+    .policy:nth-child(2) { animation-delay: 0.45s; }
+    .policy:nth-child(3) { animation-delay: 0.6s; }
+    .policy:nth-child(4) { animation-delay: 0.75s; }
+    .policy:nth-child(5) { animation-delay: 0.9s; }
+    .policy:nth-child(6) { animation-delay: 1.05s; }
+    .policy:nth-child(7) { animation-delay: 1.2s; }
+    .policy:nth-child(8) { animation-delay: 1.35s; }
+    .policy h3 {
+        color: #fca5a5;
+        margin-bottom: 6px;
+        font-size: 1.1rem;
+    }
+    .policy .meta {
+        color: #ef4444;
+        font-size: 0.84rem;
+        margin-bottom: 8px;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+    }
+    .policy p {
+        color: #c9a0a0;
+        line-height: 1.55;
+        font-size: 0.95rem;
+        margin: 8px 0;
+    }
+    .policy p.effect {
+        color: #e0b8b8;
+    }
+
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(18px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <h1>✂️ Cut Red Tape</h1>
+    <p class="subtitle">Less bureaucracy. More results.</p>
+
+    <div class="tape-scene">
+        <div class="tape tape-left"></div>
+        <div class="tape tape-right"></div>
+        <div class="scissors">✂️</div>
+    </div>
+</section>
+
+<div class="policies">
+    <article class="policy">
+        <div class="meta">Issue &amp; Policy: Transparency / Livestream Township Meetings</div>
+        <h3>Livestream Township Meetings</h3>
+        <p>Township meetings are livestreamed on YouTube where videos will automatically be archived for future reference.</p>
+        <p class="effect"><strong>Effects:</strong> Community members will have easy and open access to the township meetings and information.</p>
+    </article>
+
+    <article class="policy">
+        <div class="meta">Issue &amp; Policy: Setback Reform / Decrease Setbacks</div>
+        <h3>Decrease Setbacks</h3>
+        <p>Require adequate setbacks for on-street parking, space for walking/biking, but nothing excessive. Parking lots can be placed behind buildings.</p>
+        <p class="effect"><strong>Effects:</strong> Relegalizes traditional Main Street style storefronts, limits land waste while ensuring that adequate walking, cycling and on-street parking space is still preserved where necessary.</p>
+    </article>
+
+    <article class="policy">
+        <div class="meta">Issue &amp; Policy: Tax-Base Development / More Main Street</div>
+        <h3>More Main Street</h3>
+        <p>Properties within a mile of a Main Street building can be transformed into a Main Street style mixed-use building &mdash; consumer commercial first floor, residential/office space on above floors &mdash; with minimal setbacks required, provided they follow the aesthetic of Main Street buildings.</p>
+        <p class="effect"><strong>Effects:</strong> Relegalizes Main Street style development on properties bordering and surrounding Main Street.</p>
+    </article>
+
+    <article class="policy">
+        <div class="meta">Issue &amp; Policy: Enable Small Business / Caf&eacute; &amp; Bakery Law</div>
+        <h3>Caf&eacute; &amp; Bakery Law</h3>
+        <p>Businesses can operate from residential properties without rezoning, provided:</p>
+        <ul style="color: #c9a0a0; line-height: 1.7; font-size: 0.95rem; margin: 8px 0 8px 20px;">
+            <li>They pass all necessary inspections and certifications like they would in a commercial building.</li>
+            <li>At least one floor of said building is still dedicated to a housing unit.</li>
+            <li>Possible businesses could include but not be limited to: caf&eacute;s, bakeries, grocery stores, delis, restaurants, stores, gathering places, and bars.</li>
+            <li>Businesses must also not emit more air pollution than the average house, and must follow the same noise standards as a normal residence, with mandatory soundproofing of the building should they break this rule.</li>
+            <li>The aesthetic style of the building fits the rest of the neighborhood, and/or follows the style of Main Street.</li>
+        </ul>
+        <p class="effect"><strong>Effects:</strong> Relegalizes small businesses to start up and operate within our communities. Gives opportunities for community members to start businesses out of their homes. Creates job and enterprise opportunities. Reduces traffic by giving residents amenities within walking distance. Fosters local community spirit by creating meeting places and community gathering spaces within preexisting communities.</p>
+    </article>
+
+    <article class="policy">
+        <div class="meta">Issue &amp; Policy: Parking-Minimum Reform / Market-Based Parking</div>
+        <h3>Market-Based Parking</h3>
+        <p>The amount of parking is decided by market forces &mdash; the property owner decides how much parking is necessary for their property.</p>
+        <p class="effect"><strong>Effects:</strong> Allows more flexible land use around businesses. Creates job opportunities. Increases potential commercial tax base.</p>
+    </article>
+
+    <article class="policy">
+        <div class="meta">Issue &amp; Policy: Housing / Lot Size Reform</div>
+        <h3>Lot Size Reform</h3>
+        <p>Remove the minimum lot size for all sewer-connected properties. If the sewer capacity is at its limit a builder should be allowed to build given they contribute funds for the necessary capacity upgrades to the water treatment system, or build an on-site water treatment solution.</p>
+        <p class="effect"><strong>Effects:</strong> Ensures sewer and water infrastructure expands with the demand needed by the town without excessive expense to existing residences.</p>
+    </article>
+
+    <article class="policy">
+        <div class="meta">Issue &amp; Policy: Sustainable Development Planning / Commercial Subsidized Affordable Housing</div>
+        <h3>Commercial Subsidized Affordable Housing</h3>
+        <p>Add commercial development intertwined with affordable housing units to minimize traffic generated. Use taxes from these businesses to fund the school and roads around the area.</p>
+        <p class="effect"><strong>Effects:</strong> Decreases traffic. Allows denser developments to fund schools in addition to their property taxes.</p>
+    </article>
+
+    <article class="policy">
+        <div class="meta">Issue &amp; Policy: Housing / Legalize In-Law Suites</div>
+        <h3>Legalize In-Law Suites</h3>
+        <p>Allow accessory dwelling units on existing residential plots provided they are 1,000 ft&sup2; or 50% of the footprint of the primary residence, whichever is smaller.</p>
+        <p class="effect"><strong>Effects:</strong> Allows affordable housing construction on existing properties without requiring additional utility and road costs. Lowers cost of living. Less traffic than sprawl development.</p>
+    </article>
+</div>
+{% endblock %}

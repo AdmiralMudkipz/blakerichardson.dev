@@ -1,0 +1,124 @@
+{% extends "campaign/base.html" %}
+
+{% block title %}Blake Richardson for Township Committee{% endblock %}
+
+{% block extra_css %}
+<style>
+    .hero {
+        text-align: center;
+        padding: 72px 20px 40px;
+        background: linear-gradient(180deg, #0b1220 0%, #111827 100%);
+    }
+    .hero h1 {
+        font-size: clamp(1.8rem, 5vw, 3rem);
+        margin-bottom: 12px;
+    }
+    .hero p {
+        color: var(--muted);
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    .focuses {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        padding: 40px 16px 60px;
+        max-width: 860px;
+        margin: 0 auto;
+    }
+    .focus-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+        width: 240px;
+        padding: 32px 20px;
+        border-radius: 16px;
+        border: 2px solid transparent;
+        cursor: pointer;
+        transition: transform 0.25s, box-shadow 0.25s;
+        text-decoration: none;
+    }
+    .focus-btn:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+    }
+
+    .btn-red {
+        background: linear-gradient(135deg, #7f1d1d, #991b1b);
+        border-color: #dc2626;
+        color: #fecaca;
+    }
+    .btn-red:hover { border-color: #ef4444; }
+
+    .btn-yellow {
+        background: linear-gradient(135deg, #713f12, #854d0e);
+        border-color: #eab308;
+        color: #fef9c3;
+    }
+    .btn-yellow:hover { border-color: #facc15; }
+
+    .btn-green {
+        background: linear-gradient(135deg, #14532d, #166534);
+        border-color: #22c55e;
+        color: #bbf7d0;
+    }
+    .btn-green:hover { border-color: #4ade80; }
+
+    .focus-btn .icon {
+        font-size: 2.8rem;
+        line-height: 1;
+    }
+    .focus-btn .label {
+        font-size: 1.15rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .focus-btn .desc {
+        font-size: 0.85rem;
+        opacity: 0.8;
+        text-align: center;
+        line-height: 1.4;
+    }
+
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(24px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero        { animation: fadeInUp 0.6s ease both; }
+    .focus-btn:nth-child(1) { animation: fadeInUp 0.6s 0.15s ease both; }
+    .focus-btn:nth-child(2) { animation: fadeInUp 0.6s 0.30s ease both; }
+    .focus-btn:nth-child(3) { animation: fadeInUp 0.6s 0.45s ease both; }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>Campaign Focuses</h1>
+    <p>Three priorities to make our township more affordable, safer, and less bureaucratic. Pick a focus to see the full policy platform.</p>
+</section>
+
+<div class="focuses">
+    <a class="focus-btn btn-red" href="{% url 'campaign:cut_red_tape' %}">
+        <span class="icon">✂️</span>
+        <span class="label">Cut Red Tape</span>
+        <span class="desc">Streamline permits, reduce fees, and eliminate unnecessary bureaucracy.</span>
+    </a>
+
+    <a class="focus-btn btn-yellow" href="{% url 'campaign:cheap_energy' %}">
+        <span class="icon">⚡</span>
+        <span class="label">Cheap Energy</span>
+        <span class="desc">Lower utility costs and promote practical local energy solutions.</span>
+    </a>
+
+    <a class="focus-btn btn-green" href="{% url 'campaign:safe_streets' %}">
+        <span class="icon">🛣️</span>
+        <span class="label">Safe Streets</span>
+        <span class="desc">Better lighting, crosswalks, traffic calming, and road maintenance.</span>
+    </a>
+</div>
+{% endblock %}

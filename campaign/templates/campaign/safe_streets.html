@@ -1,0 +1,206 @@
+{% extends "campaign/base.html" %}
+
+{% block title %}Safe Streets — Blake Richardson{% endblock %}
+
+{% block extra_css %}
+<style>
+    .page-header {
+        text-align: center;
+        padding: 56px 20px 32px;
+        background: linear-gradient(180deg, #021a08 0%, var(--bg) 100%);
+        position: relative;
+        overflow: hidden;
+    }
+    .page-header h1 {
+        font-size: clamp(1.6rem, 5vw, 2.6rem);
+        color: #86efac;
+        position: relative;
+        z-index: 2;
+    }
+    .page-header .subtitle {
+        color: #8ccba0;
+        margin-top: 8px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .road-scene {
+        position: relative;
+        width: 100%;
+        max-width: 420px;
+        height: 80px;
+        margin: 28px auto 0;
+        z-index: 2;
+    }
+    .road {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 48px;
+        background: #1f2937;
+        border-radius: 6px;
+        overflow: hidden;
+    }
+    .road::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: repeating-linear-gradient(
+            90deg,
+            #facc15 0px, #facc15 24px,
+            transparent 24px, transparent 44px
+        );
+        transform: translateY(-50%);
+        animation: lineScroll 1.5s linear infinite;
+    }
+    @keyframes lineScroll {
+        to { background-position: -44px 0; }
+    }
+
+    .crosswalk {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 72px;
+        height: 48px;
+        background: repeating-linear-gradient(
+            180deg,
+            #e5e7eb 0px, #e5e7eb 5px,
+            transparent 5px, transparent 11px
+        );
+        opacity: 0.55;
+        border-radius: 2px;
+    }
+
+    .walker {
+        position: absolute;
+        bottom: 48px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 1.8rem;
+        animation: walkBounce 0.8s ease-in-out infinite alternate;
+    }
+    @keyframes walkBounce {
+        from { transform: translateX(-50%) translateY(0); }
+        to   { transform: translateX(-50%) translateY(-6px); }
+    }
+
+    .safety-icon {
+        position: absolute;
+        font-size: 1.3rem;
+        opacity: 0;
+        animation: floatIcon 4s ease-in-out infinite;
+    }
+    .safety-icon:nth-child(1) { left: 8%;  top: 20%; animation-delay: 0s; }
+    .safety-icon:nth-child(2) { right: 8%; top: 15%; animation-delay: 1.2s; }
+    .safety-icon:nth-child(3) { left: 18%; top: 55%; animation-delay: 2.4s; }
+    .safety-icon:nth-child(4) { right: 15%; top: 50%; animation-delay: 0.6s; }
+    @keyframes floatIcon {
+        0%, 100% { opacity: 0; transform: translateY(0); }
+        50%      { opacity: 0.6; transform: translateY(-10px); }
+    }
+
+    .policies {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 24px 16px 48px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    .policy {
+        background: #0d1a12;
+        border: 1px solid #143d20;
+        border-left: 4px solid #22c55e;
+        border-radius: 10px;
+        padding: 20px 24px;
+        opacity: 0;
+        animation: fadeInUp 0.5s ease forwards;
+    }
+    .policy:nth-child(1) { animation-delay: 0.3s; }
+    .policy:nth-child(2) { animation-delay: 0.45s; }
+    .policy:nth-child(3) { animation-delay: 0.6s; }
+    .policy:nth-child(4) { animation-delay: 0.75s; }
+    .policy h3 {
+        color: #86efac;
+        margin-bottom: 6px;
+        font-size: 1.1rem;
+    }
+    .policy .meta {
+        color: #22c55e;
+        font-size: 0.84rem;
+        margin-bottom: 8px;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+    }
+    .policy p {
+        color: #8cc9a0;
+        line-height: 1.55;
+        font-size: 0.95rem;
+        margin: 8px 0;
+    }
+    .policy p.effect {
+        color: #b8e0c4;
+    }
+
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(18px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <span class="safety-icon">🚦</span>
+    <span class="safety-icon">🛑</span>
+    <span class="safety-icon">💡</span>
+    <span class="safety-icon">🚸</span>
+
+    <h1>🛣️ Safe Streets</h1>
+    <p class="subtitle">Every road. Every crosswalk. Every neighbor.</p>
+
+    <div class="road-scene">
+        <div class="walker">🚶</div>
+        <div class="road">
+            <div class="crosswalk"></div>
+        </div>
+    </div>
+</section>
+
+<div class="policies">
+    <article class="policy">
+        <div class="meta">Issue &amp; Policy: Traffic &amp; Child Safety / Fast Track Traffic Calming &amp; Child Safety Improvements</div>
+        <h3>Fast Track Traffic Calming &amp; Child Safety Improvements</h3>
+        <p>Have a fast-tracked online form to request crosswalks, raised crosswalks, pedestrian bumpouts, road narrowing around schools, playgrounds, or where children are at risk of vehicle collisions.</p>
+        <p>A similar form will exist for traffic problem areas &mdash; residents can fill out the form and traffic calming bollards, roundabouts at intersections, speedbumps, and/or road narrowing can be implemented to make streets safer.</p>
+        <p class="effect"><strong>Effects:</strong> Critical safety improvements can be highlighted and implemented before incidents occur rather than after. Children and teens will be able to get around Harrison Township safer. Disruptive traffic patterns will be highlighted and prevented at an engineering level to make Harrison Township&rsquo;s roads and communities safer.</p>
+    </article>
+
+    <article class="policy">
+        <div class="meta">Issue &amp; Policy: Bus Shelters / NJTransit Free Bus Stops &amp; Shelters Program</div>
+        <h3>Take Advantage of NJTransit&rsquo;s Free Bus Stops and Shelters Program</h3>
+        <p>NJTransit provides free bus shelters to all municipalities who request them. We should take advantage of this program to give our transit riders better quality of service.</p>
+        <p class="effect"><strong>Effects:</strong> Improves quality of life for bus riders. Decreases traffic by encouraging bus ridership and improving riding experience.</p>
+    </article>
+
+    <article class="policy">
+        <div class="meta">Issue &amp; Policy: School Transport &amp; Traffic / Separated Paths</div>
+        <h3>Separated Paths</h3>
+        <p>Create a network of protected paths connecting various neighborhoods so that students can safely get to school via bicycle if they choose without having to worry about being run over by cars or slowing down car traffic. If the path is along an existing street, place street-side parking, or some sort of barrier like flower pots between the driving lane and the path in order to protect users of the path.</p>
+        <p class="effect"><strong>Effects:</strong> Improves child safety. Saves school budget on bussing and bus drivers. Decreases traffic for pickup, drop-off, as well as students driving to and from school. Decreases traffic in general. Gives alternative transportation for those without a car or with limited access to a car.</p>
+    </article>
+
+    <article class="policy">
+        <div class="meta">Issue &amp; Policy: Traffic / Bus Signal Prioritization</div>
+        <h3>Bus Signal Prioritization</h3>
+        <p>Implement priority signalling for NJTransit, SJTA, and school busses by adding transponders to the busses, upgrading traffic lights that are municipally controlled, and petitioning NJDOT for those traffic lights the town does not control.</p>
+        <p class="effect"><strong>Effects:</strong> Lowers school bus fuel costs, lowers staffing costs by decreasing school bus ride times, decreases traffic by allowing large busses through to free up intersections &mdash; especially during rush hour. Allows commuters to get to their destinations faster via bus. Allows Main Street to have smoother traffic flow during the busiest times.</p>
+    </article>
+</div>
+{% endblock %}
