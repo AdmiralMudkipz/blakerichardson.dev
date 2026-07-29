@@ -1,0 +1,93 @@
+{% extends "campaign/base.html" %}
+
+{% block title %}Campaign FAQ - Blake Richardson{% endblock %}
+
+{% block meta_description %}Frequently asked questions about the Blake Richardson campaign and policy platform.{% endblock %}
+
+{% block extra_css %}
+<style>
+    .faq-wrap {
+        max-width: 1040px;
+        margin: 0 auto;
+        padding: 38px 18px 54px;
+    }
+    .heading {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 24px 22px;
+        margin-bottom: 16px;
+    }
+    .kicker {
+        font-size: 0.74rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
+        color: var(--accent);
+        margin-bottom: 10px;
+    }
+    .heading h1 {
+        font-family: "Merriweather", Georgia, serif;
+        font-size: clamp(1.65rem, 4.2vw, 2.5rem);
+        margin-bottom: 10px;
+        color: var(--ink);
+    }
+    .heading p {
+        color: var(--ink-soft);
+        line-height: 1.62;
+    }
+
+    .faq-list {
+        display: grid;
+        gap: 12px;
+    }
+    .faq-item {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 16px;
+    }
+    .faq-item h2 {
+        font-size: 1rem;
+        color: var(--ink);
+        margin-bottom: 7px;
+    }
+    .faq-item p {
+        color: var(--ink-soft);
+        font-size: 0.93rem;
+        line-height: 1.6;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="faq-wrap">
+    <header class="heading">
+        <p class="kicker">Campaign FAQ</p>
+        <h1>Frequently Asked Questions</h1>
+        <p>Quick answers about the campaign platform and where to find policy details.</p>
+    </header>
+
+    <div class="faq-list">
+        <article class="faq-item">
+            <h2>What are the campaign's top priorities?</h2>
+            <p>The platform focuses on three core areas: cutting red tape, lowering long-term energy costs, and improving street safety through practical infrastructure changes.</p>
+        </article>
+
+        <article class="faq-item">
+            <h2>Where can I read policy details?</h2>
+            <p>Visit the Issues page for a full overview, then open each issue brief for detailed proposals and expected impacts.</p>
+        </article>
+
+        <article class="faq-item">
+            <h2>Is this website collecting contact form submissions yet?</h2>
+            <p>Not yet. The current contact page is static and provides direct communication channels. A full submission workflow can be added in a later phase.</p>
+        </article>
+
+        <article class="faq-item">
+            <h2>How can I share local concerns?</h2>
+            <p>Use the Contact page to send campaign questions and neighborhood-specific concerns, including location context when relevant.</p>
+        </article>
+    </div>
+</section>
+{% endblock %}

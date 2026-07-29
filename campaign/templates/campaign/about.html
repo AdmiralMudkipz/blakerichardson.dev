@@ -1,0 +1,129 @@
+{% extends "campaign/base.html" %}
+
+{% block title %}About Blake Richardson{% endblock %}
+
+{% block meta_description %}Learn about Blake Richardson, his background, and why he is running for Township Committee.{% endblock %}
+
+{% block extra_css %}
+<style>
+    .about-wrap {
+        max-width: 1040px;
+        margin: 0 auto;
+        padding: 38px 18px 54px;
+        display: grid;
+        grid-template-columns: 1fr 0.95fr;
+        gap: 18px;
+    }
+    .panel {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 24px 22px;
+        box-shadow: 0 10px 22px rgba(26, 47, 69, 0.07);
+    }
+    .eyebrow {
+        font-size: 0.74rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
+        color: var(--accent);
+        margin-bottom: 10px;
+    }
+    h1 {
+        font-family: "Merriweather", Georgia, serif;
+        font-size: clamp(1.7rem, 4.2vw, 2.7rem);
+        margin-bottom: 10px;
+        color: var(--ink);
+    }
+    .lead {
+        color: var(--ink-soft);
+        line-height: 1.68;
+        margin-bottom: 16px;
+    }
+    .bio {
+        color: var(--ink-soft);
+        line-height: 1.65;
+        margin-bottom: 14px;
+    }
+    .card-title {
+        font-family: "Merriweather", Georgia, serif;
+        font-size: 1.15rem;
+        margin-bottom: 10px;
+        color: var(--ink);
+    }
+    .values {
+        margin-left: 18px;
+        color: var(--ink-soft);
+        line-height: 1.65;
+    }
+    .values li {
+        margin-bottom: 6px;
+    }
+    .next-links {
+        margin-top: 16px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+    .next-links a {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 12px;
+        text-decoration: none;
+        color: var(--ink-soft);
+        background: var(--panel-flat);
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+    .next-links a:hover {
+        background: var(--chip-hover);
+        border-color: var(--accent);
+    }
+    .next-links strong {
+        display: block;
+        color: var(--ink);
+        margin-bottom: 4px;
+        font-size: 0.92rem;
+    }
+    @media (max-width: 900px) {
+        .about-wrap {
+            grid-template-columns: 1fr;
+        }
+        .next-links {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="about-wrap">
+    <article class="panel">
+        <p class="eyebrow">About The Candidate</p>
+        <h1>Blake Richardson</h1>
+        <p class="lead">Blake Richardson is running for Township Committee to deliver practical, local policy that residents can feel in everyday life: lower costs, safer streets, and a local government that works faster and communicates clearly.</p>
+        <p class="bio">This campaign is grounded in implementation. The focus is on specific policy changes, transparent decision-making, and measurable outcomes for families, commuters, small businesses, and students.</p>
+        <p class="bio">Rather than broad slogans, Blake's approach is to publish clear policy proposals, explain expected impacts, and keep residents informed as work moves from planning to execution.</p>
+    </article>
+
+    <aside class="panel" aria-label="Campaign values and priorities">
+        <h2 class="card-title">Campaign Priorities</h2>
+        <ul class="values">
+            <li>Modernize outdated rules that block housing and small business opportunity.</li>
+            <li>Expand practical energy options that lower long-term household costs.</li>
+            <li>Improve school-area and Main Street safety through funded street redesign.</li>
+            <li>Increase transparency and access to local government information.</li>
+        </ul>
+
+        <div class="next-links">
+            <a href="{% url 'campaign:issues' %}">
+                <strong>Read The Platform</strong>
+                Full issue-by-issue policy details.
+            </a>
+            <a href="{% url 'campaign:contact' %}">
+                <strong>Contact The Campaign</strong>
+                Share local concerns or questions.
+            </a>
+        </div>
+    </aside>
+</section>
+{% endblock %}

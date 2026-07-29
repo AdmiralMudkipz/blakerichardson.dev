@@ -2,123 +2,263 @@
 
 {% block title %}Blake Richardson for Township Committee{% endblock %}
 
+{% block meta_description %}Blake Richardson is running for Township Committee, focused on cutting red tape, lowering energy costs, and making our streets safer.{% endblock %}
+
 {% block extra_css %}
 <style>
     .hero {
-        text-align: center;
-        padding: 72px 20px 40px;
-        background: linear-gradient(180deg, #0b1220 0%, #111827 100%);
+        max-width: 1040px;
+        margin: 0 auto;
+        padding: 44px 18px 8px;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 24px;
+        align-items: stretch;
+    }
+    .hero-copy {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 28px 24px;
+        box-shadow: 0 10px 22px rgba(26, 47, 69, 0.08);
+    }
+    .eyebrow {
+        display: inline-block;
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 12px;
     }
     .hero h1 {
-        font-size: clamp(1.8rem, 5vw, 3rem);
+        font-family: "Merriweather", Georgia, serif;
+        font-size: clamp(1.85rem, 4.3vw, 3rem);
+        line-height: 1.18;
         margin-bottom: 12px;
     }
     .hero p {
-        color: var(--muted);
-        max-width: 600px;
+        color: var(--ink-soft);
+        line-height: 1.65;
+        margin-bottom: 18px;
+    }
+    .cta-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    .cta-row a {
+        display: inline-block;
+        padding: 10px 14px;
+        border-radius: 999px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        text-decoration: none;
+    }
+    .cta-primary {
+        background: var(--accent);
+        color: #fff;
+        transition: background-color 0.2s ease;
+    }
+    .cta-primary:hover {
+        background: #a4462b;
+    }
+    .cta-secondary {
+        border: 1px solid var(--line);
+        color: var(--ink);
+        background: var(--panel-flat);
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+    .cta-secondary:hover {
+        background: var(--chip-hover);
+        border-color: var(--accent);
+    }
+
+    .hero-panel {
+        background:
+            linear-gradient(170deg, #1a2f45 0%, #244764 100%);
+        border-radius: 18px;
+        border: 1px solid #214766;
+        color: #ebf4fb;
+        padding: 24px 22px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .hero-panel h2 {
+        font-family: "Merriweather", Georgia, serif;
+        font-size: 1.25rem;
+        margin-bottom: 8px;
+    }
+    .hero-panel p {
+        color: #d6e5f2;
+        margin-bottom: 14px;
+    }
+    .hero-panel ul {
+        margin-left: 18px;
+        line-height: 1.65;
+    }
+
+    .section {
+        max-width: 1040px;
         margin: 0 auto;
+        padding: 24px 18px 10px;
+    }
+    .section h2 {
+        font-family: "Merriweather", Georgia, serif;
+        font-size: clamp(1.35rem, 3vw, 2rem);
+        margin-bottom: 14px;
+    }
+    .section-intro {
+        color: var(--ink-soft);
+        max-width: 780px;
+        margin-bottom: 18px;
         line-height: 1.6;
     }
 
-    .focuses {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        flex-wrap: wrap;
-        padding: 40px 16px 60px;
-        max-width: 860px;
-        margin: 0 auto;
-    }
-    .focus-btn {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    .issue-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 14px;
-        width: 240px;
-        padding: 32px 20px;
-        border-radius: 16px;
-        border: 2px solid transparent;
-        cursor: pointer;
-        transition: transform 0.25s, box-shadow 0.25s;
+        margin-bottom: 12px;
+    }
+    .issue-card {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--card);
+        padding: 18px 16px;
         text-decoration: none;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .focus-btn:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+    .issue-card:hover {
+        transform: translateY(-3px);
+        background: var(--panel-flat);
+        border-color: var(--accent);
+        box-shadow: 0 8px 18px rgba(26, 47, 69, 0.08);
     }
-
-    .btn-red {
-        background: linear-gradient(135deg, #7f1d1d, #991b1b);
-        border-color: #dc2626;
-        color: #fecaca;
+    .issue-card h3 {
+        font-size: 1.03rem;
+        margin-bottom: 8px;
+        color: var(--ink);
     }
-    .btn-red:hover { border-color: #ef4444; }
-
-    .btn-yellow {
-        background: linear-gradient(135deg, #713f12, #854d0e);
-        border-color: #eab308;
-        color: #fef9c3;
+    .issue-card p {
+        color: var(--ink-soft);
+        line-height: 1.52;
+        font-size: 0.92rem;
+        margin-bottom: 10px;
     }
-    .btn-yellow:hover { border-color: #facc15; }
-
-    .btn-green {
-        background: linear-gradient(135deg, #14532d, #166534);
-        border-color: #22c55e;
-        color: #bbf7d0;
-    }
-    .btn-green:hover { border-color: #4ade80; }
-
-    .focus-btn .icon {
-        font-size: 2.8rem;
-        line-height: 1;
-    }
-    .focus-btn .label {
-        font-size: 1.15rem;
+    .issue-card span {
+        font-size: 0.86rem;
         font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-    .focus-btn .desc {
-        font-size: 0.85rem;
-        opacity: 0.8;
-        text-align: center;
-        line-height: 1.4;
+        color: var(--accent);
     }
 
-    @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(24px); }
-        to   { opacity: 1; transform: translateY(0); }
+    .quick-links {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        padding-bottom: 30px;
     }
-    .hero        { animation: fadeInUp 0.6s ease both; }
-    .focus-btn:nth-child(1) { animation: fadeInUp 0.6s 0.15s ease both; }
-    .focus-btn:nth-child(2) { animation: fadeInUp 0.6s 0.30s ease both; }
-    .focus-btn:nth-child(3) { animation: fadeInUp 0.6s 0.45s ease both; }
+    .quick-links a {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--panel-flat);
+        padding: 14px;
+        text-decoration: none;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+    .quick-links a:hover {
+        background: var(--chip-hover);
+        border-color: var(--accent);
+    }
+    .quick-links strong {
+        display: block;
+        margin-bottom: 5px;
+        color: var(--ink);
+        font-size: 0.95rem;
+    }
+    .quick-links span {
+        color: var(--ink-soft);
+        font-size: 0.88rem;
+        line-height: 1.45;
+    }
+
+    @media (max-width: 900px) {
+        .hero {
+            grid-template-columns: 1fr;
+        }
+        .issue-grid,
+        .quick-links {
+            grid-template-columns: 1fr;
+        }
+    }
 </style>
 {% endblock %}
 
 {% block content %}
 <section class="hero">
-    <h1>Campaign Focuses</h1>
-    <p>Three priorities to make our township more affordable, safer, and less bureaucratic. Pick a focus to see the full policy platform.</p>
+    <div class="hero-copy">
+        <span class="eyebrow">Township Committee Campaign</span>
+        <h1>Practical local policy that keeps neighborhoods affordable, safe, and open for opportunity.</h1>
+        <p>
+            Blake Richardson is running for Township Committee with a policy-first platform focused on cutting unnecessary bureaucracy,
+            lowering long-term household energy costs, and building safer streets for families, commuters, and students.
+        </p>
+        <div class="cta-row">
+            <a class="cta-primary" href="{% url 'campaign:issues' %}">Read The Platform</a>
+            <a class="cta-secondary" href="{% url 'campaign:about' %}">Meet Blake</a>
+            <a class="cta-secondary" href="{% url 'campaign:contact' %}">Get In Touch</a>
+        </div>
+    </div>
+    <aside class="hero-panel" aria-label="Campaign at a glance">
+        <h2>At A Glance</h2>
+        <p>Focus areas built around measurable township outcomes.</p>
+        <ul>
+            <li>Streamline permitting and modernize local processes.</li>
+            <li>Expand affordable, resilient energy options.</li>
+            <li>Deliver safer routes near schools and Main Street.</li>
+        </ul>
+    </aside>
 </section>
 
-<div class="focuses">
-    <a class="focus-btn btn-red" href="{% url 'campaign:cut_red_tape' %}">
-        <span class="icon">✂️</span>
-        <span class="label">Cut Red Tape</span>
-        <span class="desc">Streamline permits, reduce fees, and eliminate unnecessary bureaucracy.</span>
-    </a>
+<section class="section" aria-labelledby="priorities-title">
+    <h2 id="priorities-title">Campaign Priorities</h2>
+    <p class="section-intro">Each issue page details concrete policy changes and expected impacts for township residents, businesses, and commuters.</p>
 
-    <a class="focus-btn btn-yellow" href="{% url 'campaign:cheap_energy' %}">
-        <span class="icon">⚡</span>
-        <span class="label">Cheap Energy</span>
-        <span class="desc">Lower utility costs and promote practical local energy solutions.</span>
-    </a>
+    <div class="issue-grid">
+        <a class="issue-card" href="{% url 'campaign:cut_red_tape' %}">
+            <h3>Cut Red Tape</h3>
+            <p>Simplify local approvals and remove outdated rules that slow down housing, small business, and transparent governance.</p>
+            <span>View Policies</span>
+        </a>
+        <a class="issue-card" href="{% url 'campaign:cheap_energy' %}">
+            <h3>Cheap Energy</h3>
+            <p>Lower utility pressure over time through practical solar permitting reform and distributed local energy improvements.</p>
+            <span>View Policies</span>
+        </a>
+        <a class="issue-card" href="{% url 'campaign:safe_streets' %}">
+            <h3>Safe Streets</h3>
+            <p>Prioritize funded upgrades around schools, crosswalk safety, transit support, and better traffic-calming infrastructure.</p>
+            <span>View Policies</span>
+        </a>
+    </div>
+</section>
 
-    <a class="focus-btn btn-green" href="{% url 'campaign:safe_streets' %}">
-        <span class="icon">🛣️</span>
-        <span class="label">Safe Streets</span>
-        <span class="desc">Raised crosswalks, pedestrian bumpouts, protected bike lanes, and wider sidewalks.</span>
-    </a>
-</div>
+<section class="section" aria-labelledby="next-steps-title">
+    <h2 id="next-steps-title">Learn More</h2>
+    <div class="quick-links">
+        <a href="{% url 'campaign:about' %}">
+            <strong>About Blake</strong>
+            <span>Background, campaign approach, and governing priorities.</span>
+        </a>
+        <a href="{% url 'campaign:faq' %}">
+            <strong>Campaign FAQ</strong>
+            <span>Answers to common resident and voter questions.</span>
+        </a>
+        <a href="{% url 'campaign:contact' %}">
+            <strong>Contact</strong>
+            <span>Get in touch for campaign questions and local concerns.</span>
+        </a>
+    </div>
+</section>
 {% endblock %}

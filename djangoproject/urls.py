@@ -19,10 +19,12 @@ from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
-from .views import domain_homepage
+from .views import domain_homepage, dynamic_sitemap, robots_txt
 
 urlpatterns = [
     path("", domain_homepage, name="domain_homepage"),
+    path("robots.txt", robots_txt, name="robots_txt"),
+    path("sitemap.xml", dynamic_sitemap, name="sitemap"),
     path("admin/", admin.site.urls),
     path("campaign/", include('campaign.urls')),
     path("portfolio/", include('portfolio.urls')),
