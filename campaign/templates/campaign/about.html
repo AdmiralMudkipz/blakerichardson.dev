@@ -1,0 +1,129 @@
+{% extends "campaign/base.html" %}
+
+{% block title %}About Blake Richardson{% endblock %}
+
+{% block meta_description %}I'm Blake Richardson, and I'm running for Township Committee to use the grants we're ignoring, unleash solar power, and make our government transparent again.{% endblock %}
+
+{% block extra_css %}
+<style>
+    .about-wrap {
+        max-width: 1040px;
+        margin: 0 auto;
+        padding: 38px 18px 54px;
+        display: grid;
+        grid-template-columns: 1fr 0.95fr;
+        gap: 18px;
+    }
+    .panel {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 24px 22px;
+        box-shadow: 0 10px 22px rgba(26, 47, 69, 0.07);
+    }
+    .eyebrow {
+        font-size: 0.74rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
+        color: var(--accent);
+        margin-bottom: 10px;
+    }
+    h1 {
+        font-family: "Merriweather", Georgia, serif;
+        font-size: clamp(1.7rem, 4.2vw, 2.7rem);
+        margin-bottom: 10px;
+        color: var(--ink);
+    }
+    .lead {
+        color: var(--ink-soft);
+        line-height: 1.68;
+        margin-bottom: 16px;
+    }
+    .bio {
+        color: var(--ink-soft);
+        line-height: 1.65;
+        margin-bottom: 14px;
+    }
+    .card-title {
+        font-family: "Merriweather", Georgia, serif;
+        font-size: 1.15rem;
+        margin-bottom: 10px;
+        color: var(--ink);
+    }
+    .values {
+        margin-left: 18px;
+        color: var(--ink-soft);
+        line-height: 1.65;
+    }
+    .values li {
+        margin-bottom: 6px;
+    }
+    .next-links {
+        margin-top: 16px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+    .next-links a {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 12px;
+        text-decoration: none;
+        color: var(--ink-soft);
+        background: var(--panel-flat);
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+    .next-links a:hover {
+        background: var(--chip-hover);
+        border-color: var(--accent);
+    }
+    .next-links strong {
+        display: block;
+        color: var(--ink);
+        margin-bottom: 4px;
+        font-size: 0.92rem;
+    }
+    @media (max-width: 900px) {
+        .about-wrap {
+            grid-template-columns: 1fr;
+        }
+        .next-links {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="about-wrap">
+    <article class="panel">
+        <p class="eyebrow">About Me</p>
+        <h1>Blake Richardson</h1>
+        <p class="lead">My name is Blake Richardson, I grew up in Mullica Hill and have lived here for nearly my entire life. I'm 21  and graduated with a Bachelor's of Science in Computer Science and a Minor in German this past May. I've had an interest in policy, urban planning, for several years now. </p>
+        <p class="bio"> Some people may wonder why a 21-year-old would run for Township Committee, or even care about these sort of things. It started with me trying to build a shed, and honestly I found that the rules around sheds were very odd, specific, and restrictive. Then I looked at solar, building codes, zoning codes, and noticed that there are dozens of really strange and outdated regulations. These laws had real negative impacts, arbitrarily banning many legitimately harmless building uses, types, and styles. Along with that I found a laundry list of fees, permits, and bureaucratic hurdles that made simple projects unnecessarily complicated.</p>
+        <p class="bio">These laws are so restrictive that the Main Street I grew up around, would be completely illegal to build today, even with modern materials and safety standards. I want to bring back that kind of development, cut the red tape that's stopping it, and give people a local government that is an asset to their lives rather than a source of headache and problems.</p>
+    </article>
+
+    <aside class="panel" aria-label="Campaign values and priorities">
+        <h2 class="card-title">What I'm Fighting For</h2>
+        <ul class="values">
+            <li>Go after the grant money our township keeps leaving on the table.</li>
+            <li>Tear up the outdated solar rules and let people build.</li>
+            <li>Put every township meeting online, live and archived.</li>
+            <li>Relegalize the kind of Main Street development that built this town.</li>
+        </ul>
+
+        <div class="next-links">
+            <a href="{% url 'campaign:issues' %}">
+                <strong>Read The Platform</strong>
+                See exactly what I want to change and why.
+            </a>
+            <a href="{% url 'campaign:contact' %}">
+                <strong>Contact The Campaign</strong>
+                Reach out with questions or local concerns.
+            </a>
+        </div>
+    </aside>
+</section>
+{% endblock %}

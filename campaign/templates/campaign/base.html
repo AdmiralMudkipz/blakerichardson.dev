@@ -3,79 +3,468 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="{% block meta_description %}Blake Richardson is running for Township Committee, focused on cutting red tape, lowering energy costs, and making our streets safer.{% endblock %}" />
     <title>{% block title %}Blake Richardson for Township Committee{% endblock %}</title>
     <link rel="icon" type="image/x-icon" href="/media/favicon_io/favicon.ico" />
     <style>
         :root {
-            --bg: #0f172a;
-            --panel: #111827;
-            --panel-2: #1f2937;
-            --text: #e5e7eb;
-            --muted: #9ca3af;
-            --accent: #38bdf8;
-            --red: #ef4444;
-            --yellow: #facc15;
-            --green: #22c55e;
+            --ink: #1a2f45;
+            --ink-soft: #38516b;
+            --paper: #f6f3ec;
+            --card: #fffdf8;
+            --line: #d8d1c5;
+            --accent: #b94f31;
+            --accent-2: #2f6b4f;
+            --focus: #0f6db1;
+            --page-spot-1: rgba(185, 79, 49, 0.12);
+            --page-spot-2: rgba(47, 107, 79, 0.12);
+            --paper-bottom: #efe9de;
+            --nav-bg: #fffdf9;
+            --chip-hover: #eee7da;
+            --footer-bg: rgba(255, 253, 248, 0.92);
+            --panel-flat: #fffcf5;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --ink: #eef3f8;
+                --ink-soft: #b4c2d2;
+                --paper: #0f1620;
+                --card: #151f2c;
+                --line: #2b3b4e;
+                --accent: #e07f61;
+                --accent-2: #66ad87;
+                --focus: #6bb9ff;
+                --page-spot-1: rgba(224, 127, 97, 0.16);
+                --page-spot-2: rgba(102, 173, 135, 0.16);
+                --paper-bottom: #0b1119;
+                --nav-bg: rgba(16, 24, 35, 0.96);
+                --chip-hover: #202d3f;
+                --footer-bg: rgba(16, 24, 35, 0.95);
+                --panel-flat: #1a2635;
+            }
+        }
+        :root[data-theme="light"] {
+            --ink: #1a2f45;
+            --ink-soft: #38516b;
+            --paper: #f6f3ec;
+            --card: #fffdf8;
+            --line: #d8d1c5;
+            --accent: #b94f31;
+            --accent-2: #2f6b4f;
+            --focus: #0f6db1;
+            --page-spot-1: rgba(185, 79, 49, 0.12);
+            --page-spot-2: rgba(47, 107, 79, 0.12);
+            --paper-bottom: #efe9de;
+            --nav-bg: #fffdf9;
+            --chip-hover: #eee7da;
+            --footer-bg: rgba(255, 253, 248, 0.92);
+            --panel-flat: #fffcf5;
+        }
+        :root[data-theme="dark"] {
+            --ink: #eef3f8;
+            --ink-soft: #b4c2d2;
+            --paper: #0f1620;
+            --card: #151f2c;
+            --line: #2b3b4e;
+            --accent: #e07f61;
+            --accent-2: #66ad87;
+            --focus: #6bb9ff;
+            --page-spot-1: rgba(224, 127, 97, 0.16);
+            --page-spot-2: rgba(102, 173, 135, 0.16);
+            --paper-bottom: #0b1119;
+            --nav-bg: rgba(16, 24, 35, 0.96);
+            --chip-hover: #202d3f;
+            --footer-bg: rgba(16, 24, 35, 0.95);
+            --panel-flat: #1a2635;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text);
+            font-family: "Libre Franklin", "Segoe UI", Arial, sans-serif;
+            background:
+                radial-gradient(circle at 12% 8%, var(--page-spot-1), transparent 32%),
+                radial-gradient(circle at 88% 0%, var(--page-spot-2), transparent 34%),
+                linear-gradient(180deg, var(--paper) 0%, var(--paper-bottom) 100%);
+            color: var(--ink);
             min-height: 100vh;
         }
-        a { text-decoration: none; color: inherit; }
+        a {
+            color: inherit;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 3px;
+        }
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid var(--focus);
+            outline-offset: 2px;
+        }
+
+        .site-shell {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
         .topnav {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 14px 24px;
-            background: #0b1120;
-            border-bottom: 1px solid #1e293b;
+            flex-wrap: wrap;
+            gap: 10px 18px;
+            padding: 16px 24px;
+            background: var(--nav-bg);
+            border-bottom: 1px solid var(--line);
+            position: sticky;
+            top: 0;
+            z-index: 50;
         }
-        .topnav img {
-            width: 32px;
-            height: 32px;
-            border-radius: 6px;
+        .topnav .brand-group {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-right: auto;
+            color: var(--ink);
+            text-decoration: none;
         }
-        .topnav .brand {
-            font-weight: 700;
-            font-size: 1.1rem;
+        .topnav .brand-group .brand-logo {
+            height: 36px;
+            width: auto;
+            display: block;
+        }
+        .topnav .brand-group .brand-text {
+            font-family: "Merriweather", Georgia, serif;
+            font-weight: 800;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            letter-spacing: 0.01em;
+        }
+        .topnav .links {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .topnav .links a {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--ink-soft);
+            padding: 6px 10px;
+            border-radius: 999px;
+            text-decoration: none;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        .topnav .links a:hover {
+            background: var(--chip-hover);
+            color: var(--ink);
+        }
+        .topnav .links .donate-chip {
+            background: var(--accent);
             color: #fff;
         }
-        .topnav .home-link {
-            margin-left: auto;
-            color: var(--accent);
-            font-size: 0.9rem;
+        .topnav .links .donate-chip:hover {
+            background: #a4462b;
+            color: #fff;
         }
-        .topnav .home-link:hover { text-decoration: underline; }
+        .theme-toggle {
+            --switch-width: 58px;
+            --switch-height: 30px;
+            position: relative;
+            width: var(--switch-width);
+            height: var(--switch-height);
+            border: 1px solid var(--line);
+            background: var(--panel-flat);
+            color: var(--ink-soft);
+            cursor: pointer;
+            border-radius: 999px;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            overflow: hidden;
+            transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+        }
+        .theme-toggle-floating {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            z-index: 60;
+            box-shadow: 0 6px 18px rgba(26, 47, 69, 0.18);
+        }
+        .theme-toggle-floating.is-hidden {
+            opacity: 0;
+            transform: translateY(14px);
+            pointer-events: none;
+        }
+        .theme-toggle .sun,
+        .theme-toggle .moon {
+            width: 50%;
+            text-align: center;
+            font-size: 0.8rem;
+            line-height: 1;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.9;
+        }
+        .theme-toggle .thumb {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--card);
+            border: 1px solid var(--line);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+            transition: transform 0.22s ease;
+        }
+        .theme-toggle[aria-checked="true"] .thumb {
+            transform: translateX(28px);
+        }
+        .theme-toggle[aria-checked="true"] {
+            background: #22374e;
+            border-color: #2f4a66;
+            color: #f0f4f9;
+        }
+        .theme-toggle:hover {
+            background: var(--chip-hover);
+            border-color: var(--accent);
+        }
+        .theme-toggle:hover[aria-checked="true"] {
+            background: #2a435f;
+            border-color: var(--accent);
+        }
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
 
         .wrap {
-            max-width: 960px;
+            max-width: 1040px;
             margin: 0 auto;
-            padding: 32px 16px 64px;
+            padding: 34px 18px 64px;
+            width: 100%;
+        }
+        main {
+            flex: 1;
+        }
+
+        .footer-area {
+            border-top: 1px solid var(--line);
+            background: var(--footer-bg);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(150px, 1fr));
+            gap: 18px;
+            align-items: start;
+            padding-top: 26px;
+            padding-bottom: 12px;
+        }
+        .footer-col h3 {
+            font-family: "Merriweather", Georgia, serif;
+            font-size: 0.92rem;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+        .footer-col a {
+            display: block;
+            color: var(--ink-soft);
+            font-size: 0.89rem;
+            margin-bottom: 7px;
+            text-decoration: none;
+        }
+        .footer-col a:hover {
+            text-decoration: underline;
         }
         .footer {
             text-align: center;
-            color: #4b5563;
-            font-size: 0.85rem;
-            margin-top: 48px;
+            color: var(--ink-soft);
+            font-size: 0.84rem;
+            padding: 16px 0 18px;
+            border-top: 1px solid var(--line);
+        }
+
+        @media (max-width: 860px) {
+            .topnav {
+                padding: 14px 16px;
+            }
+            .topnav .brand-group {
+                margin-right: 0;
+                width: 100%;
+                order: 2;
+                justify-content: center;
+            }
+            .topnav .brand-group .brand-logo {
+                height: 30px;
+            }
+            .topnav .links {
+                width: 100%;
+                order: 3;
+                gap: 8px;
+                justify-content: center;
+            }
+            .topnav .links a {
+                font-size: 0.9rem;
+                padding: 7px 10px;
+            }
+            .topnav.nav-compact .brand-group {
+                display: none;
+            }
+            .theme-toggle-floating {
+                --switch-width: 60px;
+                --switch-height: 32px;
+                right: 14px;
+                bottom: 14px;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
         }
     </style>
     {% block extra_css %}{% endblock %}
 </head>
 <body>
-    <nav class="topnav">
-        <img src="/media/logo.png" alt="Logo" />
-        <span class="brand">Blake Richardson for Township Committee</span>
-        <a class="home-link" href="/campaign/homepage/">← Home</a>
-    </nav>
+    <div class="site-shell">
+        <nav class="topnav" id="topnav" aria-label="Primary">
+            <a href="{% url 'campaign:homepage' %}" class="brand-group">
+                <img src="/media/logo.png" alt="" class="brand-logo" />
+                <span class="brand-text">Blake Richardson for Township Committee</span>
+            </a>
+            <div class="links">
+                <a href="{% url 'campaign:homepage' %}">Home</a>
+                <a href="{% url 'campaign:about' %}">About</a>
+                <a href="{% url 'campaign:issues' %}">Issues</a>
+                <a href="{% url 'campaign:faq' %}">FAQ</a>
+                <a href="{% url 'campaign:contact' %}" class="donate-chip">Contact</a>
+            </div>
+        </nav>
 
-    {% block content %}{% endblock %}
+        <button id="theme-toggle" class="theme-toggle theme-toggle-floating" type="button" role="switch" aria-label="Toggle light and dark mode" aria-checked="false">
+            <span class="sun" aria-hidden="true">☀</span>
+            <span class="moon" aria-hidden="true">🌙</span>
+            <span class="thumb" aria-hidden="true"></span>
+            <span class="sr-only" id="theme-toggle-label">Toggle light and dark mode</span>
+        </button>
 
-    <div class="wrap">
-        <p class="footer">© 2026 Blake Richardson Campaign</p>
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="footer-area">
+            <div class="wrap footer-grid">
+                <div class="footer-col">
+                    <h3>Campaign</h3>
+                    <a href="{% url 'campaign:homepage' %}">Home</a>
+                    <a href="{% url 'campaign:about' %}">About Blake</a>
+                    <a href="{% url 'campaign:contact' %}">Contact</a>
+                </div>
+                <div class="footer-col">
+                    <h3>Policy</h3>
+                    <a href="{% url 'campaign:issues' %}">Issues Overview</a>
+                    <a href="{% url 'campaign:cut_red_tape' %}">Cut Red Tape</a>
+                    <a href="{% url 'campaign:cheap_energy' %}">Cheap Energy</a>
+                    <a href="{% url 'campaign:safe_streets' %}">Safe Streets</a>
+                </div>
+                <div class="footer-col">
+                    <h3>Info</h3>
+                    <a href="{% url 'campaign:faq' %}">FAQ</a>
+                    <a href="{% url 'campaign:sitemap' %}">Site Map</a>
+                </div>
+            </div>
+            <div class="wrap">
+                <p class="footer">© 2026 Blake Richardson Campaign</p>
+            </div>
+        </footer>
     </div>
+    <script>
+        (function() {
+            var storageKey = "campaign-theme";
+            var root = document.documentElement;
+            var toggle = document.getElementById("theme-toggle");
+
+            function prefersDark() {
+                return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+            }
+
+            function resolvedTheme() {
+                if (root.dataset.theme === "dark") {
+                    return "dark";
+                }
+                if (root.dataset.theme === "light") {
+                    return "light";
+                }
+                return prefersDark() ? "dark" : "light";
+            }
+
+            function updateToggle(theme) {
+                if (!toggle) {
+                    return;
+                }
+                var isDark = theme === "dark";
+                toggle.setAttribute("aria-checked", isDark ? "true" : "false");
+                toggle.setAttribute("title", isDark ? "Switch to light mode" : "Switch to dark mode");
+            }
+
+            function applyStoredTheme() {
+                var stored = localStorage.getItem(storageKey);
+                if (stored === "light" || stored === "dark") {
+                    root.dataset.theme = stored;
+                } else {
+                    root.removeAttribute("data-theme");
+                }
+                updateToggle(resolvedTheme());
+            }
+
+            applyStoredTheme();
+
+            if (toggle) {
+                toggle.addEventListener("click", function() {
+                    var nextTheme = resolvedTheme() === "dark" ? "light" : "dark";
+                    root.dataset.theme = nextTheme;
+                    localStorage.setItem(storageKey, nextTheme);
+                    updateToggle(nextTheme);
+                });
+            }
+
+            if (window.matchMedia) {
+                var media = window.matchMedia("(prefers-color-scheme: dark)");
+                media.addEventListener("change", function() {
+                    if (!localStorage.getItem(storageKey)) {
+                        updateToggle(resolvedTheme());
+                    }
+                });
+            }
+
+            if (toggle) {
+                function updateScrollState() {
+                    if (window.scrollY > 8) {
+                        toggle.classList.add("is-hidden");
+                    } else {
+                        toggle.classList.remove("is-hidden");
+                    }
+                }
+                updateScrollState();
+                window.addEventListener("scroll", updateScrollState, { passive: true });
+            }
+
+            var topnav = document.getElementById("topnav");
+            if (topnav) {
+                function updateNavScrollState() {
+                    if (window.scrollY > 40) {
+                        topnav.classList.add("nav-compact");
+                    } else {
+                        topnav.classList.remove("nav-compact");
+                    }
+                }
+                updateNavScrollState();
+                window.addEventListener("scroll", updateNavScrollState, { passive: true });
+            }
+        })();
+    </script>
 </body>
 </html>
