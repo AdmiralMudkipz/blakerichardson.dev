@@ -6,6 +6,36 @@
 
 {% block extra_css %}
 <style>
+    :root {
+        --policy-kicker: #8a6720;
+        --policy-heading: #735814;
+        --policy-meta: #8f6b1b;
+        --policy-effect: #4a637b;
+        --policy-border: #b3861e;
+    }
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --policy-kicker: #f0ce7e;
+            --policy-heading: #f5d792;
+            --policy-meta: #e6c977;
+            --policy-effect: #d7e6f4;
+            --policy-border: #cfb05a;
+        }
+    }
+    :root[data-theme="light"] {
+        --policy-kicker: #8a6720;
+        --policy-heading: #735814;
+        --policy-meta: #8f6b1b;
+        --policy-effect: #4a637b;
+        --policy-border: #b3861e;
+    }
+    :root[data-theme="dark"] {
+        --policy-kicker: #f0ce7e;
+        --policy-heading: #f5d792;
+        --policy-meta: #e6c977;
+        --policy-effect: #d7e6f4;
+        --policy-border: #cfb05a;
+    }
     .page-header {
         max-width: 1040px;
         margin: 0 auto;
@@ -23,13 +53,13 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.09em;
-        color: #8a6720;
+        color: var(--policy-kicker);
         margin-bottom: 10px;
     }
     .page-header h1 {
         font-family: "Merriweather", Georgia, serif;
         font-size: clamp(1.6rem, 4.2vw, 2.6rem);
-        color: #735814;
+        color: var(--policy-heading);
         margin-bottom: 8px;
     }
     .page-header .subtitle {
@@ -49,18 +79,18 @@
     .policy {
         background: var(--card);
         border: 1px solid var(--line);
-        border-left: 4px solid #b3861e;
+        border-left: 4px solid var(--policy-border);
         border-radius: 10px;
         padding: 20px 24px;
         box-shadow: 0 8px 18px rgba(26, 47, 69, 0.05);
     }
     .policy h3 {
-        color: #735814;
+        color: var(--policy-heading);
         margin-bottom: 6px;
         font-size: 1.1rem;
     }
     .policy .meta {
-        color: #8f6b1b;
+        color: var(--policy-meta);
         font-size: 0.84rem;
         margin-bottom: 8px;
         letter-spacing: 0.02em;
@@ -73,24 +103,7 @@
         margin: 8px 0;
     }
     .policy p.effect {
-        color: #4a637b;
-    }
-
-    @media (prefers-color-scheme: dark) {
-        .kicker { color: #f0ce7e; }
-        .page-header h1,
-        .policy h3 { color: #f5d792; }
-        .policy .meta { color: #e6c977; }
-        .policy {
-            border-left-color: #cfb05a;
-        }
-        .policy p.effect {
-            color: #d7e6f4;
-        }
-    }
-
-    :root[data-theme="dark"] .policy p.effect {
-        color: #d7e6f4;
+        color: var(--policy-effect);
     }
 </style>
 {% endblock %}

@@ -1,11 +1,41 @@
 {% extends "campaign/base.html" %}
 
-{% block title %}Cut Red Tape — Blake Richardson{% endblock %}
+{% block title %}Cut Red Tape - Blake Richardson{% endblock %}
 
 {% block meta_description %}Blake Richardson's plan to cut red tape and streamline local government for residents and small businesses.{% endblock %}
 
 {% block extra_css %}
 <style>
+    :root {
+        --policy-kicker: #8f4330;
+        --policy-heading: #7e3525;
+        --policy-meta: #a6462c;
+        --policy-effect: #4a637b;
+        --policy-border: #b94f31;
+    }
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --policy-kicker: #f1a48e;
+            --policy-heading: #f2b6a5;
+            --policy-meta: #e69e89;
+            --policy-effect: #d7e6f4;
+            --policy-border: #d87f63;
+        }
+    }
+    :root[data-theme="light"] {
+        --policy-kicker: #8f4330;
+        --policy-heading: #7e3525;
+        --policy-meta: #a6462c;
+        --policy-effect: #4a637b;
+        --policy-border: #b94f31;
+    }
+    :root[data-theme="dark"] {
+        --policy-kicker: #f1a48e;
+        --policy-heading: #f2b6a5;
+        --policy-meta: #e69e89;
+        --policy-effect: #d7e6f4;
+        --policy-border: #d87f63;
+    }
     .page-header {
         max-width: 1040px;
         margin: 0 auto;
@@ -23,13 +53,13 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.09em;
-        color: #8f4330;
+        color: var(--policy-kicker);
         margin-bottom: 10px;
     }
     .page-header h1 {
         font-family: "Merriweather", Georgia, serif;
         font-size: clamp(1.6rem, 4.2vw, 2.6rem);
-        color: #7e3525;
+        color: var(--policy-heading);
         margin-bottom: 8px;
     }
     .page-header .subtitle {
@@ -49,18 +79,18 @@
     .policy {
         background: var(--card);
         border: 1px solid var(--line);
-        border-left: 4px solid #b94f31;
+        border-left: 4px solid var(--policy-border);
         border-radius: 10px;
         padding: 20px 24px;
         box-shadow: 0 8px 18px rgba(26, 47, 69, 0.05);
     }
     .policy h3 {
-        color: #7e3525;
+        color: var(--policy-heading);
         margin-bottom: 6px;
         font-size: 1.1rem;
     }
     .policy .meta {
-        color: #a6462c;
+        color: var(--policy-meta);
         font-size: 0.84rem;
         margin-bottom: 8px;
         letter-spacing: 0.02em;
@@ -73,7 +103,7 @@
         margin: 8px 0;
     }
     .policy p.effect {
-        color: #4a637b;
+        color: var(--policy-effect);
     }
     .policy ul {
         color: var(--ink-soft);
@@ -81,23 +111,7 @@
         font-size: 0.95rem;
         margin: 8px 0 8px 20px;
     }
-
-    @media (prefers-color-scheme: dark) {
-        .kicker { color: #f1a48e; }
-        .page-header h1,
-        .policy h3 { color: #f2b6a5; }
-        .policy .meta { color: #e69e89; }
-        .policy {
-            border-left-color: #d87f63;
-        }
-        .policy p.effect {
-            color: #d7e6f4;
-        }
-    }
-
-    :root[data-theme="dark"] .policy p.effect {
-        color: #d7e6f4;
-    }
+</style>
 </style>
 {% endblock %}
 
@@ -128,7 +142,7 @@
     <article class="policy">
         <div class="meta">Issue &amp; Policy: Tax-Base Development / More Main Street</div>
         <h3>More Main Street</h3>
-        <p>Properties within a mile of a Main Street building can be transformed into a Main Street style mixed-use building &mdash; consumer commercial first floor, residential/office space on above floors &mdash; with minimal setbacks required, provided they follow the aesthetic of Main Street buildings.</p>
+        <p>Properties within a mile of a Main Street building can be transformed into a Main Street style mixed-use building, consumer commercial first floor, residential/office space on above floors, with minimal setbacks required, provided they follow the aesthetic of Main Street buildings.</p>
         <p class="effect"><strong>Effects:</strong> Relegalizes Main Street style development on properties bordering and surrounding Main Street.</p>
     </article>
 
@@ -149,7 +163,7 @@
     <article class="policy">
         <div class="meta">Issue &amp; Policy: Parking-Minimum Reform / Market-Based Parking</div>
         <h3>Market-Based Parking</h3>
-        <p>The amount of parking is decided by market forces &mdash; the property owner decides how much parking is necessary for their property.</p>
+        <p>The amount of parking is decided by market forces, the property owner decides how much parking is necessary for their property.</p>
         <p class="effect"><strong>Effects:</strong> Allows more flexible land use around businesses. Creates job opportunities. Increases potential commercial tax base.</p>
     </article>
 

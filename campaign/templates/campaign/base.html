@@ -116,19 +116,24 @@
             top: 0;
             z-index: 50;
         }
-        .topnav img {
-            width: 36px;
-            height: 36px;
-            border-radius: 7px;
-            border: 1px solid var(--line);
+        .topnav .brand-group {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-right: auto;
+            color: var(--ink);
+            text-decoration: none;
         }
-        .topnav .brand {
+        .topnav .brand-group .brand-logo {
+            height: 36px;
+            width: auto;
+            display: block;
+        }
+        .topnav .brand-group .brand-text {
             font-family: "Merriweather", Georgia, serif;
             font-weight: 800;
             font-size: clamp(0.95rem, 2vw, 1.1rem);
             letter-spacing: 0.01em;
-            color: var(--ink);
-            margin-right: auto;
         }
         .topnav .links {
             display: flex;
@@ -157,7 +162,7 @@
             background: #a4462b;
             color: #fff;
         }
-        .topnav .links .theme-toggle {
+        .theme-toggle {
             --switch-width: 58px;
             --switch-height: 30px;
             position: relative;
@@ -172,7 +177,20 @@
             display: inline-flex;
             align-items: center;
             justify-content: space-between;
-            transition: background-color 0.2s ease, border-color 0.2s ease;
+            overflow: hidden;
+            transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+        }
+        .theme-toggle-floating {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            z-index: 60;
+            box-shadow: 0 6px 18px rgba(26, 47, 69, 0.18);
+        }
+        .theme-toggle-floating.is-hidden {
+            opacity: 0;
+            transform: translateY(14px);
+            pointer-events: none;
         }
         .theme-toggle .sun,
         .theme-toggle .moon {
@@ -204,11 +222,11 @@
             border-color: #2f4a66;
             color: #f0f4f9;
         }
-        .topnav .links .theme-toggle:hover {
+        .theme-toggle:hover {
             background: var(--chip-hover);
             border-color: var(--accent);
         }
-        .topnav .links .theme-toggle:hover[aria-checked="true"] {
+        .theme-toggle:hover[aria-checked="true"] {
             background: #2a435f;
             border-color: var(--accent);
         }
@@ -274,23 +292,33 @@
             .topnav {
                 padding: 14px 16px;
             }
-            .topnav .brand {
+            .topnav .brand-group {
                 margin-right: 0;
                 width: 100%;
                 order: 2;
+                justify-content: center;
+            }
+            .topnav .brand-group .brand-logo {
+                height: 30px;
             }
             .topnav .links {
                 width: 100%;
                 order: 3;
                 gap: 8px;
+                justify-content: center;
             }
             .topnav .links a {
                 font-size: 0.9rem;
                 padding: 7px 10px;
             }
-            .topnav .links .theme-toggle {
+            .topnav.nav-compact .brand-group {
+                display: none;
+            }
+            .theme-toggle-floating {
                 --switch-width: 60px;
                 --switch-height: 32px;
+                right: 14px;
+                bottom: 14px;
             }
             .footer-grid {
                 grid-template-columns: 1fr;
@@ -302,23 +330,26 @@
 </head>
 <body>
     <div class="site-shell">
-        <nav class="topnav" aria-label="Primary">
-            <img src="/media/logo.png" alt="Blake Richardson campaign logo" />
-            <span class="brand">Blake Richardson for Township Committee</span>
+        <nav class="topnav" id="topnav" aria-label="Primary">
+            <a href="{% url 'campaign:homepage' %}" class="brand-group">
+                <img src="/media/logo.png" alt="" class="brand-logo" />
+                <span class="brand-text">Blake Richardson for Township Committee</span>
+            </a>
             <div class="links">
                 <a href="{% url 'campaign:homepage' %}">Home</a>
-                <button id="theme-toggle" class="theme-toggle" type="button" role="switch" aria-label="Toggle light and dark mode" aria-checked="false">
-                    <span class="sun" aria-hidden="true">☀</span>
-                    <span class="moon" aria-hidden="true">🌙</span>
-                    <span class="thumb" aria-hidden="true"></span>
-                    <span class="sr-only" id="theme-toggle-label">Toggle light and dark mode</span>
-                </button>
                 <a href="{% url 'campaign:about' %}">About</a>
                 <a href="{% url 'campaign:issues' %}">Issues</a>
                 <a href="{% url 'campaign:faq' %}">FAQ</a>
                 <a href="{% url 'campaign:contact' %}" class="donate-chip">Contact</a>
             </div>
         </nav>
+
+        <button id="theme-toggle" class="theme-toggle theme-toggle-floating" type="button" role="switch" aria-label="Toggle light and dark mode" aria-checked="false">
+            <span class="sun" aria-hidden="true">☀</span>
+            <span class="moon" aria-hidden="true">🌙</span>
+            <span class="thumb" aria-hidden="true"></span>
+            <span class="sr-only" id="theme-toggle-label">Toggle light and dark mode</span>
+        </button>
 
         <main>
             {% block content %}{% endblock %}
@@ -407,6 +438,31 @@
                         updateToggle(resolvedTheme());
                     }
                 });
+            }
+
+            if (toggle) {
+                function updateScrollState() {
+                    if (window.scrollY > 8) {
+                        toggle.classList.add("is-hidden");
+                    } else {
+                        toggle.classList.remove("is-hidden");
+                    }
+                }
+                updateScrollState();
+                window.addEventListener("scroll", updateScrollState, { passive: true });
+            }
+
+            var topnav = document.getElementById("topnav");
+            if (topnav) {
+                function updateNavScrollState() {
+                    if (window.scrollY > 40) {
+                        topnav.classList.add("nav-compact");
+                    } else {
+                        topnav.classList.remove("nav-compact");
+                    }
+                }
+                updateNavScrollState();
+                window.addEventListener("scroll", updateNavScrollState, { passive: true });
             }
         })();
     </script>
