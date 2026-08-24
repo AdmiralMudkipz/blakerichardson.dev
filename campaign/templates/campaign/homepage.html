@@ -23,14 +23,6 @@
         text-align: center;
         gap: 8px;
     }
-    .candidate-photo {
-        width: 200px;
-        height: 200px;
-        border-radius: 22px;
-        object-fit: cover;
-        box-shadow: 0 16px 30px rgba(26, 47, 69, 0.18);
-        margin-bottom: 4px;
-    }
     .eyebrow {
         display: inline-block;
         font-size: 0.76rem;
@@ -222,19 +214,12 @@
             grid-template-columns: 1fr;
         }
     }
-    @media (max-width: 480px) {
-        .candidate-photo {
-            width: 140px;
-            height: 140px;
-        }
-    }
 </style>
 {% endblock %}
 
 {% block content %}
 <section class="hero">
     <div class="hero-photo">
-        <img class="candidate-photo" src="/media/profilepic.jpeg" alt="Blake Richardson, candidate for Harrison Township Committee" />
         <span class="eyebrow">Township Committee Candidate</span>
         <p class="candidate-name">Blake Richardson</p>
         <p class="candidate-tagline">I'm running to use the grants we're ignoring, unleash solar power, and make our government transparent again.</p>
