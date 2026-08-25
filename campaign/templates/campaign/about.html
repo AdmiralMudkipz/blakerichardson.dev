@@ -11,7 +11,7 @@
         margin: 0 auto;
         padding: 38px 18px 54px;
         display: grid;
-        grid-template-columns: 1fr 0.95fr;
+        grid-template-columns: 1.2fr 0.8fr;
         gap: 18px;
     }
     .panel {
@@ -45,25 +45,31 @@
         line-height: 1.65;
         margin-bottom: 14px;
     }
-    .card-title {
-        font-family: "Merriweather", Georgia, serif;
-        font-size: 1.15rem;
-        margin-bottom: 10px;
-        color: var(--ink);
+    .profile-panel {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 14px;
     }
-    .values {
-        margin-left: 18px;
+    .portrait {
+        width: min(100%, 300px);
+        aspect-ratio: 4 / 5;
+        object-fit: cover;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        box-shadow: 0 12px 24px rgba(26, 47, 69, 0.12);
+    }
+    .profile-copy {
         color: var(--ink-soft);
-        line-height: 1.65;
-    }
-    .values li {
-        margin-bottom: 6px;
+        line-height: 1.6;
     }
     .next-links {
         margin-top: 16px;
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        display: flex;
+        flex-direction: column;
         gap: 10px;
+        width: 100%;
     }
     .next-links a {
         border: 1px solid var(--line);
@@ -88,9 +94,6 @@
         .about-wrap {
             grid-template-columns: 1fr;
         }
-        .next-links {
-            grid-template-columns: 1fr;
-        }
     }
 </style>
 {% endblock %}
@@ -100,28 +103,22 @@
     <article class="panel">
         <p class="eyebrow">About Me</p>
         <h1>Blake Richardson</h1>
-        <p class="lead">My name is Blake Richardson, I grew up in Mullica Hill and have lived here for nearly my entire life. I'm 21 and graduated with a Bachelor's in Computer Science and a Minor in German from Rowan University. I've had an interest in policy, urban planning, for several years now. </p>
+        <p class="lead">My name is Blake Richardson, I grew up in Mullica Hill and have lived here for nearly my entire life. I graduated with a Bachelor's in Computer Science and a Minor in German from Rowan University. I've had an interest in local policy & urban planning for several years now. </p>
         <p class="bio"> Some people may wonder why a 21-year-old would run for Township Committee, or even care about these sort of things. It started with me trying to build a shed, and honestly I found that the rules around sheds were very odd, specific, and restrictive. Then I looked at solar, building codes, zoning codes, and noticed that there are dozens of really strange and outdated regulations. These laws had real negative impacts, arbitrarily banning many legitimately harmless building uses, types, and styles. Along with that I found a laundry list of fees, permits, and bureaucratic hurdles that made simple projects unnecessarily complicated.</p>
         <p class="bio">These laws are so restrictive that the Main Street I grew up around, would be completely illegal to build today, even with modern materials and safety standards. I want to bring back that kind of development, cut the red tape that's stopping it, and give people a local government that is an asset to their lives rather than a source of headache and problems.</p>
     </article>
 
-    <aside class="panel" aria-label="Campaign values and priorities">
-        <h2 class="card-title">What I'm Fighting For</h2>
-        <ul class="values">
-            <li>Go after the grant money our township keeps leaving on the table.</li>
-            <li>Tear up the outdated solar rules and let people build.</li>
-            <li>Put every township meeting online, live and archived.</li>
-            <li>Relegalize the kind of Main Street development that built this town.</li>
-        </ul>
-
+    <aside class="panel profile-panel" aria-label="Portrait of Blake Richardson">
+        <img class="portrait" src="/media/profilepic.jpeg" alt="Blake Richardson" />
+        <p class="profile-copy">I care deeply about protecting the character of our town while making local government work better for regular people.</p>
         <div class="next-links">
-            <a href="{% url 'campaign:issues' %}">
-                <strong>Read The Platform</strong>
-                See exactly what I want to change and why.
+            <a href="{% url 'campaign:homepage' %}">
+                <strong>Back To Homepage</strong>
+                Return to campaign highlights and priorities.
             </a>
-            <a href="{% url 'campaign:contact' %}">
-                <strong>Contact The Campaign</strong>
-                Reach out with questions or local concerns.
+            <a href="{% url 'campaign:homepage' %}#contact-email">
+                <strong>Contact By Email</strong>
+                blake@blakerichardson.dev
             </a>
         </div>
     </aside>

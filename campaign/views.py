@@ -1,4 +1,6 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 
 
 def homepage(request):
@@ -14,7 +16,7 @@ def issues(request):
 
 
 def contact(request):
-    return render(request, "campaign/contact.html")
+    return HttpResponseRedirect(reverse("campaign:homepage") + "#contact-email")
 
 
 def faq(request):
