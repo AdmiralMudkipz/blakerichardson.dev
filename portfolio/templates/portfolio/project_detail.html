@@ -80,6 +80,14 @@
         background-color: #1E1E1E;
         color: #C0C0C0;
     }
+    .btn-demo {
+        background-color: #478cbf;
+        color: #fff;
+        border: 1px solid #6ab0e3;
+    }
+    .btn-demo:hover {
+        background-color: #6ab0e3;
+    }
     @media (max-width: 480px) {
         .detail-card {
             padding: 1.5rem;
@@ -107,6 +115,9 @@
         </div>
 
         <div>
+            {% if project.demo_url %}
+                <a href="{{ project.demo_url }}" class="btn btn-demo">Open Tool</a>
+            {% endif %}
             {% if project.github %}
                 <a href="{{ project.github }}" target="_blank" class="btn btn-github">View on GitHub</a>
             {% endif %}

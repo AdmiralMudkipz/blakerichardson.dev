@@ -1,0 +1,418 @@
+{% extends 'portfolio/base.html' %}
+
+{% block title %}KML Shape Generator - Blake Richardson{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #121212 !important;
+        color: #B2B2B2 !important;
+        font-family: 'Arial', sans-serif;
+    }
+    .page-wrap {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 2rem 1rem 3rem;
+    }
+    .tool-card {
+        background: linear-gradient(180deg, #1a1a1a, #161616);
+        border: 1px solid #2e2e2e;
+        border-radius: 12px;
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+        overflow: hidden;
+    }
+    .tool-accent {
+        height: 5px;
+        background: linear-gradient(90deg, #478cbf, #6ab0e3);
+    }
+    .tool-content {
+        padding: 1.5rem;
+    }
+    h1 {
+        color: #ffffff;
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0 0 0.4rem;
+    }
+    .subtitle {
+        color: #8e8e8e;
+        margin-bottom: 1.4rem;
+    }
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.9rem;
+    }
+    .field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+    }
+    .field label {
+        color: #d6d6d6;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+    .input,
+    .select,
+    .output {
+        background-color: #101010;
+        color: #dbdbdb;
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 0.65rem 0.75rem;
+        font-size: 0.95rem;
+    }
+    .input:focus,
+    .select:focus,
+    .output:focus {
+        outline: none;
+        border-color: #6ab0e3;
+        box-shadow: 0 0 0 3px rgba(106, 176, 227, 0.2);
+    }
+    .actions {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+    }
+    .btn {
+        border: 1px solid #3d3d3d;
+        border-radius: 8px;
+        padding: 0.62rem 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        font-size: 0.93rem;
+        transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .btn-primary {
+        background-color: #478cbf;
+        border-color: #5aa0d4;
+        color: #fff;
+    }
+    .btn-primary:hover {
+        background-color: #5fa8dd;
+    }
+    .btn-secondary {
+        background-color: #252525;
+        color: #d9d9d9;
+    }
+    .btn-secondary:hover {
+        background-color: #313131;
+    }
+    .btn[disabled] {
+        opacity: 0.55;
+        cursor: not-allowed;
+    }
+    .notice {
+        margin-top: 1rem;
+        color: #9b9b9b;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        background: #151515;
+        border: 1px solid #2c2c2c;
+        border-radius: 8px;
+        padding: 0.75rem 0.85rem;
+    }
+    .status {
+        margin-top: 0.85rem;
+        min-height: 1.2rem;
+        font-size: 0.9rem;
+    }
+    .status.error {
+        color: #f28b82;
+    }
+    .status.success {
+        color: #8ed18e;
+    }
+    .output {
+        width: 100%;
+        min-height: 260px;
+        margin-top: 1rem;
+        resize: vertical;
+        font-family: Consolas, monospace;
+        line-height: 1.35;
+    }
+    .back-link {
+        display: inline-block;
+        margin-top: 1rem;
+        color: #7db7e4;
+        text-decoration: none;
+        font-weight: 600;
+    }
+    .back-link:hover {
+        color: #a3d0f0;
+    }
+    @media (max-width: 700px) {
+        .grid {
+            grid-template-columns: 1fr;
+        }
+        .tool-content {
+            padding: 1rem;
+        }
+        h1 {
+            font-size: 1.6rem;
+        }
+    }
+</style>
+
+<div class="page-wrap">
+    <div class="tool-card">
+        <div class="tool-accent"></div>
+        <div class="tool-content">
+            <h1>KML Shape Generator</h1>
+            <p class="subtitle">Create a square or circle KML centered on a coordinate. Square output is north-facing by side, not corner.</p>
+
+            <div class="grid">
+                <div class="field">
+                    <label for="shape">Shape</label>
+                    <select id="shape" class="select">
+                        <option value="square">Square</option>
+                        <option value="circle">Circle</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="unit">Distance Unit</label>
+                    <select id="unit" class="select">
+                        <option value="nm">Nautical Miles</option>
+                        <option value="mi">Miles</option>
+                        <option value="km">Kilometers</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="distance">Distance from Center to Edge/Radius</label>
+                    <input id="distance" class="input" type="number" min="0" step="any" placeholder="Example: 20">
+                </div>
+                <div class="field">
+                    <label for="latitude">Center Latitude</label>
+                    <input id="latitude" class="input" type="number" min="-90" max="90" step="any" placeholder="Example: 39.7392">
+                </div>
+                <div class="field">
+                    <label for="longitude">Center Longitude</label>
+                    <input id="longitude" class="input" type="number" min="-180" max="180" step="any" placeholder="Example: -75.1638">
+                </div>
+            </div>
+
+            <div class="actions">
+                <button id="generateBtn" class="btn btn-primary" type="button">Generate KML</button>
+                <button id="downloadBtn" class="btn btn-secondary" type="button" disabled>Download KML</button>
+                <a href="{% url 'portfolio:homepage' %}" class="btn btn-secondary">Back to Portfolio</a>
+            </div>
+
+            <div id="status" class="status"></div>
+
+            <div class="notice">
+                KML filename format: distance + unit + shape. Example: 20nmsquare.kml or 12.5kmcircle.kml.
+            </div>
+
+            <textarea id="kmlOutput" class="output" readonly placeholder="Generated KML will appear here."></textarea>
+        </div>
+    </div>
+
+    <a class="back-link" href="{% url 'portfolio:project_detail' 'kml-shape-generator' %}">&larr; View project details</a>
+</div>
+
+<script>
+    (function () {
+        var EARTH_RADIUS_M = 6371008.8;
+        var generatedKml = '';
+        var generatedFileName = '';
+
+        var unitToMeters = {
+            nm: 1852,
+            mi: 1609.344,
+            km: 1000
+        };
+
+        var shapeEl = document.getElementById('shape');
+        var unitEl = document.getElementById('unit');
+        var distanceEl = document.getElementById('distance');
+        var latEl = document.getElementById('latitude');
+        var lonEl = document.getElementById('longitude');
+        var generateBtn = document.getElementById('generateBtn');
+        var downloadBtn = document.getElementById('downloadBtn');
+        var outputEl = document.getElementById('kmlOutput');
+        var statusEl = document.getElementById('status');
+
+        function toRadians(value) {
+            return value * Math.PI / 180;
+        }
+
+        function toDegrees(value) {
+            return value * 180 / Math.PI;
+        }
+
+        function normalizeLongitude(lonDeg) {
+            var lon = ((lonDeg + 540) % 360) - 180;
+            return lon;
+        }
+
+        function destinationPoint(latDeg, lonDeg, bearingDeg, distanceMeters) {
+            var lat1 = toRadians(latDeg);
+            var lon1 = toRadians(lonDeg);
+            var bearing = toRadians(bearingDeg);
+            var angularDistance = distanceMeters / EARTH_RADIUS_M;
+
+            var sinLat1 = Math.sin(lat1);
+            var cosLat1 = Math.cos(lat1);
+            var sinAd = Math.sin(angularDistance);
+            var cosAd = Math.cos(angularDistance);
+
+            var sinLat2 = sinLat1 * cosAd + cosLat1 * sinAd * Math.cos(bearing);
+            var lat2 = Math.asin(sinLat2);
+            var y = Math.sin(bearing) * sinAd * cosLat1;
+            var x = cosAd - sinLat1 * sinLat2;
+            var lon2 = lon1 + Math.atan2(y, x);
+
+            return {
+                lat: toDegrees(lat2),
+                lon: normalizeLongitude(toDegrees(lon2))
+            };
+        }
+
+        function formatCoordinate(point) {
+            return point.lon.toFixed(8) + ',' + point.lat.toFixed(8) + ',0';
+        }
+
+        function buildSquareCoordinates(lat, lon, centerToSideMeters) {
+            var cornerDistance = centerToSideMeters * Math.SQRT2;
+            var corners = [45, 135, 225, 315].map(function (bearing) {
+                return destinationPoint(lat, lon, bearing, cornerDistance);
+            });
+            corners.push(corners[0]);
+            return corners;
+        }
+
+        function buildCircleCoordinates(lat, lon, radiusMeters) {
+            var segments = 120;
+            var points = [];
+            for (var i = 0; i < segments; i += 1) {
+                var bearing = (i / segments) * 360;
+                points.push(destinationPoint(lat, lon, bearing, radiusMeters));
+            }
+            points.push(points[0]);
+            return points;
+        }
+
+        function buildKml(name, points) {
+            var coordinateText = points.map(formatCoordinate).join('\n                        ');
+            return [
+                '<?xml version="1.0" encoding="UTF-8"?>',
+                '<kml xmlns="http://www.opengis.net/kml/2.2">',
+                '    <Document>',
+                '        <name>' + name + '</name>',
+                '        <Placemark>',
+                '            <name>' + name + '</name>',
+                '            <Style>',
+                '                <LineStyle><color>ffbf8c47</color><width>2</width></LineStyle>',
+                '                <PolyStyle><color>55bf8c47</color></PolyStyle>',
+                '            </Style>',
+                '            <Polygon>',
+                '                <tessellate>1</tessellate>',
+                '                <outerBoundaryIs>',
+                '                    <LinearRing>',
+                '                        <coordinates>',
+                '                        ' + coordinateText,
+                '                        </coordinates>',
+                '                    </LinearRing>',
+                '                </outerBoundaryIs>',
+                '            </Polygon>',
+                '        </Placemark>',
+                '    </Document>',
+                '</kml>'
+            ].join('\n');
+        }
+
+        function setStatus(message, isError) {
+            statusEl.textContent = message;
+            statusEl.className = isError ? 'status error' : 'status success';
+        }
+
+        function clearStatus() {
+            statusEl.textContent = '';
+            statusEl.className = 'status';
+        }
+
+        function formatDistanceToken(distance) {
+            var rounded = Number(distance.toFixed(6));
+            return String(rounded);
+        }
+
+        function validateInputs(shape, unit, distance, lat, lon) {
+            if (shape !== 'square' && shape !== 'circle') {
+                return 'Invalid shape selected.';
+            }
+            if (!Object.prototype.hasOwnProperty.call(unitToMeters, unit)) {
+                return 'Invalid distance unit selected.';
+            }
+            if (!Number.isFinite(distance) || distance <= 0) {
+                return 'Distance must be a number greater than 0.';
+            }
+            if (!Number.isFinite(lat) || lat < -90 || lat > 90) {
+                return 'Latitude must be between -90 and 90.';
+            }
+            if (!Number.isFinite(lon) || lon < -180 || lon > 180) {
+                return 'Longitude must be between -180 and 180.';
+            }
+            return '';
+        }
+
+        function generate() {
+            clearStatus();
+            downloadBtn.disabled = true;
+
+            var shape = shapeEl.value;
+            var unit = unitEl.value;
+            var distance = parseFloat(distanceEl.value);
+            var lat = parseFloat(latEl.value);
+            var lon = parseFloat(lonEl.value);
+
+            var validationMessage = validateInputs(shape, unit, distance, lat, lon);
+            if (validationMessage) {
+                generatedKml = '';
+                generatedFileName = '';
+                outputEl.value = '';
+                setStatus(validationMessage, true);
+                return;
+            }
+
+            var distanceMeters = distance * unitToMeters[unit];
+            var points = shape === 'square'
+                ? buildSquareCoordinates(lat, lon, distanceMeters)
+                : buildCircleCoordinates(lat, lon, distanceMeters);
+
+            var distanceToken = formatDistanceToken(distance);
+            var fileStem = distanceToken + unit + shape;
+            generatedFileName = fileStem + '.kml';
+            generatedKml = buildKml(fileStem, points);
+
+            outputEl.value = generatedKml;
+            downloadBtn.disabled = false;
+            setStatus('KML generated successfully: ' + generatedFileName, false);
+        }
+
+        function downloadKml() {
+            if (!generatedKml || !generatedFileName) {
+                setStatus('Generate KML first before downloading.', true);
+                return;
+            }
+
+            var blob = new Blob([generatedKml], { type: 'application/vnd.google-earth.kml+xml;charset=utf-8' });
+            var url = URL.createObjectURL(blob);
+            var link = document.createElement('a');
+            link.href = url;
+            link.download = generatedFileName;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+
+            setStatus('Downloaded ' + generatedFileName, false);
+        }
+
+        generateBtn.addEventListener('click', generate);
+        downloadBtn.addEventListener('click', downloadKml);
+    })();
+</script>
+{% endblock %}

@@ -5,6 +5,23 @@ from django.utils import timezone
 
 
 PROJECTS = {
+    'kml-shape-generator': {
+        'slug': 'kml-shape-generator',
+        'title': 'KML Shape Generator',
+        'subtitle': 'Geospatial Utility • JavaScript • KML',
+        'description': 'Interactive tool that generates downloadable KML squares or circles centered on user-provided coordinates with distance inputs in nautical miles, miles, or kilometers.',
+        'long_description': (
+            'KML Shape Generator is an interactive geospatial utility designed to quickly produce reusable KML files '
+            'for mapping and planning workflows. The tool lets users choose either a square or a circle, define a '
+            'center latitude/longitude, and set the shape size as a center-to-edge distance. Distances can be entered '
+            'in nautical miles, miles, or kilometers. The square output is oriented so its sides face north/south/east/west '
+            '(not corner-up), and each generated file can be downloaded instantly with a standardized filename format '
+            'of distance + unit + shape.'
+        ),
+        'github': None,
+        'demo_url': '/portfolio/kml-shape-generator/',
+        'skills': ['Python', 'JavaScript', 'HTML', 'CSS', 'Django', 'Geospatial', 'KML'],
+    },
     'nature-picture': {
         'slug': 'nature-picture',
         'title': 'Nature Picture',
@@ -178,6 +195,10 @@ def homepage(request):
         'projects': PROJECTS.values(),
         'all_skills': ALL_SKILLS,
     })
+
+
+def kml_shape_generator(request):
+    return render(request, "portfolio/kml_shape_generator.html")
 
 
 def project_detail(request, slug):

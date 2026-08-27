@@ -487,6 +487,9 @@
                             <a href="{% url 'portfolio:projects_by_skill' skill %}" class="skill-tag">{{ skill }}</a>
                         {% endfor %}
                     </div>
+                    {% if project.demo_url %}
+                        <a href="{{ project.demo_url }}" class="text-blue-400 mt-2 inline-block" style="font-size:0.85rem;margin-right:12px;">Open Tool &rarr;</a>
+                    {% endif %}
                     {% if project.github %}
                         <a href="{{ project.github }}" target="_blank" class="text-blue-400 mt-2 inline-block" style="font-size:0.85rem;">View on GitHub &rarr;</a>
                     {% endif %}

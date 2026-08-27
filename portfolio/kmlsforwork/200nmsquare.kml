@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+	<Document>
+		<name>200 NM Square</name>
+		<Placemark>
+			<name>200 NM Square</name>
+			<Polygon>
+				<tessellate>1</tessellate>
+				<altitudeMode>clampToGround</altitudeMode>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							1.9473696264,53.7264783667,0
+							-3.4741080264,53.7264783667,0
+							-3.4741080264,50.3931450333,0
+							1.9473696264,50.3931450333,0
+							1.9473696264,53.7264783667,0
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+	</Document>
+</kml>
