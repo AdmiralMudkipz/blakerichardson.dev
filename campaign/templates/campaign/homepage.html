@@ -171,34 +171,41 @@
         color: var(--accent);
     }
 
-    .quick-links {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+    .contact-methods {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
         gap: 12px;
         padding-bottom: 30px;
     }
-    .quick-links a {
+    .contact-methods .email-link {
+        color: var(--ink-soft);
+        font-weight: 600;
+        text-decoration: none;
+    }
+    .contact-methods .email-link:hover {
+        color: var(--accent);
+        text-decoration: underline;
+    }
+    .contact-methods .contact-instagram {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
         border: 1px solid var(--line);
         border-radius: 12px;
-        background: var(--panel-flat);
-        padding: 14px;
-        text-decoration: none;
+        color: var(--ink-soft);
+        background: transparent;
         transition: background-color 0.2s ease, border-color 0.2s ease;
     }
-    .quick-links a:hover {
+    .contact-methods .contact-instagram:hover {
         background: var(--chip-hover);
         border-color: var(--accent);
     }
-    .quick-links strong {
-        display: block;
-        margin-bottom: 5px;
-        color: var(--ink);
-        font-size: 0.95rem;
-    }
-    .quick-links span {
-        color: var(--ink-soft);
-        font-size: 0.88rem;
-        line-height: 1.45;
+    .contact-methods .instagram-icon {
+        width: 22px;
+        height: 22px;
     }
 
     @media (min-width: 1200px) {
@@ -217,8 +224,7 @@
         .section {
             padding: 20px 12px 8px;
         }
-        .issue-grid,
-        .quick-links {
+        .issue-grid {
             grid-template-columns: 1fr;
         }
     }
@@ -288,11 +294,14 @@
 
 <section class="section" aria-labelledby="contact-title" id="contact-email">
     <h2 id="contact-title">Contact</h2>
-    <p class="section-intro">Email me directly:</p>
-    <div class="quick-links">
-        <a href="mailto:blake@blakerichardson.dev">
-            <strong>blake@blakerichardson.dev</strong>
-            <span>The fastest way to reach me.</span>
+    <div class="contact-methods">
+        <a class="email-link" href="mailto:blake@blakerichardson.dev">blake@blakerichardson.dev</a>
+        <a class="contact-instagram" href="https://www.instagram.com/blakerichardson2026" target="_blank" rel="noopener noreferrer" aria-label="Follow Blake Richardson on Instagram (opens in a new tab)">
+            <svg class="instagram-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="2" />
+                <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" />
+                <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
+            </svg>
         </a>
     </div>
 </section>

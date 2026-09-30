@@ -162,6 +162,15 @@
             background: #a4462b;
             color: #fff;
         }
+        .topnav .links .instagram-button {
+            display: inline-flex;
+            align-items: center;
+        }
+        .instagram-icon {
+            width: 18px;
+            height: 18px;
+            flex: 0 0 auto;
+        }
         .theme-toggle {
             --switch-width: 58px;
             --switch-height: 30px;
@@ -337,6 +346,13 @@
             </a>
             <div class="links">
                 <a href="{% url 'campaign:homepage' %}">Home</a>
+                <a href="https://www.instagram.com/blakerichardson2026" class="instagram-button" target="_blank" rel="noopener noreferrer" aria-label="Follow Blake Richardson on Instagram (opens in a new tab)">
+                    <svg class="instagram-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="2" />
+                        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" />
+                        <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
+                    </svg>
+                </a>
                 <a href="{% url 'campaign:about' %}">About</a>
                 <a href="{% url 'campaign:issues' %}">Issues</a>
                 <a href="{% url 'campaign:faq' %}">FAQ</a>
