@@ -11,12 +11,10 @@ PROJECTS = {
         'subtitle': 'Geospatial Utility • JavaScript • KML',
         'description': 'Interactive tool that generates downloadable KML squares or circles centered on user-provided coordinates with distance inputs in nautical miles, miles, or kilometers.',
         'long_description': (
-            'KML Shape Generator is an interactive geospatial utility designed to quickly produce reusable KML files '
-            'for mapping and planning workflows. The tool lets users choose either a square or a circle, define a '
+            'KML Shape Generator is a little tool to create very simple shape KMLs I needed for work.'
+            'The tool lets users choose either a square or a circle, define a '
             'center latitude/longitude, and set the shape size as a center-to-edge distance. Distances can be entered '
-            'in nautical miles, miles, or kilometers. The square output is oriented so its sides face north/south/east/west '
-            '(not corner-up), and each generated file can be downloaded instantly with a standardized filename format '
-            'of distance + unit + shape.'
+            'in nautical miles, miles, or kilometers. Output file can be downloaded or copied.'
         ),
         'github': None,
         'demo_url': '/portfolio/kml-shape-generator/',

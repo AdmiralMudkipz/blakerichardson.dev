@@ -70,6 +70,15 @@
         border-color: #6ab0e3;
         box-shadow: 0 0 0 3px rgba(106, 176, 227, 0.2);
     }
+    .input[type="number"] {
+        appearance: textfield;
+        -moz-appearance: textfield;
+    }
+    .input[type="number"]::-webkit-inner-spin-button,
+    .input[type="number"]::-webkit-outer-spin-button {
+        appearance: none;
+        margin: 0;
+    }
     .actions {
         display: flex;
         gap: 0.75rem;
@@ -173,6 +182,13 @@
                     </select>
                 </div>
                 <div class="field">
+                    <label for="distanceMode">Distance Mode</label>
+                    <select id="distanceMode" class="select">
+                        <option value="center">Center to Edge / Radius</option>
+                        <option value="side">Side Length (Square Only)</option>
+                    </select>
+                </div>
+                <div class="field">
                     <label for="unit">Distance Unit</label>
                     <select id="unit" class="select">
                         <option value="nm">Nautical Miles</option>
@@ -181,41 +197,46 @@
                     </select>
                 </div>
                 <div class="field">
-                    <label for="distance">Distance from Center to Edge/Radius</label>
-                    <input id="distance" class="input" type="number" min="0" step="any" placeholder="Example: 20">
+                    <label id="distanceLabel" for="distance">Distance from Center to Edge/Radius</label>
+                    <input id="distance" class="input" type="number" min="0" step="any">
                 </div>
                 <div class="field">
                     <label for="latitude">Center Latitude</label>
-                    <input id="latitude" class="input" type="number" min="-90" max="90" step="any" placeholder="Example: 39.7392">
+                    <input id="latitude" class="input" type="number" min="-90" max="90" step="any">
                 </div>
                 <div class="field">
                     <label for="longitude">Center Longitude</label>
-                    <input id="longitude" class="input" type="number" min="-180" max="180" step="any" placeholder="Example: -75.1638">
+                    <input id="longitude" class="input" type="number" min="-180" max="180" step="any">
                 </div>
             </div>
 
             <div class="actions">
                 <button id="generateBtn" class="btn btn-primary" type="button">Generate KML</button>
                 <button id="downloadBtn" class="btn btn-secondary" type="button" disabled>Download KML</button>
-                <a href="{% url 'portfolio:homepage' %}" class="btn btn-secondary">Back to Portfolio</a>
+                
             </div>
 
             <div id="status" class="status"></div>
 
             <div class="notice">
-                KML filename format: distance + unit + shape. Example: 20nmsquare.kml or 12.5kmcircle.kml.
+                KML filename format: distance + unit + shape. 
+                E.g.
+                20nmsquare.kml 
+                12.5kmcircle.kml.
+                
             </div>
 
-            <textarea id="kmlOutput" class="output" readonly placeholder="Generated KML will appear here."></textarea>
+            <textarea id="kmlOutput" class="output" readonly placeholder="Output"></textarea>
         </div>
     </div>
 
-    <a class="back-link" href="{% url 'portfolio:project_detail' 'kml-shape-generator' %}">&larr; View project details</a>
+    
 </div>
 
 <script>
     (function () {
-        var EARTH_RADIUS_M = 6371008.8;
+        var WGS84_A = 6378137;
+        var WGS84_F = 1 / 298.257223563;
         var generatedKml = '';
         var generatedFileName = '';
 
@@ -226,8 +247,10 @@
         };
 
         var shapeEl = document.getElementById('shape');
+        var distanceModeEl = document.getElementById('distanceMode');
         var unitEl = document.getElementById('unit');
         var distanceEl = document.getElementById('distance');
+        var distanceLabelEl = document.getElementById('distanceLabel');
         var latEl = document.getElementById('latitude');
         var lonEl = document.getElementById('longitude');
         var generateBtn = document.getElementById('generateBtn');
@@ -249,21 +272,61 @@
         }
 
         function destinationPoint(latDeg, lonDeg, bearingDeg, distanceMeters) {
-            var lat1 = toRadians(latDeg);
-            var lon1 = toRadians(lonDeg);
-            var bearing = toRadians(bearingDeg);
-            var angularDistance = distanceMeters / EARTH_RADIUS_M;
+            var a = WGS84_A;
+            var f = WGS84_F;
+            var b = a * (1 - f);
+            var alpha1 = toRadians(bearingDeg);
+            var sinAlpha1 = Math.sin(alpha1);
+            var cosAlpha1 = Math.cos(alpha1);
+            var tanU1 = (1 - f) * Math.tan(toRadians(latDeg));
+            var cosU1 = 1 / Math.sqrt(1 + tanU1 * tanU1);
+            var sinU1 = tanU1 * cosU1;
+            var sigma1 = Math.atan2(tanU1, cosAlpha1);
+            var sinAlpha = cosU1 * sinAlpha1;
+            var cosSqAlpha = 1 - sinAlpha * sinAlpha;
+            var uSq = cosSqAlpha * (a * a - b * b) / (b * b);
+            var A = 1 + uSq / 16384 * (4096 + uSq * (-768 + uSq * (320 - 175 * uSq)));
+            var B = uSq / 1024 * (256 + uSq * (-128 + uSq * (74 - 47 * uSq)));
+            var sigma = distanceMeters / (b * A);
+            var sigmaPrevious;
+            var iterations = 0;
+            var cos2SigmaM;
+            var sinSigma;
+            var cosSigma;
+            var deltaSigma;
 
-            var sinLat1 = Math.sin(lat1);
-            var cosLat1 = Math.cos(lat1);
-            var sinAd = Math.sin(angularDistance);
-            var cosAd = Math.cos(angularDistance);
+            do {
+                cos2SigmaM = Math.cos(2 * sigma1 + sigma);
+                sinSigma = Math.sin(sigma);
+                cosSigma = Math.cos(sigma);
+                deltaSigma = B * sinSigma * (cos2SigmaM + B / 4 * (
+                    cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM) -
+                    B / 6 * cos2SigmaM * (-3 + 4 * sinSigma * sinSigma) *
+                    (-3 + 4 * cos2SigmaM * cos2SigmaM)
+                ));
+                sigmaPrevious = sigma;
+                sigma = distanceMeters / (b * A) + deltaSigma;
+                iterations += 1;
+            } while (Math.abs(sigma - sigmaPrevious) > 1e-12 && iterations < 200);
 
-            var sinLat2 = sinLat1 * cosAd + cosLat1 * sinAd * Math.cos(bearing);
-            var lat2 = Math.asin(sinLat2);
-            var y = Math.sin(bearing) * sinAd * cosLat1;
-            var x = cosAd - sinLat1 * sinLat2;
-            var lon2 = lon1 + Math.atan2(y, x);
+            if (iterations === 200) {
+                return null;
+            }
+
+            var tmp = sinU1 * sinSigma - cosU1 * cosSigma * cosAlpha1;
+            var lat2 = Math.atan2(
+                sinU1 * cosSigma + cosU1 * sinSigma * cosAlpha1,
+                (1 - f) * Math.sqrt(sinAlpha * sinAlpha + tmp * tmp)
+            );
+            var lambda = Math.atan2(
+                sinSigma * sinAlpha1,
+                cosU1 * cosSigma - sinU1 * sinSigma * cosAlpha1
+            );
+            var C = f / 16 * cosSqAlpha * (4 + f * (4 - 3 * cosSqAlpha));
+            var longitudeCorrection = (1 - C) * f * sinAlpha * (
+                sigma + C * sinSigma * (cos2SigmaM + C * cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM))
+            );
+            var lon2 = toRadians(lonDeg) + lambda - longitudeCorrection;
 
             return {
                 lat: toDegrees(lat2),
@@ -277,9 +340,14 @@
 
         function buildSquareCoordinates(lat, lon, centerToSideMeters) {
             var cornerDistance = centerToSideMeters * Math.SQRT2;
-            var corners = [45, 135, 225, 315].map(function (bearing) {
+            var corners = [45, 315, 225, 135].map(function (bearing) {
                 return destinationPoint(lat, lon, bearing, cornerDistance);
             });
+
+            if (corners.some(function (corner) { return corner === null; })) {
+                return [];
+            }
+
             corners.push(corners[0]);
             return corners;
         }
@@ -289,7 +357,11 @@
             var points = [];
             for (var i = 0; i < segments; i += 1) {
                 var bearing = (i / segments) * 360;
-                points.push(destinationPoint(lat, lon, bearing, radiusMeters));
+                var point = destinationPoint(lat, lon, bearing, radiusMeters);
+                if (point === null) {
+                    return [];
+                }
+                points.push(point);
             }
             points.push(points[0]);
             return points;
@@ -310,6 +382,7 @@
                 '            </Style>',
                 '            <Polygon>',
                 '                <tessellate>1</tessellate>',
+                '                <altitudeMode>clampToGround</altitudeMode>',
                 '                <outerBoundaryIs>',
                 '                    <LinearRing>',
                 '                        <coordinates>',
@@ -339,9 +412,35 @@
             return String(rounded);
         }
 
-        function validateInputs(shape, unit, distance, lat, lon) {
+        function updateDistanceLabel() {
+            var shape = shapeEl.value;
+            var mode = distanceModeEl.value;
+
+            if (shape === 'square' && mode === 'side') {
+                distanceLabelEl.textContent = 'Square Side Length';
+                distanceEl.placeholder = '';
+                return;
+            }
+
+            if (shape === 'square') {
+                distanceLabelEl.textContent = 'Distance from Center to Side';
+                distanceEl.placeholder = '';
+                return;
+            }
+
+            distanceLabelEl.textContent = 'Circle Radius';
+            distanceEl.placeholder = '';
+        }
+
+        function validateInputs(shape, mode, unit, distance, lat, lon) {
             if (shape !== 'square' && shape !== 'circle') {
                 return 'Invalid shape selected.';
+            }
+            if (mode !== 'center' && mode !== 'side') {
+                return 'Invalid distance mode selected.';
+            }
+            if (shape === 'circle' && mode === 'side') {
+                return 'Side length mode is only valid for squares.';
             }
             if (!Object.prototype.hasOwnProperty.call(unitToMeters, unit)) {
                 return 'Invalid distance unit selected.';
@@ -363,12 +462,13 @@
             downloadBtn.disabled = true;
 
             var shape = shapeEl.value;
+            var distanceMode = distanceModeEl.value;
             var unit = unitEl.value;
-            var distance = parseFloat(distanceEl.value);
+            var distanceInput = parseFloat(distanceEl.value);
             var lat = parseFloat(latEl.value);
             var lon = parseFloat(lonEl.value);
 
-            var validationMessage = validateInputs(shape, unit, distance, lat, lon);
+            var validationMessage = validateInputs(shape, distanceMode, unit, distanceInput, lat, lon);
             if (validationMessage) {
                 generatedKml = '';
                 generatedFileName = '';
@@ -377,12 +477,25 @@
                 return;
             }
 
-            var distanceMeters = distance * unitToMeters[unit];
+            var effectiveDistance = distanceInput;
+            if (shape === 'square' && distanceMode === 'side') {
+                effectiveDistance = distanceInput / 2;
+            }
+
+            var distanceMeters = effectiveDistance * unitToMeters[unit];
             var points = shape === 'square'
                 ? buildSquareCoordinates(lat, lon, distanceMeters)
                 : buildCircleCoordinates(lat, lon, distanceMeters);
 
-            var distanceToken = formatDistanceToken(distance);
+            if (points.length === 0) {
+                generatedKml = '';
+                generatedFileName = '';
+                outputEl.value = '';
+                setStatus('The requested geometry could not be calculated. Try a smaller distance or a different center point.', true);
+                return;
+            }
+
+            var distanceToken = formatDistanceToken(distanceInput);
             var fileStem = distanceToken + unit + shape;
             generatedFileName = fileStem + '.kml';
             generatedKml = buildKml(fileStem, points);
@@ -411,6 +524,21 @@
             setStatus('Downloaded ' + generatedFileName, false);
         }
 
+        shapeEl.addEventListener('change', function () {
+            if (shapeEl.value === 'circle' && distanceModeEl.value === 'side') {
+                distanceModeEl.value = 'center';
+            }
+            updateDistanceLabel();
+        });
+
+        distanceModeEl.addEventListener('change', function () {
+            if (shapeEl.value === 'circle' && distanceModeEl.value === 'side') {
+                distanceModeEl.value = 'center';
+            }
+            updateDistanceLabel();
+        });
+
+        updateDistanceLabel();
         generateBtn.addEventListener('click', generate);
         downloadBtn.addEventListener('click', downloadKml);
     })();
