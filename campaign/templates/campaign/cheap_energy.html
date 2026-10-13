@@ -4,160 +4,39 @@
 
 {% block meta_description %}Blake Richardson's plan to lower energy costs for township residents and promote affordable, reliable power.{% endblock %}
 
-{% block extra_css %}
-<style>
-    :root {
-        --policy-kicker: #8a6720;
-        --policy-heading: #735814;
-        --policy-meta: #8f6b1b;
-        --policy-effect: #4a637b;
-        --policy-border: #b3861e;
-    }
-    @media (prefers-color-scheme: dark) {
-        :root {
-            --policy-kicker: #f0ce7e;
-            --policy-heading: #f5d792;
-            --policy-meta: #e6c977;
-            --policy-effect: #d7e6f4;
-            --policy-border: #cfb05a;
-        }
-    }
-    :root[data-theme="light"] {
-        --policy-kicker: #8a6720;
-        --policy-heading: #735814;
-        --policy-meta: #8f6b1b;
-        --policy-effect: #4a637b;
-        --policy-border: #b3861e;
-    }
-    :root[data-theme="dark"] {
-        --policy-kicker: #f0ce7e;
-        --policy-heading: #f5d792;
-        --policy-meta: #e6c977;
-        --policy-effect: #d7e6f4;
-        --policy-border: #cfb05a;
-    }
-    .page-header {
-        max-width: 1040px;
-        margin: 0 auto;
-        padding: 38px 18px 12px;
-    }
-    .header-card {
-        background: var(--card);
-        border: 1px solid var(--line);
-        border-radius: 16px;
-        padding: 24px 22px;
-        box-shadow: 0 10px 22px rgba(26, 47, 69, 0.08);
-    }
-    .kicker {
-        font-size: 0.74rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.09em;
-        color: var(--policy-kicker);
-        margin-bottom: 10px;
-    }
-    .page-header h1 {
-        font-family: "Merriweather", Georgia, serif;
-        font-size: clamp(1.6rem, 4.2vw, 2.6rem);
-        color: var(--policy-heading);
-        margin-bottom: 8px;
-    }
-    .page-header .subtitle {
-        color: var(--ink-soft);
-        line-height: 1.6;
-        max-width: 760px;
-    }
-
-    .policies {
-        max-width: 1040px;
-        margin: 0 auto;
-        padding: 16px 18px 48px;
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-    }
-    .policy {
-        background: var(--card);
-        border: 1px solid var(--line);
-        border-left: 4px solid var(--policy-border);
-        border-radius: 10px;
-        padding: 20px 24px;
-        box-shadow: 0 8px 18px rgba(26, 47, 69, 0.05);
-    }
-    .policy h3 {
-        color: var(--policy-heading);
-        margin-bottom: 6px;
-        font-size: 1.1rem;
-    }
-    .policy .meta {
-        color: var(--policy-meta);
-        font-size: 0.84rem;
-        margin-bottom: 8px;
-        letter-spacing: 0.02em;
-        text-transform: uppercase;
-    }
-    .policy p {
-        color: var(--ink-soft);
-        line-height: 1.55;
-        font-size: 0.95rem;
-        margin: 8px 0;
-    }
-    .policy p.effect {
-        color: var(--policy-effect);
-    }
-</style>
-{% endblock %}
-
 {% block content %}
-<section class="page-header">
-    <div class="header-card">
+<section class="page-head">
+    <div class="wrap">
+        <a class="back-link" href="{% url 'campaign:issues' %}">&larr; Back to Issues</a>
         <p class="kicker">Issue Brief</p>
         <h1>Cheap Energy</h1>
         <p class="subtitle">A local policy roadmap for more affordable and resilient power generation.</p>
     </div>
 </section>
+<div class="road-divider" aria-hidden="true"></div>
 
+<div class="page-body">
+<div class="wrap">
 <div class="policies">
     <article class="policy">
         <div class="meta">Issue &amp; Policy: Permitting Reform / Streamline Bureaucracy</div>
-        <h3>Implement New Policy - SolarApp+ (NJ Smart Solar Permitting Law A5264)</h3>
+        <h3>Automate Solar Permitting (SolarApp+)</h3>
         <p>Do solar permitting via SolarApp+ utilizing the NJ Smart Solar Permitting Law (A5264).</p>
         <p class="effect"><strong>Effects:</strong> Effectively automates solar permitting, saving both the township and residents thousands a year while streamlining permitting and construction to get desperately needed solar savings rapidly during our ongoing energy crisis.</p>
     </article>
 
     <article class="policy">
         <div class="meta">Issue &amp; Policy: Energy Production / Cut Red-Tape</div>
-        <h3>Repeal § 225-132D(1)</h3>
-        <p>Allow properties to have solar installations in which the principle use is the production of electricity via solar.</p>
-        <p class="effect"><strong>Effects:</strong> Unbans solar power plants.</p>
-    </article>
-
-    <article class="policy">
-        <div class="meta">Issue &amp; Policy: Energy Production / Cut Red-Tape</div>
-        <h3>Repeal § 225-132D(3)</h3>
-        <p>Allow a property to have both ground and rooftop solar.</p>
-        <p class="effect"><strong>Effects:</strong> This is a completely arbitrary rule with no benefit. If a property can use more solar than it has roof space they ought to be able to build that much solar generation by right.</p>
-    </article>
-
-    <article class="policy">
-        <div class="meta">Issue &amp; Policy: Energy Production / Cut Red-Tape</div>
-        <h3>Repeal § 225-132D(4)(f), § 110-1.1J</h3>
-        <p>Remove mandatory township review for ROW facing roof solar.</p>
+        <h3>End Township Review of Street-Facing Roof Solar</h3>
+        <p><strong>Repeal § 225-132D(4)(f), § 110-1.1J:</strong> Remove mandatory township review for ROW facing roof solar.</p>
         <p class="effect"><strong>Effects:</strong> Removes unnecessary red tape around installing roof solar. This law needlessly involves the township in something inconsequential and makes solar installation more complicated for homeowners for no tangible benefit.</p>
     </article>
 
     <article class="policy">
         <div class="meta">Issue &amp; Policy: Energy Production / Cut Red-Tape</div>
-        <h3>Repeal § 225-132D(5)(b)</h3>
-        <p>Allow ground solar on &lt;1 acre properties.</p>
-        <p class="effect"><strong>Effects:</strong> The feasibility of a solar installation should be decided by the property owner. This opens up ground solar opportunities for residents with smaller plots.</p>
-    </article>
-
-    <article class="policy">
-        <div class="meta">Issue &amp; Policy: Energy Production / Cut Red-Tape</div>
-        <h3>Modify § 225-132D(6)(a)</h3>
-        <p>Reduce solar panel setback rule to the same as sheds, 10 feet from the property boundary.</p>
-        <p class="effect"><strong>Effects:</strong> Enables solar installations in areas with less land to work with. No need for excessively large setbacks.</p>
+        <h3>Allow Both Ground and Rooftop Solar</h3>
+        <p><strong>Repeal § 225-132D(3):</strong> Allow a property to have both ground and rooftop solar.</p>
+        <p class="effect"><strong>Effects:</strong> This is a completely arbitrary rule with no benefit. If a property can use more solar than it has roof space they ought to be able to build that much solar generation by right.</p>
     </article>
 
     <article class="policy">
@@ -174,5 +53,28 @@
         <p>Legalize plug-in solar systems for homes and renters, provided installations are implemented according to the power company&rsquo;s safety and interconnection standards.</p>
         <p class="effect"><strong>Effects:</strong> Expands access to lower-cost solar for households that cannot install full rooftop systems, while maintaining grid and fire safety through utility safety requirements.</p>
     </article>
+
+    <article class="policy">
+        <div class="meta">Issue &amp; Policy: Energy Production / Cut Red-Tape</div>
+        <h3>Allow Solar Power Plants</h3>
+        <p><strong>Repeal § 225-132D(1):</strong> Allow properties to have solar installations in which the principle use is the production of electricity via solar.</p>
+        <p class="effect"><strong>Effects:</strong> Unbans solar power plants.</p>
+    </article>
+
+    <article class="policy">
+        <div class="meta">Issue &amp; Policy: Energy Production / Cut Red-Tape</div>
+        <h3>Allow Ground Solar on Small Lots</h3>
+        <p><strong>Repeal § 225-132D(5)(b):</strong> Allow ground solar on &lt;1 acre properties.</p>
+        <p class="effect"><strong>Effects:</strong> The feasibility of a solar installation should be decided by the property owner. This opens up ground solar opportunities for residents with smaller plots.</p>
+    </article>
+
+    <article class="policy">
+        <div class="meta">Issue &amp; Policy: Energy Production / Cut Red-Tape</div>
+        <h3>Shrink Solar Panel Setbacks to 10 Feet</h3>
+        <p><strong>Modify § 225-132D(6)(a):</strong> Reduce solar panel setback rule to the same as sheds, 10 feet from the property boundary.</p>
+        <p class="effect"><strong>Effects:</strong> Enables solar installations in areas with less land to work with. No need for excessively large setbacks.</p>
+    </article>
+</div>
+</div>
 </div>
 {% endblock %}

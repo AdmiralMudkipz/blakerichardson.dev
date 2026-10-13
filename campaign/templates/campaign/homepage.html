@@ -2,307 +2,456 @@
 
 {% block title %}Blake Richardson for Township Committee{% endblock %}
 
-{% block meta_description %}I'm Blake Richardson, running for Township Committee to use state grants, unleash solar power, and make our government transparent again.{% endblock %}
+{% block meta_description %}Government should be simple, fair, & fast. I'm Blake Richardson, running for Township Committee to use state grants, unleash solar power, and make our government transparent again.{% endblock %}
 
 {% block extra_css %}
 <style>
-    .hero {
-        max-width: 1180px;
-        margin: 0 auto;
-        padding: 30px 18px 12px;
-        display: grid;
-        grid-template-columns: 0.75fr 1.25fr;
-        gap: 32px;
-        align-items: center;
+    /* Hero */
+    .hero { padding: 22px 0 40px; }
+    .hero-grid { display: grid; gap: 22px; }
+    .hero-visual { order: -1; }
+    .hero h1 {
+        font-size: clamp(2.5rem, 13vw, 5.4rem);
+        line-height: 0.98;
+        letter-spacing: 0.01em;
+        margin-bottom: 16px;
     }
-    .hero-photo {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        gap: 8px;
+    .hero h1 span { display: block; }
+    .hero-tagline {
+        font-weight: 500;
+        color: var(--on-blue-soft);
+        max-width: 520px;
+        margin-bottom: 24px;
     }
-    .candidate-photo {
-        width: 200px;
-        height: 200px;
-        border-radius: 22px;
+    .hero-cta { display: grid; gap: 12px; max-width: 420px; }
+    .hero-visual { max-width: 560px; }
+    .hero-photo-frame {
+        width: clamp(150px, 46vw, 250px);
+        aspect-ratio: 1 / 1;
+        border: 4px solid #fff;
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 12px 26px rgba(0, 20, 60, 0.35);
+        background: #fff;
+    }
+    .hero-photo-frame img {
+        display: block;
+        width: 100%;
+        height: 100%;
         object-fit: cover;
-        box-shadow: 0 16px 30px rgba(26, 47, 69, 0.18);
-        margin-bottom: 4px;
-    }
-    .eyebrow {
-        display: inline-block;
-        font-size: 0.76rem;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--accent);
-    }
-    .candidate-name {
-        font-family: "Merriweather", Georgia, serif;
-        font-size: clamp(1.4rem, 3vw, 1.8rem);
-        font-weight: 800;
-        line-height: 1.2;
-        color: var(--ink);
-    }
-    .candidate-tagline {
-        color: var(--ink-soft);
-        line-height: 1.6;
-        max-width: 320px;
-    }
-    .cta-row {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-top: 6px;
-    }
-    .cta-row a {
-        display: inline-block;
-        padding: 10px 14px;
-        border-radius: 999px;
-        font-size: 0.9rem;
-        font-weight: 700;
-        text-decoration: none;
-    }
-    .cta-primary {
-        background: var(--accent);
-        color: #fff;
-        transition: background-color 0.2s ease;
-    }
-    .cta-primary:hover {
-        background: #a4462b;
-    }
-    .cta-secondary {
-        border: 1px solid var(--line);
-        color: var(--ink);
-        background: var(--card);
-        transition: background-color 0.2s ease, border-color 0.2s ease;
-    }
-    .cta-secondary:hover {
-        background: var(--chip-hover);
-        border-color: var(--accent);
     }
 
-    .hero-points h1 {
-        font-family: "Merriweather", Georgia, serif;
-        font-weight: 700;
-        font-size: clamp(1.35rem, 2.6vw, 1.8rem);
-        line-height: 1.3;
-        margin-bottom: 14px;
-        color: var(--ink);
+    /* Why I'm running */
+    .why-grid { display: grid; gap: 16px; }
+    .why-card { border-top: 6px solid var(--blue); }
+    .why-card h3 {
+        font-size: clamp(1.45rem, 6vw, 1.8rem);
+        margin-bottom: 10px;
     }
-    .pitch-points {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-    .pitch-point {
-        background: var(--card);
-        border: 1px solid var(--line);
-        border-left: 4px solid var(--accent);
-        border-radius: 12px;
-        padding: 12px 16px;
-        box-shadow: 0 8px 18px rgba(26, 47, 69, 0.07);
-    }
-    .pitch-point p {
-        margin: 0;
-        color: var(--ink-soft);
-        line-height: 1.5;
-        font-size: 0.94rem;
-    }
-    .pitch-point p b {
-        color: var(--ink);
-        font-weight: 700;
-    }
+    .why-card p { color: var(--ink-soft); }
 
-    .section {
-        max-width: 1040px;
-        margin: 0 auto;
-        padding: 24px 18px 10px;
-    }
-    .section h2 {
-        font-family: "Merriweather", Georgia, serif;
-        font-size: clamp(1.35rem, 3vw, 2rem);
-        margin-bottom: 14px;
-    }
-    .section-intro {
-        color: var(--ink-soft);
-        max-width: 780px;
-        margin-bottom: 18px;
-        line-height: 1.6;
-    }
-
-    .issue-grid {
+    /* Vision */
+    .vision-grid { display: grid; gap: 24px; }
+    .vision-list {
+        list-style: none;
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 14px;
-        margin-bottom: 12px;
+        gap: 16px;
     }
+    .vision-list li {
+        position: relative;
+        padding-left: 36px;
+        font-weight: 500;
+        font-size: 1.05rem;
+    }
+    .vision-list li::before,
+    .grant-list li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.3em;
+        width: 18px;
+        height: 22px;
+        background: var(--bolt);
+        clip-path: polygon(50% 0, 100% 45%, 70% 45%, 70% 100%, 30% 100%, 30% 45%, 0 45%);
+    }
+    .vision-closer {
+        font-family: var(--font-head);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        line-height: 1.05;
+        font-size: clamp(2.1rem, 9.5vw, 3.6rem);
+        color: var(--bolt);
+        margin-top: 26px;
+    }
+
+    /* What we can do together */
+    .do-grid { list-style: none; display: grid; gap: 16px; }
+    .do-card { display: flex; gap: 16px; align-items: flex-start; }
+    .do-num {
+        flex: 0 0 auto;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: var(--blue);
+        color: #fff;
+        font-family: var(--font-head);
+        font-weight: 700;
+        font-size: 1.4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .do-body { min-width: 0; }
+    .do-body h3 { font-size: 1.5rem; margin-bottom: 6px; }
+    .do-body p { color: var(--ink-soft); }
+
+    /* Grants */
+    .grants { background: var(--paper-2); }
+    .grant-grid { display: grid; gap: 16px; margin-bottom: 20px; }
+    .grant-card h3 { font-size: 1.6rem; margin-bottom: 12px; }
+    .grant-list { list-style: none; display: grid; gap: 12px; }
+    .grant-list li {
+        position: relative;
+        padding-left: 30px;
+        font-weight: 500;
+        color: var(--ink-soft);
+    }
+    .grant-list li::before {
+        width: 14px;
+        height: 18px;
+        top: 0.3em;
+        background: var(--blue);
+    }
+    :root[data-theme="dark"] .grant-list li::before { background: var(--bolt); }
+    @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) .grant-list li::before { background: var(--bolt); }
+    }
+
+    /* Issue cards */
+    .issue-grid { display: grid; gap: 16px; }
     .issue-card {
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        background: var(--card);
-        padding: 18px 16px;
+        display: block;
         text-decoration: none;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .issue-card:hover {
-        transform: translateY(-3px);
-        background: var(--panel-flat);
-        border-color: var(--accent);
-        box-shadow: 0 8px 18px rgba(26, 47, 69, 0.08);
-    }
-    .issue-card h3 {
-        font-size: 1.03rem;
-        margin-bottom: 8px;
-        color: var(--ink);
-    }
-    .issue-card p {
-        color: var(--ink-soft);
-        line-height: 1.52;
-        font-size: 0.92rem;
-        margin-bottom: 10px;
-    }
-    .issue-card span {
-        font-size: 0.86rem;
-        font-weight: 700;
-        color: var(--accent);
+    .issue-card:hover { transform: translateY(-3px); }
+    .issue-card h3 { font-size: 1.8rem; margin-bottom: 8px; }
+    .issue-card p { color: var(--ink-soft); margin-bottom: 10px; }
+    .issue-card .go { color: var(--accent-text); font-weight: 700; font-size: 0.92rem; }
+    .pamphlet-dl { margin-top: 28px; display: grid; gap: 12px; max-width: 420px; }
+    .pamphlet-dl p { font-weight: 600; color: var(--on-blue); }
+    @media (min-width: 700px) {
+        .pamphlet-dl { max-width: none; grid-template-columns: 1fr auto; align-items: center; gap: 24px; }
     }
 
-    .contact-methods {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-        padding-bottom: 30px;
-    }
-    .contact-methods .email-link {
-        color: var(--ink-soft);
-        font-weight: 600;
-        text-decoration: none;
-    }
-    .contact-methods .email-link:hover {
-        color: var(--accent);
-        text-decoration: underline;
-    }
-    .contact-methods .contact-instagram {
-        display: flex;
+    /* About */
+    .about-grid {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-areas: "title photo" "text text";
         align-items: center;
-        justify-content: center;
-        width: 44px;
-        height: 44px;
-        border: 1px solid var(--line);
-        border-radius: 12px;
-        color: var(--ink-soft);
-        background: transparent;
-        transition: background-color 0.2s ease, border-color 0.2s ease;
+        gap: 14px 18px;
     }
-    .contact-methods .contact-instagram:hover {
-        background: var(--chip-hover);
-        border-color: var(--accent);
+    .about-title { grid-area: title; margin-bottom: 0; }
+    .about-photo {
+        grid-area: photo;
+        width: clamp(96px, 28vw, 150px);
+        border-bottom: 5px solid var(--road);
+        padding-bottom: 8px;
     }
-    .contact-methods .instagram-icon {
-        width: 22px;
-        height: 22px;
+    .about-text { grid-area: text; }
+    .about-photo img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border-radius: 4px;
     }
+    .about-text p { color: var(--ink-soft); margin-bottom: 14px; max-width: 640px; }
+    .about-text .btn { margin-top: 8px; }
 
-    @media (min-width: 1200px) {
-        .pitch-points {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 10px 14px;
-        }
+    /* Contact */
+    .contact-actions { display: grid; gap: 12px; max-width: 420px; margin-top: 18px; }
+    .contact-email {
+        display: inline-block;
+        font-family: var(--font-head);
+        font-weight: 600;
+        font-size: clamp(1.25rem, 6vw, 2rem);
+        letter-spacing: 0.03em;
+        color: #fff;
+        overflow-wrap: anywhere;
     }
-    @media (max-width: 900px) {
-        .hero {
-            grid-template-columns: 1fr;
-            padding: 30px 14px 8px;
-            gap: 26px;
-        }
-        .section {
-            padding: 20px 12px 8px;
-        }
-        .issue-grid {
-            grid-template-columns: 1fr;
-        }
+    .contact-email:hover { color: var(--bolt); }
+
+    @media (min-width: 700px) {
+        .why-grid { grid-template-columns: repeat(2, 1fr); }
+        .do-grid { grid-template-columns: repeat(2, 1fr); }
+        .hero-cta { grid-template-columns: repeat(3, auto); max-width: none; justify-content: start; }
+        .contact-actions { grid-template-columns: repeat(2, auto); max-width: none; justify-content: start; }
     }
-    @media (max-width: 480px) {
-        .candidate-photo {
-            width: 140px;
-            height: 140px;
+    @media (min-width: 900px) {
+        .hero { padding: 56px 0 64px; }
+        .hero-grid { grid-template-columns: 1.1fr 0.9fr; align-items: center; gap: 48px; }
+        .hero-visual { order: 0; justify-self: center; width: 100%; max-width: 400px; }
+        .hero-photo-frame { width: 100%; }
+        .vision-grid { grid-template-columns: 0.8fr 1.2fr; gap: 48px; align-items: start; }
+        .vision-closer { margin-top: 0; }
+        .grant-grid { grid-template-columns: repeat(3, 1fr); }
+        .issue-grid { grid-template-columns: repeat(3, 1fr); }
+        .about-grid {
+            grid-template-columns: 0.75fr 1.25fr;
+            grid-template-areas: "photo title" "photo text";
+            grid-template-rows: auto 1fr;
+            gap: 20px 56px;
+            align-items: start;
         }
+        .about-photo { width: 100%; max-width: 340px; padding-bottom: 14px; }
+        .about-title { margin-bottom: 0; }
+        .why-card, .do-card { padding: 24px 24px; }
+    }
+    @media (min-width: 1000px) {
+        .do-grid { grid-template-columns: repeat(3, 1fr); }
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<section class="hero">
-    <div class="hero-photo">
-        <img class="candidate-photo" src="/media/profilepic.jpeg" alt="Blake Richardson, candidate for Harrison Township Committee" />
-        <span class="eyebrow">Township Committee Candidate</span>
-        <p class="candidate-name">Blake Richardson</p>
-        <p class="candidate-tagline">I'm running to use the state grants, unleash solar power, and make our government transparent again.</p>
-        <div class="cta-row">
-            <a class="cta-primary" href="{% url 'campaign:issues' %}">Read The Policies</a>
-            <a class="cta-secondary" href="{% url 'campaign:about' %}">About Me</a>
-            <a class="cta-secondary" href="#contact-email">Contact</a>
+<section class="hero on-blue" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+        <div class="hero-copy">
+            <h1 id="hero-title"><span>Government</span> <span>should be</span> <span>simple, fair,</span> <span>&amp; fast.</span></h1>
+            <p class="hero-tagline">I'm running to use the state grants, unleash solar power, and make our government transparent again.</p>
+            <div class="hero-cta">
+                <a class="btn btn-bolt" href="{% url 'campaign:issues' %}">Read The Policies</a>
+                <a class="btn btn-outline" href="{% url 'campaign:about' %}">About Me</a>
+                <a class="btn btn-outline" href="#contact-email">Contact</a>
+            </div>
         </div>
-    </div>
-    <div class="hero-points">
-        <h1>Use the Grants, Unleash Solar Power, Transparent and Responsive Government.</h1>
-        <div class="pitch-points">
-            <div class="pitch-point">
-                <p><b>Our township is leaving millions in grants on the table.</b> These grants can be used for paths, crosswalks, and safety improvements around schools and playgrounds. I will push to take advantage of all these grants to improve our town. Using state money you've already paid for, instead of costing us on the local level.</p>
-            </div>
-            <div class="pitch-point">
-                <p><b>We must make it easier for everyone to build solar.</b> Our township has backwards, decade old solar laws that make building solar a time consuming headache. Solar is now the most affordable source of electricity, in a world where AI is spiking our utility costs, we deserve to have Power over our own Power. </p>
-            </div>
-            <div class="pitch-point">
-                <p><b>Our township desperately needs transparency.</b> Our meetings are no longer viewable online which prevents many working people from staying informed. I will ensure that township meetings are available to the public online and archived, so busy working people can have a voice in our future as well.</p>
-            </div>
-            <div class="pitch-point">
-                <p><b>If we tried to build Main Street today, it would be illegal.</b> New development lately has been completely different from what made our Harrison great. I want our town to grow with the same charm and character that founded it, and we can start by relegalizing traditional forms of development that made our town what it is today.</p>
+        <div class="hero-visual">
+            <div class="hero-photo-frame">
+                <img src="/media/profilepic.jpeg" width="746" height="746" fetchpriority="high" alt="Blake Richardson, candidate for Harrison Township Committee" />
             </div>
         </div>
     </div>
 </section>
+<div class="road-divider" aria-hidden="true"></div>
 
-<section class="section" aria-labelledby="priorities-title">
-    <h2 id="priorities-title">What I Want To Do</h2>
-    <p class="section-intro">My policies focus on these three issues. Click into each issue below for the details.</p>
-
-    <div class="issue-grid">
-        <a class="issue-card" href="{% url 'campaign:cut_red_tape' %}">
-            <h3>Cut Red Tape</h3>
-            <p>Fees, zoning, and permitting in our town are overreaching &amp; outdated. We must cut red tape to enable growth &amp; progress.</p>
-            <span>See How I'll Cut Red Tape</span>
-        </a>
-        <a class="issue-card" href="{% url 'campaign:cheap_energy' %}">
-            <h3>Affordable Energy</h3>
-            <p>Solar is the cheapest power there is, and our rules make it needlessly hard to build. I want to tear up the red tape standing in the way.</p>
-            <span>See How I'll Lower Energy Costs</span>
-        </a>
-        <a class="issue-card" href="{% url 'campaign:safe_streets' %}">
-            <h3>Safe Streets</h3>
-            <p>There's grant money sitting untouched for safer sidewalks, crosswalks, and routes to school. I want to actually go get it.</p>
-            <span>See How I'll Make Streets Safer</span>
-        </a>
+<section class="section" aria-labelledby="why-title">
+    <div class="wrap">
+        <h2 class="section-title" id="why-title">Why I'm Running</h2>
+        <div class="why-grid">
+            <article class="card why-card">
+                <h3>Our township desperately needs transparency.</h3>
+                <p>Our meetings are no longer viewable online which prevents many working people from staying informed. I will ensure that township meetings are available to the public online and archived, so busy working people can have a voice in our future as well.</p>
+            </article>
+            <article class="card why-card">
+                <h3>Our township is leaving millions in grants on the table.</h3>
+                <p>These grants can be used for paths, crosswalks, and safety improvements around schools and playgrounds. I will push to take advantage of all these grants to improve our town. Using state money you've already paid for, instead of costing us on the local level.</p>
+            </article>
+            <article class="card why-card">
+                <h3>We must make it easier for everyone to build solar.</h3>
+                <p>Our township has backwards, decade old solar laws that make building solar a time consuming headache. Solar is now the most affordable source of electricity, in a world where AI is spiking our utility costs, we deserve to have Power over our own Power.</p>
+            </article>
+            <article class="card why-card">
+                <h3>If we tried to build Main Street today, it would be illegal.</h3>
+                <p>New development lately has been completely different from what made our Harrison great. I want our town to grow with the same charm and character that founded it, and we can start by relegalizing traditional forms of development that made our town what it is today.</p>
+            </article>
+        </div>
     </div>
 </section>
 
-<section class="section" aria-labelledby="contact-title" id="contact-email">
-    <h2 id="contact-title">Contact</h2>
-    <div class="contact-methods">
-        <a class="email-link" href="mailto:blake@blakerichardson.dev">blake@blakerichardson.dev</a>
-        <a class="contact-instagram" href="https://www.instagram.com/blakerichardson2026" target="_blank" rel="noopener noreferrer" aria-label="Follow Blake Richardson on Instagram (opens in a new tab)">
-            <svg class="instagram-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="2" />
-                <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" />
-                <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
-            </svg>
-        </a>
+<section class="section on-blue" aria-labelledby="vision-title">
+    <div class="wrap vision-grid">
+        <div>
+            <p class="kicker">Where we're headed</p>
+            <h2 class="section-title" id="vision-title">My Vision</h2>
+        </div>
+        <div>
+            <ul class="vision-list">
+                <li>A government that uses its power to help people, not constrain them.</li>
+                <li>A town constantly improving through grants.</li>
+                <li>Smart land use, so our new development adds more to the tax base than it costs.</li>
+                <li>Growing the town with the same Main Street style and charm that founded it.</li>
+                <li>A connected community where children can get to school, parks, and recreation safely.</li>
+            </ul>
+            <p class="vision-closer">All for a Stronger Harrison.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section" aria-labelledby="do-title">
+    <div class="wrap">
+        <h2 class="section-title" id="do-title">What We Can Do Together</h2>
+        <ol class="do-grid">
+            <li class="card do-card">
+                <span class="do-num" aria-hidden="true">1</span>
+                <div class="do-body">
+                    <h3>Pedestrian safety upgrades</h3>
+                    <p>near schools, playgrounds, and high foot traffic areas.</p>
+                    <a class="text-link" href="{% url 'campaign:safe_streets' %}">See the details &rarr;</a>
+                </div>
+            </li>
+            <li class="card do-card">
+                <span class="do-num" aria-hidden="true">2</span>
+                <div class="do-body">
+                    <h3>Transparency in government</h3>
+                    <p>with Township Committee meetings available online publicly.</p>
+                    <a class="text-link" href="{% url 'campaign:cut_red_tape' %}">See the details &rarr;</a>
+                </div>
+            </li>
+            <li class="card do-card">
+                <span class="do-num" aria-hidden="true">3</span>
+                <div class="do-body">
+                    <h3>Active communication</h3>
+                    <p>between the Township Committee and the people on policy goals and progress.</p>
+                </div>
+            </li>
+            <li class="card do-card">
+                <span class="do-num" aria-hidden="true">4</span>
+                <div class="do-body">
+                    <h3>Update solar laws</h3>
+                    <p>to allow more people to build solar. E.g. legalize both rooftop and ground solar, or building street facing solar without zoning variances.</p>
+                    <a class="text-link" href="{% url 'campaign:cheap_energy' %}">See the details &rarr;</a>
+                </div>
+            </li>
+            <li class="card do-card">
+                <span class="do-num" aria-hidden="true">5</span>
+                <div class="do-body">
+                    <h3>Streamline permitting</h3>
+                    <p>so it's available online, with quick approvals, and denials that include exactly what must change for approval.</p>
+                    <a class="text-link" href="{% url 'campaign:cut_red_tape' %}">See the details &rarr;</a>
+                </div>
+            </li>
+            <li class="card do-card">
+                <span class="do-num" aria-hidden="true">6</span>
+                <div class="do-body">
+                    <h3>Bike paths</h3>
+                    <p>near schools, bus stops, and businesses, for transportation and recreation.</p>
+                    <a class="text-link" href="{% url 'campaign:safe_streets' %}">See the details &rarr;</a>
+                </div>
+            </li>
+            <li class="card do-card">
+                <span class="do-num" aria-hidden="true">7</span>
+                <div class="do-body">
+                    <h3>Traditional, smart land use</h3>
+                    <p>Every extra foot of utilities costs the tax base long term. Main Street was built with this in mind, our new development should be built in this same style, to save all of our tax money, and for a Stronger Harrison.</p>
+                    <a class="text-link" href="{% url 'campaign:cut_red_tape' %}">See the details &rarr;</a>
+                </div>
+            </li>
+            <li class="card do-card">
+                <span class="do-num" aria-hidden="true">8</span>
+                <div class="do-body">
+                    <h3>Legalize In-Law Suites</h3>
+                    <p>so those with extra land can build living spaces for family who need it.</p>
+                    <a class="text-link" href="{% url 'campaign:cut_red_tape' %}">See the details &rarr;</a>
+                </div>
+            </li>
+            <li class="card do-card">
+                <span class="do-num" aria-hidden="true">9</span>
+                <div class="do-body">
+                    <h3>Reform Costly Parking Mandates</h3>
+                    <p>so home and business owners can decide how much parking they build.</p>
+                    <a class="text-link" href="{% url 'campaign:cut_red_tape' %}">See the details &rarr;</a>
+                </div>
+            </li>
+        </ol>
+    </div>
+</section>
+<div class="road-divider" aria-hidden="true"></div>
+
+<section class="section grants" aria-labelledby="grants-title">
+    <div class="wrap">
+        <h2 class="section-title" id="grants-title">Unused Grants</h2>
+        <p class="section-intro">State, federal, and regional programs our township isn't using today.</p>
+        <div class="grant-grid">
+            <div class="card grant-card">
+                <h3>Multi-Use Paths</h3>
+                <ul class="grant-list">
+                    <li>NJDOT Bikeway Grant Program</li>
+                    <li>DVRPC Regional Trails Program</li>
+                    <li>NJDOT Transportation Alternatives Set-Aside</li>
+                </ul>
+            </div>
+            <div class="card grant-card">
+                <h3>Safety Upgrades</h3>
+                <ul class="grant-list">
+                    <li>Federal Safe Routes to School Infrastructure Grant</li>
+                    <li>NJDOT Safe Streets to Transit</li>
+                    <li>FHA Safe Streets and Roads for All</li>
+                    <li>NJ Transit Bus Stop &amp; Shelter Program</li>
+                </ul>
+            </div>
+            <div class="card grant-card">
+                <h3>Planning</h3>
+                <ul class="grant-list">
+                    <li>DVRPC Transportation &amp; Community Development Initiative</li>
+                    <li>New Jersey Complete Streets Technical Assistance</li>
+                    <li>Cross County Connection Free Infrastructure Planning</li>
+                </ul>
+            </div>
+        </div>
+        <a class="text-link" href="{% url 'campaign:safe_streets' %}">See my Safe Streets plan &rarr;</a>
+    </div>
+</section>
+
+<section class="section on-blue" aria-labelledby="priorities-title">
+    <div class="wrap">
+        <h2 class="section-title" id="priorities-title">What I Want To Do</h2>
+        <p class="section-intro">My policies focus on these three issues. Click into each issue below for the details.</p>
+        <div class="issue-grid">
+            <a class="card issue-card" href="{% url 'campaign:safe_streets' %}">
+                <h3>Safe Streets</h3>
+                <p>There's grant money sitting untouched for safer sidewalks, crosswalks, and routes to school. I want to actually go get it.</p>
+                <span class="go">See How I'll Make Streets Safer &rarr;</span>
+            </a>
+            <a class="card issue-card" href="{% url 'campaign:cheap_energy' %}">
+                <h3>Affordable Energy</h3>
+                <p>Solar is the cheapest power there is, and our rules make it needlessly hard to build. I want to tear up the red tape standing in the way.</p>
+                <span class="go">See How I'll Lower Energy Costs &rarr;</span>
+            </a>
+            <a class="card issue-card" href="{% url 'campaign:cut_red_tape' %}">
+                <h3>Cut Red Tape</h3>
+                <p>Fees, zoning, and permitting in our town are overreaching &amp; outdated. We must cut red tape to enable growth &amp; progress.</p>
+            </a>
+        </div>
+        <div class="pamphlet-dl">
+            <p>Want it on paper? Download my campaign pamphlet to read, print, or share.</p>
+            <a class="btn btn-bolt" href="/media/TrifoldPamphlet.pdf" download="Blake-Richardson-Trifold-Pamphlet.pdf">Download The Pamphlet (PDF)</a>
+        </div>
+    </div>
+</section>
+
+<section class="section" aria-labelledby="about-title">
+    <div class="wrap about-grid">
+        <h2 class="section-title about-title" id="about-title">About Me</h2>
+        <div class="about-photo">
+            <img src="/media/profilepic.jpeg" width="746" height="746" loading="lazy" alt="Portrait of Blake Richardson" />
+        </div>
+        <div class="about-text">
+            <p>A Mullica Hill local, I grew up and lived here for all my life. Growing up, I was a member of the 4-H beekeeping club, was involved with the county fair in town, and attended Clearview.</p>
+            <p>I graduated from Rowan University with a Bachelor's in Computer Science and a German Minor, now working as a Test Engineer building and testing air traffic control systems. In the past several years, I've developed an interest in local policy, planning, and road safety.</p>
+            <a class="btn btn-solid" href="{% url 'campaign:about' %}">Read My Story</a>
+        </div>
+    </div>
+</section>
+
+<section class="section on-blue" aria-labelledby="contact-title" id="contact-email">
+    <div class="wrap">
+        <h2 class="section-title" id="contact-title">Contact</h2>
+        <p class="section-intro">Have a question, concern, or suggestion? Feel free to reach out!</p>
+        <a class="contact-email" href="mailto:blake@blakerichardson.dev">blake@blakerichardson.dev</a>
+        <div class="contact-actions">
+            <a class="btn btn-bolt" href="mailto:blake@blakerichardson.dev">Email Blake</a>
+            <a class="btn btn-outline" href="https://www.instagram.com/blakerichardson2026" target="_blank" rel="noopener noreferrer" aria-label="Follow Blake Richardson on Instagram (opens in a new tab)">
+                <svg class="instagram-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="margin-right: 10px;">
+                    <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="2" />
+                    <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" />
+                    <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
+                </svg>
+                Instagram
+            </a>
+        </div>
     </div>
 </section>
 {% endblock %}

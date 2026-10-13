@@ -6,77 +6,38 @@
 
 {% block extra_css %}
 <style>
-    .faq-wrap {
-        max-width: 1040px;
-        margin: 0 auto;
-        padding: 38px 18px 54px;
-    }
-    .heading {
-        background: var(--card);
-        border: 1px solid var(--line);
-        border-radius: 16px;
-        padding: 24px 22px;
-        margin-bottom: 16px;
-    }
-    .kicker {
-        font-size: 0.74rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.09em;
-        color: var(--accent);
-        margin-bottom: 10px;
-    }
-    .heading h1 {
-        font-family: "Merriweather", Georgia, serif;
-        font-size: clamp(1.65rem, 4.2vw, 2.5rem);
-        margin-bottom: 10px;
-        color: var(--ink);
-    }
-    .heading p {
-        color: var(--ink-soft);
-        line-height: 1.62;
-    }
-
-    .faq-list {
-        display: grid;
-        gap: 12px;
-    }
-    .faq-item {
-        background: var(--card);
-        border: 1px solid var(--line);
-        border-radius: 12px;
-        padding: 16px;
-    }
-    .faq-item h2 {
-        font-size: 1rem;
-        color: var(--ink);
-        margin-bottom: 7px;
-    }
-    .faq-item p {
-        color: var(--ink-soft);
-        font-size: 0.93rem;
-        line-height: 1.6;
+    .faq-list { display: grid; gap: 16px; max-width: 820px; }
+    .faq-item { border-left: 6px solid var(--blue); }
+    .faq-item h2 { font-size: 1.6rem; margin-bottom: 8px; }
+    .faq-item p { color: var(--ink-soft); }
+    @media (min-width: 900px) {
+        .faq-item { padding: 24px 28px; }
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<section class="faq-wrap">
-    <header class="heading">
+<section class="page-head">
+    <div class="wrap">
         <p class="kicker">Campaign FAQ</p>
         <h1>Frequently Asked Questions</h1>
-    </header>
-
-    <div class="faq-list">
-        <article class="faq-item">
-            <h2>What are the campaign's top priorities?</h2>
-            <p>I want to make government simple, fair, and fast. That means actively going after the grants our township ignores, fixing our outdated solar rules, transparent online township committee meetings, and relegalizing the kind of Main Street development that built this town in the first place.</p>
-        </article>
-
-        <article class="faq-item">
-            <h2>Where can I read policy details?</h2>
-            <p>Head to the Issues page for the overview, then click into Cut Red Tape, Cheap Energy, or Safe Streets for the specific changes I want to make.</p>
-        </article>
     </div>
 </section>
+<div class="road-divider" aria-hidden="true"></div>
+
+<div class="page-body">
+    <div class="wrap">
+        <div class="faq-list">
+            <article class="card faq-item">
+                <h2>What are the campaign's top priorities?</h2>
+                <p>I want to make government simple, fair, and fast. That means actively going after the grants our township ignores, fixing our outdated solar rules, transparent online township committee meetings, and relegalizing the kind of Main Street development that built this town in the first place.</p>
+            </article>
+
+            <article class="card faq-item">
+                <h2>Where can I read policy details?</h2>
+                <p>Head to the Issues page for the overview, then click into Cut Red Tape, Cheap Energy, or Safe Streets for the specific changes I want to make.</p>
+            </article>
+        </div>
+    </div>
+</div>
 {% endblock %}
