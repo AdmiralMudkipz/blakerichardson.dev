@@ -6,148 +6,96 @@
 
 {% block extra_css %}
 <style>
-    .about-wrap {
-        max-width: 1040px;
-        margin: 0 auto;
-        padding: 38px 18px 54px;
+    .about-grid { display: grid; gap: 22px; }
+    .about-card p { color: var(--ink-soft); margin-bottom: 14px; max-width: 680px; }
+    .about-card p:last-child { margin-bottom: 0; }
+    .profile-card { text-align: center; }
+    .head-grid {
         display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
-        gap: 18px;
-    }
-    .panel {
-        background: var(--card);
-        border: 1px solid var(--line);
-        border-radius: 16px;
-        padding: 24px 22px;
-        box-shadow: 0 10px 22px rgba(26, 47, 69, 0.07);
-    }
-    .eyebrow {
-        font-size: 0.74rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.09em;
-        color: var(--accent);
-        margin-bottom: 10px;
-    }
-    h1 {
-        font-family: "Merriweather", Georgia, serif;
-        font-size: clamp(1.7rem, 4.2vw, 2.7rem);
-        margin-bottom: 10px;
-        color: var(--ink);
-    }
-    .lead {
-        color: var(--ink-soft);
-        line-height: 1.68;
-        margin-bottom: 16px;
-    }
-    .bio {
-        color: var(--ink-soft);
-        line-height: 1.65;
-        margin-bottom: 14px;
-    }
-    .profile-panel {
-        display: flex;
-        flex-direction: column;
+        grid-template-columns: 1fr auto;
         align-items: center;
-        text-align: center;
-        gap: 14px;
+        gap: 16px;
     }
     .portrait {
-        width: min(100%, 300px);
-        aspect-ratio: 4 / 5;
+        display: block;
+        width: clamp(104px, 30vw, 190px);
+        aspect-ratio: 1 / 1;
         object-fit: cover;
-        border-radius: 16px;
-        border: 1px solid var(--line);
-        box-shadow: 0 12px 24px rgba(26, 47, 69, 0.12);
+        border: 4px solid #fff;
+        border-radius: 4px;
+        box-shadow: 0 12px 26px rgba(0, 20, 60, 0.35);
     }
-    .profile-copy {
-        color: var(--ink-soft);
-        line-height: 1.6;
-    }
-    .next-links {
-        margin-top: 16px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        width: 100%;
-    }
+    .profile-card .profile-copy { color: var(--ink-soft); margin-bottom: 18px; }
+    .next-links { display: grid; gap: 12px; text-align: left; }
     .next-links a {
+        display: block;
         border: 1px solid var(--line);
-        border-radius: 10px;
-        padding: 12px;
+        border-left: 6px solid var(--blue);
+        border-radius: 6px;
+        padding: 12px 14px;
+        min-height: 44px;
         text-decoration: none;
         color: var(--ink-soft);
-        background: var(--panel-flat);
+        background: var(--paper-2);
+        font-size: 0.92rem;
+        overflow-wrap: anywhere;
         transition: background-color 0.2s ease, border-color 0.2s ease;
     }
-    .next-links a:hover {
-        background: var(--chip-hover);
-        border-color: var(--accent);
-    }
+    .next-links a:hover { border-left-color: var(--bolt); }
     .next-links strong {
         display: block;
-        color: var(--ink);
-        margin-bottom: 4px;
-        font-size: 0.92rem;
+        font-family: var(--font-head);
+        font-size: 1.15rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--heading);
+        margin-bottom: 2px;
     }
-    .contact-links {
-        display: flex;
-        gap: 10px;
-        width: 100%;
-    }
-    .contact-links > a:first-child {
-        flex: 1;
-    }
-    .contact-links .instagram-icon-link {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 48px;
-        color: var(--ink-soft);
-    }
-    .contact-links .instagram-icon {
-        width: 22px;
-        height: 22px;
-    }
-    @media (max-width: 900px) {
-        .about-wrap {
-            grid-template-columns: 1fr;
-        }
+    @media (min-width: 900px) {
+        .about-grid { grid-template-columns: 1.2fr 0.8fr; gap: 28px; align-items: start; }
+        .about-card { padding: 28px 30px; }
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<section class="about-wrap">
-    <article class="panel">
-        <p class="eyebrow">About Me</p>
-        <h1>Blake Richardson</h1>
-        <p class="lead">My name is Blake Richardson, I grew up in Mullica Hill and have lived here for nearly my entire life. I graduated with a Bachelor's in Computer Science and a Minor in German from Rowan University. Throughout my education I've gain an interest in economics, urban planning, and local policy. Curiosity lead me to researching our own local policies here in Harrison Township. I found a lot of very strange and outdated regulations that have real negative impacts on our community. In light of this, and the national economic environment we find ourselves in, I decided to run for office, to try to make life a bit easier for everyone.</p>
-        <p>In order to effectively serve our people, government must be simple, fair and fast.</p>
-    </article>
+<section class="page-head">
+    <div class="wrap head-grid">
+        <div>
+            <p class="kicker">About Me</p>
+            <h1>Blake Richardson</h1>
+            <p class="subtitle">Candidate for Harrison Township Committee.</p>
+        </div>
+        <img class="portrait" src="/media/profilepic.jpeg" width="746" height="746" fetchpriority="high" alt="Portrait of Blake Richardson" />
+    </div>
+</section>
+<div class="road-divider" aria-hidden="true"></div>
 
-    <aside class="panel profile-panel" aria-label="Portrait of Blake Richardson">
-        <img class="portrait" src="/media/profilepic.jpeg" alt="Blake Richardson" />
-        <p class="profile-copy">I care deeply about protecting the character of our town while making local government work better for regular people.</p>
-        <div class="next-links">
-            <a href="{% url 'campaign:homepage' %}">
-                <strong>Back To Homepage</strong>
-                Return to campaign highlights and priorities.
-            </a>
-            <div class="contact-links">
+<div class="page-body">
+    <div class="wrap about-grid">
+        <article class="card about-card">
+            <p>My name is Blake Richardson, I grew up in Mullica Hill and have lived here for nearly my entire life. I graduated with a Bachelor's in Computer Science and a Minor in German from Rowan University. Throughout my education I've gain an interest in economics, urban planning, and local policy. Curiosity lead me to researching our own local policies here in Harrison Township. I found a lot of very strange and outdated regulations that have real negative impacts on our community. In light of this, and the national economic environment we find ourselves in, I decided to run for office, to try to make life a bit easier for everyone.</p>
+            <p>Growing up, I was a member of the 4-H beekeeping club, was involved with the county fair in town, and attended Clearview. I now work as a Test Engineer building and testing air traffic control systems, and in the past several years I've developed an interest in local policy, planning, and road safety. </p>
+            <p>In order to effectively serve our people, government must be simple, fair and fast.</p>
+        </article>
+
+        <aside class="card profile-card" aria-label="More about Blake Richardson">
+            
+            <div class="next-links">
+                <a href="{% url 'campaign:homepage' %}">
+                    <strong>Back To Homepage</strong>
+                    Return to campaign highlights and priorities.
+                </a>
                 <a href="{% url 'campaign:homepage' %}#contact-email">
                     <strong>Contact By Email</strong>
                     blake@blakerichardson.dev
                 </a>
-                <a class="instagram-icon-link" href="https://www.instagram.com/blakerichardson2026" target="_blank" rel="noopener noreferrer" aria-label="Follow Blake Richardson on Instagram (opens in a new tab)">
-                    <svg class="instagram-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="2" />
-                        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" />
-                        <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
-                    </svg>
+                <a href="https://www.instagram.com/blakerichardson2026" target="_blank" rel="noopener noreferrer" aria-label="Follow Blake Richardson on Instagram (opens in a new tab)">
+                    <strong>Instagram</strong>
+                    @blakerichardson2026
                 </a>
             </div>
-        </div>
-    </aside>
-</section>
+        </aside>
+    </div>
+</div>
 {% endblock %}

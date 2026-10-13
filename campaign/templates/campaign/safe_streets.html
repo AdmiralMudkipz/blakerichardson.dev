@@ -4,119 +4,19 @@
 
 {% block meta_description %}Blake Richardson's plan to make township streets safer for families, pedestrians, and drivers alike.{% endblock %}
 
-{% block extra_css %}
-<style>
-    :root {
-        --policy-kicker: #3d6b53;
-        --policy-heading: #2f654f;
-        --policy-meta: #3a7f5d;
-        --policy-effect: #4a637b;
-        --policy-border: #3a7f5d;
-    }
-    @media (prefers-color-scheme: dark) {
-        :root {
-            --policy-kicker: #9dd8bd;
-            --policy-heading: #b0e1ca;
-            --policy-meta: #8dcfb0;
-            --policy-effect: #d7e6f4;
-            --policy-border: #66ad87;
-        }
-    }
-    :root[data-theme="light"] {
-        --policy-kicker: #3d6b53;
-        --policy-heading: #2f654f;
-        --policy-meta: #3a7f5d;
-        --policy-effect: #4a637b;
-        --policy-border: #3a7f5d;
-    }
-    :root[data-theme="dark"] {
-        --policy-kicker: #9dd8bd;
-        --policy-heading: #b0e1ca;
-        --policy-meta: #8dcfb0;
-        --policy-effect: #d7e6f4;
-        --policy-border: #66ad87;
-    }
-    .page-header {
-        max-width: 1040px;
-        margin: 0 auto;
-        padding: 38px 18px 12px;
-    }
-    .header-card {
-        background: var(--card);
-        border: 1px solid var(--line);
-        border-radius: 16px;
-        padding: 24px 22px;
-        box-shadow: 0 10px 22px rgba(26, 47, 69, 0.08);
-    }
-    .kicker {
-        font-size: 0.74rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.09em;
-        color: var(--policy-kicker);
-        margin-bottom: 10px;
-    }
-    .page-header h1 {
-        font-family: "Merriweather", Georgia, serif;
-        font-size: clamp(1.6rem, 4.2vw, 2.6rem);
-        color: var(--policy-heading);
-        margin-bottom: 8px;
-    }
-    .page-header .subtitle {
-        color: var(--ink-soft);
-        line-height: 1.6;
-        max-width: 760px;
-    }
-
-    .policies {
-        max-width: 1040px;
-        margin: 0 auto;
-        padding: 16px 18px 48px;
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-    }
-    .policy {
-        background: var(--card);
-        border: 1px solid var(--line);
-        border-left: 4px solid var(--policy-border);
-        border-radius: 10px;
-        padding: 20px 24px;
-        box-shadow: 0 8px 18px rgba(26, 47, 69, 0.05);
-    }
-    .policy h3 {
-        color: var(--policy-heading);
-        margin-bottom: 6px;
-        font-size: 1.1rem;
-    }
-    .policy .meta {
-        color: var(--policy-meta);
-        font-size: 0.84rem;
-        margin-bottom: 8px;
-        letter-spacing: 0.02em;
-        text-transform: uppercase;
-    }
-    .policy p {
-        color: var(--ink-soft);
-        line-height: 1.55;
-        font-size: 0.95rem;
-        margin: 8px 0;
-    }
-    .policy p.effect {
-        color: var(--policy-effect);
-    }
-</style>
-{% endblock %}
-
 {% block content %}
-<section class="page-header">
-    <div class="header-card">
+<section class="page-head">
+    <div class="wrap">
+        <a class="back-link" href="{% url 'campaign:issues' %}">&larr; Back to Issues</a>
         <p class="kicker">Issue Brief</p>
         <h1>Safe Streets</h1>
         <p class="subtitle">Street design and transit improvements that protect children, pedestrians, cyclists, and drivers.</p>
     </div>
 </section>
+<div class="road-divider" aria-hidden="true"></div>
 
+<div class="page-body">
+<div class="wrap">
 <div class="policies">
     <article class="policy">
         <div class="meta">Issue &amp; Policy: School Safety Infrastructure / NJDOT Safe Routes to School (SRTS)</div>
@@ -153,5 +53,7 @@
         <p>Implement priority signalling for NJTransit, SJTA, and school busses by adding transponders to the busses, upgrading traffic lights that are municipally controlled, and petitioning NJDOT for those traffic lights the town does not control.</p>
         <p class="effect"><strong>Effects:</strong> Lowers school bus fuel costs, lowers staffing costs by decreasing school bus ride times, decreases traffic by allowing large busses through to free up intersections, especially during rush hour. Allows commuters to get to their destinations faster via bus. Allows Main Street to have smoother traffic flow during the busiest times.</p>
     </article>
+</div>
+</div>
 </div>
 {% endblock %}

@@ -4,18 +4,49 @@
 
 {% block meta_description %}Site map for the Blake Richardson for Township Committee campaign, with links to every page on the site.{% endblock %}
 
+{% block extra_css %}
+<style>
+    .sitemap-list { list-style: none; display: grid; gap: 10px; max-width: 560px; }
+    .sitemap-list a {
+        display: flex;
+        align-items: center;
+        min-height: 48px;
+        padding: 0 16px;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-left: 6px solid var(--blue);
+        border-radius: 6px;
+        color: var(--heading);
+        font-weight: 700;
+        text-decoration: none;
+        transition: border-color 0.2s ease;
+    }
+    .sitemap-list a:hover { border-left-color: var(--bolt); text-decoration: underline; }
+    .sitemap-list .sub a { margin-left: 22px; font-weight: 600; }
+</style>
+{% endblock %}
+
 {% block content %}
-<div class="wrap">
-    <h1>Site Map</h1>
-    <ul>
-        <li><a href="{% url 'campaign:homepage' %}">Home</a></li>
-        <li><a href="{% url 'campaign:about' %}">About Blake</a></li>
-        <li><a href="{% url 'campaign:issues' %}">Issues Overview</a></li>
-        <li><a href="{% url 'campaign:cut_red_tape' %}">Cut Red Tape</a></li>
-        <li><a href="{% url 'campaign:cheap_energy' %}">Cheap Energy</a></li>
-        <li><a href="{% url 'campaign:safe_streets' %}">Safe Streets</a></li>
-        <li><a href="{% url 'campaign:faq' %}">FAQ</a></li>
-        <li><a href="{% url 'campaign:homepage' %}#contact-email">Contact</a></li>
-    </ul>
+<section class="page-head">
+    <div class="wrap">
+        <p class="kicker">Every Page</p>
+        <h1>Site Map</h1>
+    </div>
+</section>
+<div class="road-divider" aria-hidden="true"></div>
+
+<div class="page-body">
+    <div class="wrap">
+        <ul class="sitemap-list">
+            <li><a href="{% url 'campaign:homepage' %}">Home</a></li>
+            <li><a href="{% url 'campaign:about' %}">About Blake</a></li>
+            <li><a href="{% url 'campaign:issues' %}">Issues Overview</a></li>
+            <li class="sub"><a href="{% url 'campaign:cut_red_tape' %}">Cut Red Tape</a></li>
+            <li class="sub"><a href="{% url 'campaign:cheap_energy' %}">Cheap Energy</a></li>
+            <li class="sub"><a href="{% url 'campaign:safe_streets' %}">Safe Streets</a></li>
+            <li><a href="{% url 'campaign:faq' %}">FAQ</a></li>
+            <li><a href="{% url 'campaign:homepage' %}#contact-email">Contact</a></li>
+        </ul>
+    </div>
 </div>
 {% endblock %}

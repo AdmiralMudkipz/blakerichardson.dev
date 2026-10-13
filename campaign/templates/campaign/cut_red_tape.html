@@ -4,126 +4,19 @@
 
 {% block meta_description %}Blake Richardson's plan to cut red tape and streamline local government for residents and small businesses.{% endblock %}
 
-{% block extra_css %}
-<style>
-    :root {
-        --policy-kicker: #8f4330;
-        --policy-heading: #7e3525;
-        --policy-meta: #a6462c;
-        --policy-effect: #4a637b;
-        --policy-border: #b94f31;
-    }
-    @media (prefers-color-scheme: dark) {
-        :root {
-            --policy-kicker: #f1a48e;
-            --policy-heading: #f2b6a5;
-            --policy-meta: #e69e89;
-            --policy-effect: #d7e6f4;
-            --policy-border: #d87f63;
-        }
-    }
-    :root[data-theme="light"] {
-        --policy-kicker: #8f4330;
-        --policy-heading: #7e3525;
-        --policy-meta: #a6462c;
-        --policy-effect: #4a637b;
-        --policy-border: #b94f31;
-    }
-    :root[data-theme="dark"] {
-        --policy-kicker: #f1a48e;
-        --policy-heading: #f2b6a5;
-        --policy-meta: #e69e89;
-        --policy-effect: #d7e6f4;
-        --policy-border: #d87f63;
-    }
-    .page-header {
-        max-width: 1040px;
-        margin: 0 auto;
-        padding: 38px 18px 12px;
-    }
-    .header-card {
-        background: var(--card);
-        border: 1px solid var(--line);
-        border-radius: 16px;
-        padding: 24px 22px;
-        box-shadow: 0 10px 22px rgba(26, 47, 69, 0.08);
-    }
-    .kicker {
-        font-size: 0.74rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.09em;
-        color: var(--policy-kicker);
-        margin-bottom: 10px;
-    }
-    .page-header h1 {
-        font-family: "Merriweather", Georgia, serif;
-        font-size: clamp(1.6rem, 4.2vw, 2.6rem);
-        color: var(--policy-heading);
-        margin-bottom: 8px;
-    }
-    .page-header .subtitle {
-        color: var(--ink-soft);
-        line-height: 1.6;
-        max-width: 760px;
-    }
-
-    .policies {
-        max-width: 1040px;
-        margin: 0 auto;
-        padding: 16px 18px 48px;
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-    }
-    .policy {
-        background: var(--card);
-        border: 1px solid var(--line);
-        border-left: 4px solid var(--policy-border);
-        border-radius: 10px;
-        padding: 20px 24px;
-        box-shadow: 0 8px 18px rgba(26, 47, 69, 0.05);
-    }
-    .policy h3 {
-        color: var(--policy-heading);
-        margin-bottom: 6px;
-        font-size: 1.1rem;
-    }
-    .policy .meta {
-        color: var(--policy-meta);
-        font-size: 0.84rem;
-        margin-bottom: 8px;
-        letter-spacing: 0.02em;
-        text-transform: uppercase;
-    }
-    .policy p {
-        color: var(--ink-soft);
-        line-height: 1.55;
-        font-size: 0.95rem;
-        margin: 8px 0;
-    }
-    .policy p.effect {
-        color: var(--policy-effect);
-    }
-    .policy ul {
-        color: var(--ink-soft);
-        line-height: 1.7;
-        font-size: 0.95rem;
-        margin: 8px 0 8px 20px;
-    }
-</style>
-</style>
-{% endblock %}
-
 {% block content %}
-<section class="page-header">
-    <div class="header-card">
+<section class="page-head">
+    <div class="wrap">
+        <a class="back-link" href="{% url 'campaign:issues' %}">&larr; Back to Issues</a>
         <p class="kicker">Issue Brief</p>
         <h1>Cut Red Tape</h1>
         <p class="subtitle">Less bureaucracy, clearer local rules, and faster outcomes for residents and small businesses.</p>
     </div>
 </section>
+<div class="road-divider" aria-hidden="true"></div>
 
+<div class="page-body">
+<div class="wrap">
 <div class="policies">
     <article class="policy">
         <div class="meta">Issue &amp; Policy: Transparency / Livestream Township Meetings</div>
@@ -140,10 +33,24 @@
     </article>
 
     <article class="policy">
+        <div class="meta">Issue &amp; Policy: Parking Reform / Reforming Costly Parking Mandates</div>
+        <h3>Reform Costly Parking Mandates</h3>
+        <p>Current parking mandates often require more spaces than are ever actually used, leaving giant ugly empty lots, and business owners' money, wasting the town's land and squandering potential tax revenue from better land use. The amount of parking should be decided by actual demand, the property owner decides how much parking is necessary for their property.</p>
+        <p class="effect"><strong>Effects:</strong> Allows more flexible land use around businesses. Creates job opportunities. Increases potential commercial tax base.</p>
+    </article>
+
+    <article class="policy">
         <div class="meta">Issue &amp; Policy: Tax-Base Development / More Main Street</div>
         <h3>More Main Street</h3>
         <p>Properties within a mile of a Main Street building can be transformed into a Main Street style mixed-use building, consumer commercial first floor, residential/office space on above floors, with minimal setbacks required, provided they follow the aesthetic of Main Street buildings.</p>
         <p class="effect"><strong>Effects:</strong> Relegalizes Main Street style development on properties bordering and surrounding Main Street.</p>
+    </article>
+
+    <article class="policy">
+        <div class="meta">Issue &amp; Policy: Housing / Legalize In-Law Suites</div>
+        <h3>Legalize In-Law Suites</h3>
+        <p>Allow accessory dwelling units on existing residential plots provided they are 1,000 ft&sup2; or 50% of the footprint of the primary residence, whichever is smaller.</p>
+        <p class="effect"><strong>Effects:</strong> Allows affordable housing construction on existing properties without requiring additional utility and road costs. Lowers cost of living. Less traffic than sprawl development.</p>
     </article>
 
     <article class="policy">
@@ -161,13 +68,6 @@
     </article>
 
     <article class="policy">
-        <div class="meta">Issue &amp; Policy: Reform costly parking mandates</div>
-        <h3>Market-Based Parking</h3>
-        <p>Current parking mandates often require more spaces than are ever actually used, leaving giant ugly empty lots, and business owners' money, wasting the town's land and squandering potential tax revenue from better land use. The amount of parking should be decided by actual demand, the property owner decides how much parking is necessary for their property.</p>
-        <p class="effect"><strong>Effects:</strong> Allows more flexible land use around businesses. Creates job opportunities. Increases potential commercial tax base.</p>
-    </article>
-
-    <article class="policy">
         <div class="meta">Issue &amp; Policy: Housing / Lot Size Reform</div>
         <h3>Lot Size Reform</h3>
         <p>Remove the minimum lot size for all sewer-connected properties. If the sewer capacity is at its limit a builder should be allowed to build given they contribute funds for the necessary capacity upgrades to the water treatment system, or build an on-site water treatment solution.</p>
@@ -180,12 +80,7 @@
         <p>Affordable housing is state-mandated anyway, our town has to build it no matter what, so this policy focuses on integrating commercial mixed-use into those developments. The goal is to keep affordable housing tax-positive for the town while minimizing traffic by placing homes and everyday services together.</p>
         <p class="effect"><strong>Effects:</strong> Meets state housing requirements, reduces traffic through mixed-use integration, and helps ensure affordable housing contributes net-positive tax revenue to support schools and roads.</p>
     </article>
-
-    <article class="policy">
-        <div class="meta">Issue &amp; Policy: Housing / Legalize In-Law Suites</div>
-        <h3>Legalize In-Law Suites</h3>
-        <p>Allow accessory dwelling units on existing residential plots provided they are 1,000 ft&sup2; or 50% of the footprint of the primary residence, whichever is smaller.</p>
-        <p class="effect"><strong>Effects:</strong> Allows affordable housing construction on existing properties without requiring additional utility and road costs. Lowers cost of living. Less traffic than sprawl development.</p>
-    </article>
+</div>
+</div>
 </div>
 {% endblock %}

@@ -6,83 +6,31 @@
 
 {% block extra_css %}
 <style>
-    .contact-wrap {
-        max-width: 1040px;
-        margin: 0 auto;
-        padding: 38px 18px 54px;
-        display: grid;
-        grid-template-columns: 1fr 0.85fr;
-        gap: 18px;
-    }
-    .panel {
-        background: var(--card);
-        border: 1px solid var(--line);
-        border-radius: 16px;
-        padding: 24px 22px;
-        box-shadow: 0 10px 22px rgba(26, 47, 69, 0.07);
-    }
-    .kicker {
-        font-size: 0.74rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.09em;
-        color: var(--accent);
-        margin-bottom: 10px;
-    }
-    h1 {
-        font-family: "Merriweather", Georgia, serif;
-        font-size: clamp(1.65rem, 4.2vw, 2.5rem);
-        margin-bottom: 10px;
-        color: var(--ink);
-    }
-    .intro {
-        color: var(--ink-soft);
-        line-height: 1.65;
-        margin-bottom: 18px;
-    }
-    .contact-list {
-        list-style: none;
-        color: var(--ink-soft);
-        line-height: 1.7;
-    }
-    .contact-list li {
-        margin-bottom: 8px;
-    }
-    .placeholder {
-        border: 1px dashed var(--line);
-        border-radius: 12px;
-        background: var(--panel-flat);
-        padding: 14px;
-        color: var(--ink-soft);
-        font-size: 0.9rem;
-        line-height: 1.55;
-    }
-    .card-title {
-        font-family: "Merriweather", Georgia, serif;
-        font-size: 1.08rem;
-        color: var(--ink);
-        margin-bottom: 8px;
-    }
-    @media (max-width: 900px) {
-        .contact-wrap {
-            grid-template-columns: 1fr;
-        }
-    }
+    .contact-card { max-width: 640px; border-left: 6px solid var(--blue); }
+    .contact-card p { color: var(--ink-soft); margin-bottom: 14px; }
+    .contact-list { list-style: none; color: var(--ink-soft); }
+    .contact-list li { overflow-wrap: anywhere; }
+    .contact-list a { color: var(--accent-text); font-weight: 700; }
 </style>
 {% endblock %}
 
 {% block content %}
-<section class="contact-wrap">
-    <article class="panel">
+<section class="page-head">
+    <div class="wrap">
         <p class="kicker">Contact</p>
         <h1>Get In Touch</h1>
-        <p class="intro">Have a question, concern, or suggestion? Feel free to reach out!</p>
-
-        <ul class="contact-list">
-            <li><strong>Email:</strong> blake@blakerichardson.dev</li>
-        </ul>
-    </article>
-
-    
+        <p class="subtitle">Have a question, concern, or suggestion? Feel free to reach out!</p>
+    </div>
 </section>
+<div class="road-divider" aria-hidden="true"></div>
+
+<div class="page-body">
+    <div class="wrap">
+        <article class="card contact-card">
+            <ul class="contact-list">
+                <li><strong>Email:</strong> <a href="mailto:blake@blakerichardson.dev">blake@blakerichardson.dev</a></li>
+            </ul>
+        </article>
+    </div>
+</div>
 {% endblock %}
