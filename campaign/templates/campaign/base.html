@@ -6,12 +6,15 @@
     <meta name="description" content="{% block meta_description %}Blake Richardson is running for Township Committee, focused on cutting red tape, lowering energy costs, and making our streets safer.{% endblock %}" />
     <meta name="theme-color" content="#0072bc" />
     <title>{% block title %}Blake Richardson for Township Committee{% endblock %}</title>
-    <link rel="canonical" href="{{ request.build_absolute_uri }}" />
+    <link rel="canonical" href="https://campaign.blakerichardson.dev{% block canonical_path %}{{ request.path }}{% endblock %}" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="author" content="Blake Richardson" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Blake Richardson for Township Committee" />
     <meta property="og:title" content="{% block og_title %}Blake Richardson for Township Committee | Vote Column A{% endblock %}" />
     <meta property="og:description" content="{% block og_description %}Simple, fair, and fast local government. Maximize our state grants, unleash solar power, and make Harrison Township transparent again. Vote Column A, Tuesday, November 3.{% endblock %}" />
-    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    <meta property="og:url" content="https://campaign.blakerichardson.dev{% block og_path %}{{ request.path }}{% endblock %}" />
     <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}/media/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -583,6 +586,46 @@
         }
     </style>
     {% block extra_css %}{% endblock %}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "@id": "https://campaign.blakerichardson.dev/#website",
+                "url": "https://campaign.blakerichardson.dev/",
+                "name": "Blake Richardson for Township Committee",
+                "description": "Official campaign website of Blake Richardson, candidate for Harrison Township Committee in Gloucester County, New Jersey.",
+                "inLanguage": "en-US",
+                "publisher": { "@id": "https://campaign.blakerichardson.dev/#campaign" }
+            },
+            {
+                "@type": "Organization",
+                "@id": "https://campaign.blakerichardson.dev/#campaign",
+                "name": "Blake Richardson for Township Committee",
+                "url": "https://campaign.blakerichardson.dev/",
+                "logo": "https://campaign.blakerichardson.dev/media/logo_square.png",
+                "email": "blake@blakerichardson.dev",
+                "sameAs": ["https://www.instagram.com/blakerichardson2026"],
+                "areaServed": "Harrison Township, Gloucester County, New Jersey"
+            },
+            {
+                "@type": "Person",
+                "@id": "https://campaign.blakerichardson.dev/#blake",
+                "name": "Blake Richardson",
+                "url": "https://campaign.blakerichardson.dev/campaign/about/",
+                "image": "https://campaign.blakerichardson.dev/media/profilepic.jpeg",
+                "description": "Candidate for Harrison Township Committee (Gloucester County, NJ) in the November 3 election, Column A. Mullica Hill native and Rowan University graduate focused on state grants, safe streets, solar rules, transparent township meetings, and traditional Main Street style development.",
+                "email": "blake@blakerichardson.dev",
+                "alumniOf": { "@type": "CollegeOrUniversity", "name": "Rowan University" },
+                "homeLocation": { "@type": "Place", "name": "Mullica Hill, New Jersey" },
+                "sameAs": ["https://www.instagram.com/blakerichardson2026"],
+                "knowsAbout": ["Harrison Township NJ local government", "NJ state grants", "Safe Routes to School", "Complete Streets", "Solar zoning", "Main Street zoning reform"]
+            }
+        ]
+    }
+    </script>
+    {% block page_structured_data %}{% endblock %}
 </head>
 <body>
     <div class="site-shell">

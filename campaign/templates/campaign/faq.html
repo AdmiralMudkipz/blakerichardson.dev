@@ -1,8 +1,44 @@
 {% extends "campaign/base.html" %}
 
-{% block title %}Campaign FAQ - Blake Richardson{% endblock %}
+{% block title %}FAQ: Harrison Township Committee Candidate Blake Richardson{% endblock %}
 
-{% block meta_description %}Straight answers to common questions about Blake Richardson's campaign for Township Committee.{% endblock %}
+{% block meta_description %}Answers about Blake Richardson, candidate for Harrison Township Committee (Gloucester County, NJ): election date, ballot column, grants, safe streets, solar, meeting transparency, and Main Street zoning.{% endblock %}
+
+{% block page_structured_data %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Who is Blake Richardson?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Blake Richardson is a candidate for Harrison Township Committee in Gloucester County, New Jersey. He grew up in Mullica Hill, attended Clearview, and graduated from Rowan University with a Bachelor's in Computer Science and a Minor in German." }
+        },
+        {
+            "@type": "Question",
+            "name": "When is the election and what column is Blake Richardson in?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The election is Tuesday, November 3. Blake Richardson is in Column A. Confirm early voting, mail-in ballot, and polling place details with the Gloucester County Clerk." }
+        },
+        {
+            "@type": "Question",
+            "name": "What are the campaign's top priorities?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Make government simple, fair, and fast: maximize state grants for safer streets, fix outdated solar rules, make township committee meetings available online live and as recordings, and relegalize the kind of Main Street style development that built the town." }
+        },
+        {
+            "@type": "Question",
+            "name": "How would Blake Richardson use grants in Harrison Township?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Use state and regional grants such as NJDOT Safe Routes to School and bike path programs to build safe connections between neighborhoods, schools, transit, and Main Street, reducing school drop-off traffic and bus strain without a new local tax burden." }
+        },
+        {
+            "@type": "Question",
+            "name": "Where can I read policy details?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The Issues page gives the overview, with detailed pages for Cut Red Tape, Cheap Energy, and Safe Streets." }
+        }
+    ]
+}
+</script>
+{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -29,8 +65,23 @@
     <div class="wrap">
         <div class="faq-list">
             <article class="card faq-item">
+                <h2>Who is Blake Richardson?</h2>
+                <p>I'm a candidate for Harrison Township Committee in Gloucester County, New Jersey. I grew up in Mullica Hill, attended Clearview, and graduated from Rowan University with a Bachelor's in Computer Science and a Minor in German.</p>
+            </article>
+
+            <article class="card faq-item">
+                <h2>When is the election and what column is Blake Richardson in?</h2>
+                <p>The election is Tuesday, November 3. I'm in Column A. Confirm early voting, mail-in ballot, and polling place details with the Gloucester County Clerk.</p>
+            </article>
+
+            <article class="card faq-item">
                 <h2>What are the campaign's top priorities?</h2>
-                <p>I want to make government simple, fair, and fast. That means Maximize our state grants, fixing our outdated solar rules, transparent online township committee meetings, and relegalizing the kind of Main Street development that built this town in the first place.</p>
+                <p>I want to make government simple, fair, and fast. That means maximizing our state grants for safer streets, fixing our outdated solar rules, making township committee meetings available online live and as recordings, and relegalizing the kind of Main Street style development that built this town in the first place.</p>
+            </article>
+
+            <article class="card faq-item">
+                <h2>How would Blake Richardson use grants in Harrison Township?</h2>
+                <p>I'd use state and regional grants such as NJDOT Safe Routes to School and bike path programs to build safe connections between neighborhoods, schools, transit, and Main Street. That means less school drop-off traffic and less strain on the bus system, without a new local tax burden.</p>
             </article>
 
             <article class="card faq-item">
