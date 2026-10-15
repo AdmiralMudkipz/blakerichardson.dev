@@ -86,3 +86,10 @@ Paid for by Blake Richardson for Township Committee, 413 Labrador Trail, Mullica
 
 def llms_txt(request):
     return HttpResponse(LLMS_TXT, content_type="text/plain; charset=utf-8")
+
+
+def google_site_verification(request):
+    return HttpResponse(
+        "google-site-verification: google5e7cfa0e91c5cf05.html",
+        content_type="text/html; charset=utf-8",
+    )

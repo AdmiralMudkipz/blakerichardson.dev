@@ -19,10 +19,11 @@ from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
-from .views import domain_homepage, dynamic_sitemap, robots_txt, llms_txt
+from .views import domain_homepage, dynamic_sitemap, robots_txt, llms_txt, google_site_verification
 
 urlpatterns = [
     path("", domain_homepage, name="domain_homepage"),
+    path("google5e7cfa0e91c5cf05.html", google_site_verification, name="google_site_verification"),
     path("robots.txt", robots_txt, name="robots_txt"),
     path("llms.txt", llms_txt, name="llms_txt"),
     path("sitemap.xml", dynamic_sitemap, name="sitemap"),
